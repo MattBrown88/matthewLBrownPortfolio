@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" width="480" height="360" role="img" aria-label="Abstract manufacturing illustration">
+  <defs>
+    <linearGradient id="haBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6495ED"/>
+      <stop offset="1" stop-color="#3b6fd4"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="360" rx="24" fill="url(#haBg)"/>
+  <circle cx="400" cy="70" r="120" fill="#ffffff" opacity="0.08"/>
+  <circle cx="70" cy="300" r="90" fill="#ffffff" opacity="0.06"/>
+
+  <!-- conveyor line -->
+  <rect x="60" y="250" width="360" height="10" rx="5" fill="#ffffff" opacity="0.85"/>
+  <circle cx="95" cy="277" r="14" fill="#ffffff" opacity="0.7"/>
+  <circle cx="160" cy="277" r="14" fill="#ffffff" opacity="0.7"/>
+  <circle cx="240" cy="277" r="14" fill="#ffffff" opacity="0.7"/>
+  <circle cx="320" cy="277" r="14" fill="#ffffff" opacity="0.7"/>
+  <circle cx="385" cy="277" r="14" fill="#ffffff" opacity="0.7"/>
+
+  <!-- product boxes on the line -->
+  <rect x="120" y="206" width="44" height="40" rx="6" fill="#ffffff" opacity="0.95"/>
+  <rect x="230" y="196" width="50" height="50" rx="6" fill="#ffffff" opacity="0.9"/>
+  <rect x="340" y="210" width="40" height="36" rx="6" fill="#ffffff" opacity="0.95"/>
+
+  <!-- large gear -->
+  <g transform="translate(170 110)" fill="#ffffff" opacity="0.95">
+    <path d="M0,-58 6,-58 9,-40 a44 44 0 0 1 14 6 l16,-10 9,9 -10,16 a44 44 0 0 1 6 14 l18,3 0,12 -18,3 a44 44 0 0 1 -6 14 l10,16 -9,9 -16,-10 a44 44 0 0 1 -14 6 l-3,18 -12,0 -3,-18 a44 44 0 0 1 -14 -6 l-16,10 -9,-9 10,-16 a44 44 0 0 1 -6 -14 l-18,-3 0,-12 18,-3 a44 44 0 0 1 6 -14 l-10,-16 9,-9 16,10 a44 44 0 0 1 14 -6 z"/>
+    <circle cx="0" cy="0" r="20" fill="#3b6fd4"/>
+  </g>
+
+  <!-- small gear -->
+  <g transform="translate(300 150)" fill="#ffffff" opacity="0.85">
+    <path d="M0,-34 4,-34 6,-23 a26 26 0 0 1 8 4 l10,-6 5,5 -6,10 a26 26 0 0 1 4 8 l11,2 0,7 -11,2 a26 26 0 0 1 -4 8 l6,10 -5,5 -10,-6 a26 26 0 0 1 -8 4 l-2,11 -7,0 -2,-11 a26 26 0 0 1 -8 -4 l-10,6 -5,-5 6,-10 a26 26 0 0 1 -4 -8 l-11,-2 0,-7 11,-2 a26 26 0 0 1 4 -8 l-6,-10 5,-5 10,6 a26 26 0 0 1 8 -4 z"/>
+    <circle cx="0" cy="0" r="11" fill="#3b6fd4"/>
+  </g>
+</svg>

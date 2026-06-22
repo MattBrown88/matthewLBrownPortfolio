@@ -24,6 +24,12 @@
   <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="stylesheet" href="css/main.css">
+  <script>
+    // Enable float-in reveal animations only when JS + motion are available (set before paint to avoid flash)
+    if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.className += ' has-reveal';
+    }
+  </script>
   <!-- <script src="https://kit.fontawesome.com/9bdc906322.js"></script> -->
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -39,32 +45,28 @@
 <body>
   <!-- <i class="fas fa-laptop"></i> -->
   <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
-    <div class="container">
+    <div class="container is-narrow-nav">
       <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          <!-- <i class="fak fa-mf-logo has-text-primary fa-4x"></i> -->
-          <i style="color: #6495ED" class="fas fa-laptop fa-2x is-primary"></i>
-
+        <a class="navbar-item" href="/" aria-label="Matt Brown home">
+          <span class="mb-logo">MB</span>
         </a>
         <a class="navbar-burger" role="button" aria-label="menu" aria-expanded="false" data-target="#navMenu">
           <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
       </div>
       <div class="navbar-menu is-shadowless" id="navMenu">
-        <div class="navbar-start"></div>
-        <div style="margin-right: 4vw" class="navbar-item">
-          <a target="_blank" href="https://medium.com/@matt_84360">
-            Blog</a>
+        <div class="navbar-start">
+          <a class="navbar-item has-text-weight-normal" href="#projects">Projects</a>
+          <a class="navbar-item has-text-weight-normal" href="#blog">Blog</a>
+          <a class="navbar-item has-text-weight-normal" href="#about">About</a>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <a class="button is-primary is-outlined is-rounded has-text-weight-normal" target="_blank"
+              href="https://calendly.com/matt-1176">
+              Book a meeting</a>
+          </div>
         </div>
       </div>
-
-      <!-- <div class="navbar-end"><a class="navbar-item has-text-weight-normal" href="/mentorship">Mentorship</a> -->
-      <div class="navbar-item">
-        <a class="button is-primary is-outlined is-rounded has-text-weight-normal" target="_blank"
-          href="https://calendly.com/matt-1176">
-          Book consult </a>
-      </div>
-    </div>
-    </div>
     </div>
   </nav>
   <section class="hero is-white has-text-centered">
@@ -72,28 +74,20 @@
       <div class="container">
         <div class="columns is-centered">
           <div class="column" style="display: grid; place-items: center;">
-            <div class="">
-              <h1 style="color:#6495ED" class="title is-spaced is-size-1-desktop is-size-2-tablet is-size-3-mobile">
-                Hello! I'm Matt Brown.</h1>
-            </div>
-
-            <h2 class="subtitle is-size-3-mobile is-size-4-tablet">
-              I’m a Denver-based software developer and two-time SaaS founder with 12+ years of experience. 
-              I specialize in building full-stack data platforms that generate actionable insights through ETL pipelines, dashboards, and predictive analytics. 
-              My products have powered decision-making in e-commerce, population health, and finance.
-            </h2>
-            <img class="avatar" src="img/linkedinprofile_oval.png">
+            <img class="hero-headshot" src="img/linkedinprofile_oval.png" alt="Matt Brown">
+            <h1 class="hero-greeting title is-spaced is-size-1-desktop is-size-2-tablet is-size-3-mobile">
+              I'm <span style="color:#6495ED">Matt Brown</span> <span class="wave">👋</span>
+              <span class="hero-subline">Check out my work below</span>
+            </h1>
           </div>
         </div>
       </div>
     </div>
-    <section class="section is-medium is-primary has-text-centered is-long-ish">
+    <section id="projects" class="section is-medium is-primary has-text-centered is-long-ish">
       <div class="container">
         <div class="columns is-centered">
           <div class="column is-three-fifths">
-            <h1 class="title is-spaced is-size-3-desktop is-size-4-mobile">My Previous Work</h1>
-            <h2 class="subtitle is-size-5-desktop has-text-weight-normal">
-              Here are a few of my favorite projects</h2>
+            <h1 class="title is-spaced is-size-3-desktop is-size-4-mobile">Featured Work</h1>
           </div>
         </div>
       </div>
@@ -101,66 +95,154 @@
     <section class="section startups has-text-centered">
       <div class="container is-narrow">
         <div class="startup-grid">
+          <div class="columns is-multiline level is-centered">
+            <div class="column is-12-touch is-half-desktop level-item">
+              <a class="project-card is-featured box" href="casestudies/PopulationAssessmentToolCaseStudy.html"
+                target="_blank" rel="noopener">
+                <div class="project-cover is-shot"><img src="img/screenshots/population.png"
+                    alt="Population Health analytics tool screenshot"></div>
+                <div class="project-body">
+                  <h2>Self-Service Population Health Tool</h2>
+                </div>
+              </a>
+            </div>
+            <div class="column is-12-touch is-half-desktop level-item">
+              <a class="project-card is-featured box" href="casestudies/ReinsuranceAnalyticsCaseStudy.html"
+                target="_blank" rel="noopener">
+                <div class="project-cover is-shot"><img src="img/screenshots/reinsurance.png"
+                    alt="Reinsurance analytics tool screenshot"></div>
+                <div class="project-body">
+                  <h2>Reinsurance Analytics Tool</h2>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <h1 class="title is-spaced is-size-3-desktop is-size-4-mobile" style="color:#141c3a">Projects</h1>
+        <h2 class="subtitle is-size-5-desktop has-text-weight-normal mb-6">More of the things I've built</h2>
+        <div class="startup-grid">
           <div class="columns is-multiline level">
             <div class="column is-12-touch is-half-desktop is-one-third-widescreen level-item">
-              <div class="box"><img class="logo mb-5" src="img/notifilogo.png"> Notifi: Back in Stock Alerts.
-                <p>Shopify app with 1000s of users.</p><a class="link" href="https://apps.shopify.com/solucia-1"
-                  target="_blank"><span class="tag is-link is-light is-medium"><i
-                      class="fal fa-arrow-up-right-from-square mr-2"></i>Shopify App</span></a>
-              </div>
-            </div>
-            
-            <div class="column is-12-touch is-half-desktop is-one-third-widescreen level-item">
-              <div class="box"><img class="logo mb-5" src="img/Echo-02.png">
-                <h2>Echo - Speech-to-Text </h2>
-                <p>Chrome extension for real-time dictation</p><a class="link"
-                  href="https://chromewebstore.google.com/detail/echo-speech-to-text-dicta/dogdmonghloddlmlbdpchiedlckadgal?hl=en"
-                  target="_blank"><span class="tag is-link is-light is-medium"><i
-                      class="fal fa-arrow-up-right-from-square mr-2"></i>View app</span></a>
-              </div>
-            </div>
-
-            <div class="column is-12-touch is-half-desktop is-one-third-widescreen level-item">
-              <div class="box">
-                <h2>Population Health Analytics</h2>
-                <p>Led team in developing enterprise analytics tool</p><a class="link"
-                  href="https://drive.google.com/file/d/1m9SpvIX3tvSHRZufrL-JzSL23bEC1so4/view?usp=drive_link"
-                  target="_blank"><span class="tag is-link is-light is-medium"><i
-                      class="fal fa-arrow-up-right-from-square mr-2"></i>Case Study</span></a>
-              </div>
+              <a class="project-card box" href="casestudies/ConduitCaseStudy.html" target="_blank" rel="noopener">
+                <div class="project-cover cover-manufacturing"><i class="fa-solid fa-gears"></i></div>
+                <div class="project-body">
+                  <h2>Manufacturing Quality &amp; Traceability</h2>
+                  <p>Digitized operations for a fast-growing Iowa-based plastics manufacturer.</p>
+                  <span class="tag is-link is-light is-medium">Read case study <i
+                      class="fal fa-arrow-up-right-from-square ml-2"></i></span>
+                </div>
+              </a>
             </div>
             <div class="column is-12-touch is-half-desktop is-one-third-widescreen level-item">
-              <div class="box">
-                <h2>Healthcare Business Rule Engine</h2>
-                <p>A suite of developer tools and a GUI application to build no-code member cohorts</p>
-                <a class="link"
-                  href="https://drive.google.com/file/d/1C9K9bNWD17Y--VU6oMOrp_z4OS-oTmoI/view?usp=drive_link"
-                  target="_blank"><span class="tag is-link is-light is-medium">
-                    <i class="fal fa-arrow-up-right-from-square mr-2"></i>Case Study</span></a>
-              </div>
-            </div>
-            <div class="column is-12-touch is-half-desktop is-one-third-widescreen level-item">     
-              <div class="box"><h2>CRM Suite Optimization</h2>
-                <p>Optimized suite of applications to improve UX and load times.</p>
-                <a target="_blank">
-                  <span class="tag is-medium"><i class="fal fa-arrow-up-right-from-square mr-2">
-
-                  </i>Confidential</span>
-                </a>
-              </div>
+              <a class="project-card box" href="casestudies/EcommerceDataPipeline.html" target="_blank" rel="noopener">
+                <div class="project-cover cover-ecommerce"><i class="fa-solid fa-cart-shopping"></i></div>
+                <div class="project-body">
+                  <h2>E-commerce Data Pipeline</h2>
+                  <p>Built an end-to-end data pipeline powering e-commerce analytics and reporting.</p>
+                  <span class="tag is-link is-light is-medium">Read case study <i
+                      class="fal fa-arrow-up-right-from-square ml-2"></i></span>
+                </div>
+              </a>
             </div>
             <div class="column is-12-touch is-half-desktop is-one-third-widescreen level-item">
-              <div class="box">
-                <h2>Fantasy Sports App</h2>
-                <p>Tool to allow users to build optimal lineups for Daily Fantasy Sports</p>
-                <a class="link" href="https://premium.shinyapps.io/appfiles/" target="_blank">
-                  <span class="tag is-link is-light is-medium"><i class="fal fa-arrow-up-right-from-square mr-2"></i>R
-                    Shiny App</span>
-                </a>
+              <a class="project-card box" href="https://apps.shopify.com/solucia-1" target="_blank">
+                <div class="project-cover cover-notifi"><i class="fa-solid fa-bell"></i></div>
+                <div class="project-body">
+                  <h2>Notifi: Back in Stock Alerts</h2>
+                  <p>Shopify app with 1000s of users.</p>
+                  <span class="tag is-link is-light is-medium">Shopify App <i
+                      class="fal fa-arrow-up-right-from-square ml-2"></i></span>
+                </div>
+              </a>
+            </div>
+            <div class="column is-12-touch is-half-desktop is-one-third-widescreen level-item">
+              <a class="project-card box"
+                href="https://chromewebstore.google.com/detail/echo-speech-to-text-dicta/dogdmonghloddlmlbdpchiedlckadgal?hl=en"
+                target="_blank">
+                <div class="project-cover cover-echo"><i class="fa-solid fa-microphone-lines"></i></div>
+                <div class="project-body">
+                  <h2>Echo &mdash; Speech-to-Text</h2>
+                  <p>Chrome extension for real-time dictation.</p>
+                  <span class="tag is-link is-light is-medium">View app <i
+                      class="fal fa-arrow-up-right-from-square ml-2"></i></span>
+                </div>
+              </a>
+            </div>
+            <div class="column is-12-touch is-half-desktop is-one-third-widescreen level-item">
+              <a class="project-card box"
+                href="https://drive.google.com/file/d/1C9K9bNWD17Y--VU6oMOrp_z4OS-oTmoI/view?usp=drive_link"
+                target="_blank">
+                <div class="project-cover cover-bre"><i class="fa-solid fa-diagram-project"></i></div>
+                <div class="project-body">
+                  <h2>Healthcare Business Rule Engine</h2>
+                  <p>A suite of developer tools and a GUI app to build no-code member cohorts.</p>
+                  <span class="tag is-link is-light is-medium">Read case study <i
+                      class="fal fa-arrow-up-right-from-square ml-2"></i></span>
+                </div>
+              </a>
+            </div>
+            <div class="column is-12-touch is-half-desktop is-one-third-widescreen level-item">
+              <a class="project-card box" href="https://premium.shinyapps.io/appfiles/" target="_blank">
+                <div class="project-cover cover-fantasy"><i class="fa-solid fa-trophy"></i></div>
+                <div class="project-body">
+                  <h2>Fantasy Sports App</h2>
+                  <p>Tool to build optimal lineups for Daily Fantasy Sports.</p>
+                  <span class="tag is-link is-light is-medium">R Shiny App <i
+                      class="fal fa-arrow-up-right-from-square ml-2"></i></span>
+                </div>
+              </a>
+            </div>
+            <div class="column is-12-touch is-half-desktop is-one-third-widescreen level-item">
+              <div class="project-card box is-static">
+                <div class="project-cover cover-crm"><i class="fa-solid fa-users-gear"></i></div>
+                <div class="project-body">
+                  <h2>CRM Suite Optimization</h2>
+                  <p>Optimized a suite of applications to improve UX and load times.</p>
+                  <span class="tag is-medium">Confidential</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </section>
+    <section class="section is-primary has-text-centered blog-head">
+      <div class="container">
+        <h1 class="title is-spaced is-size-3-desktop is-size-4-mobile">Blog</h1>
+      </div>
+    </section>
+    <section id="blog" class="section content-section blog-section has-text-centered">
+      <div class="container is-narrow">
+        <div class="box blog-box">
+          <ul class="article-list">
+            <li>
+              <a target="_blank"
+                href="https://medium.com/@matt_84360/debug-supabase-edge-functions-in-vs-code-with-breakpoints-fabe8582fcf1">
+                <span class="article-title">Debug Supabase Edge Functions in VS Code with Breakpoints</span>
+                <span class="article-date">Jun 2026</span>
+              </a>
+            </li>
+            <li>
+              <a target="_blank"
+                href="https://medium.com/@matt_84360/tableau-dbt-from-undocumented-calculations-to-version-controlled-business-rules-2026-f8e4d98eba65">
+                <span class="article-title">Tableau + dbt: From Undocumented Calculations to Version-Controlled Business
+                  Rules</span>
+                <span class="article-date">Jun 2026</span>
+              </a>
+            </li>
+            <li>
+              <a target="_blank"
+                href="https://medium.com/@matt_84360/the-simplest-method-to-implement-authentication-for-a-chrome-extension-using-a-django-web-app-27d531d9d6aa">
+                <span class="article-title">The Simplest Method to Implement Authentication for a Chrome Extension Using
+                  a Django Web App</span>
+                <span class="article-date">Jul 2024</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <a class="button is-primary is-outlined is-rounded has-text-weight-normal" target="_blank"
+          href="https://medium.com/@matt_84360">See all posts on Medium</a>
       </div>
     </section>
     <section class="section clients is-medium is-white has-text-centered has-border-top">
@@ -171,153 +253,76 @@
             </h1>
           </div>
         </div>
-        <div class="client-grid">
-          <div class="columns is-multiline is-mobile">
-            <div class="column is-half-mobile is-one-quarter-tablet">
-              <figure class="image is-2x1"><img class="client-logo" src="img/highmark.png"></figure>
-            </div>
-            <div class="column is-half-mobile is-one-quarter-tablet">
-              <figure class="image is-2x1"><img class="client-logo" src="img/redoak.png"></figure>
-            </div>
-            <div class="column is-half-mobile is-one-quarter-tablet">
-              <figure class="image is-2x1"><img class="client-logo" src="img/cocacola.png"></figure>
-            </div>
-            <div class="column is-half-mobile is-one-quarter-tablet">
-              <figure class="image is-2x1"><img class="client-logo" src="img/occam.png"></figure>
-            </div>
-            <div class="column is-half-mobile is-one-quarter-tablet">
-              <figure class="image is-2x1"><img class="client-logo" src="img/athena.png"></figure>
-            </div>
-            <div class="column is-half-mobile is-one-quarter-tablet">
-              <figure class="image is-2x1"><img class="client-logo" src="img/johndeere.png"></figure>
-            </div>
-            <div class="column is-half-mobile is-one-quarter-tablet">
-              <figure class="image is-2x1"><img class="client-logo" src="img/bahlogo.png"></figure>
-            </div>
-          </div>
+      </div>
+      <div class="logo-marquee">
+        <div class="logo-track">
+          <figure class="logo-slide"><img class="client-logo" src="img/highmark.png" alt="Highmark"></figure>
+          <figure class="logo-slide"><img class="client-logo" src="img/redoak.png" alt="Red Oak"></figure>
+          <figure class="logo-slide"><img class="client-logo" src="img/cocacola.png" alt="Coca-Cola"></figure>
+          <figure class="logo-slide"><img class="client-logo" src="img/occam.png" alt="Occam"></figure>
+          <figure class="logo-slide"><img class="client-logo" src="img/athena.png" alt="Athena"></figure>
+          <figure class="logo-slide"><img class="client-logo" src="img/johndeere.png" alt="John Deere"></figure>
+          <figure class="logo-slide"><img class="client-logo" src="img/bahlogo.png" alt="BAH"></figure>
+          <figure class="logo-slide" aria-hidden="true"><img class="client-logo" src="img/highmark.png" alt=""></figure>
+          <figure class="logo-slide" aria-hidden="true"><img class="client-logo" src="img/redoak.png" alt=""></figure>
+          <figure class="logo-slide" aria-hidden="true"><img class="client-logo" src="img/cocacola.png" alt=""></figure>
+          <figure class="logo-slide" aria-hidden="true"><img class="client-logo" src="img/occam.png" alt=""></figure>
+          <figure class="logo-slide" aria-hidden="true"><img class="client-logo" src="img/athena.png" alt=""></figure>
+          <figure class="logo-slide" aria-hidden="true"><img class="client-logo" src="img/johndeere.png" alt=""></figure>
+          <figure class="logo-slide" aria-hidden="true"><img class="client-logo" src="img/bahlogo.png" alt=""></figure>
         </div>
       </div>
-      </div>
     </section>
-    <section class="section testimonials is-medium is-white has-text-centered has-border-top">
-      <div class="container is-narrow">
+    <section class="section testimonials is-medium is-primary has-text-centered has-border-top">
+      <div class="container">
         <h1 class="title is-spaced is-size-3-desktop is-size-4-mobile">Testimonials</h1>
         <h2 class="subtitle is-size-5-desktop">People I've worked with have said some nice things...</h2>
         <div class="columns is-centered">
-          <div class="column is-two-thirds">
-            <div class="testimonials-slider">
-              <input id="carousel-1" type="radio" name="carousel" checked="">
-              <input id="carousel-2" type="radio" name="carousel">
-              <input id="carousel-3" type="radio" name="carousel">
-              <div class="carousel-slides">
-                <div class="carousel-inner">
-                  <div class="carousel-item">
-                    <div class="testimonial-block"><br>
-                      <p class="quote">“Matt B. has worked with my team for nearly two years on a project that morphed
-                        and
-                        grew over our time together. He is a great team player with strong technical skills as well as
-                        communication and time management skills.
-                        we have been very satisfied with his work and have since hired him for an additional project.
-                        ”</p>
-                      <h1 class="title is-size-5">Taya I.</h1>
-                      <h2 class="subtitle is-size-6">Healthcare Executive</h2>
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="testimonial-block"><br>
-                      <p class="quote">“Matt did a great work engaging with us on short notice.
-                        He teamed up with our SME to take the design of our solution and turn it into an online resource
-                        in a very short period of time. Matt was responsive, engaged, asked the right questions and was
-                        able
-                        to provide a prototype early on and adopt additional edits and feedback in the final solution.”
-                      </p>
-                      <h1 class="title is-size-5">FX C. </h1>
-                      <h2 class="subtitle is-size-6">Healthcare Technology Co.</h2>
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="testimonial-block"><br>
-                      <p class="quote">"Matt executed an R/Shiny app project on schedule, communicating
-                        clearly and promptly throughout. Strongly recommend his expertise and professionalism."</p>
-                      <h1 class="title is-size-5">Alex </h1>
-                      <h2 class="subtitle is-size-6">Data Visualization Project</h2>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-nav">
-                <label for="carousel-1"></label>
-                <label for="carousel-2"></label>
-                <label for="carousel-3"></label>
-              </div>
+          <div class="column is-one-third">
+            <div class="testimonial-card">
+              <p class="quote">“Matt B. has worked with my team for nearly two years on a project that morphed and grew
+                over our time together. He is a great team player with strong technical skills as well as communication
+                and time management skills. We have been very satisfied with his work and have since hired him for an
+                additional project.”</p>
+              <h3 class="testimonial-name">Taya I.</h3>
+              <p class="testimonial-role">Healthcare Executive</p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="testimonial-card">
+              <p class="quote">“Matt did great work engaging with us on short notice. He teamed up with our SME to turn
+                the design of our solution into an online resource in a very short period of time. Matt was responsive,
+                engaged, asked the right questions, and provided a prototype early on, adopting additional edits and
+                feedback in the final solution.”</p>
+              <h3 class="testimonial-name">FX C.</h3>
+              <p class="testimonial-role">Healthcare Technology Co.</p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="testimonial-card">
+              <p class="quote">“Matt executed an R/Shiny app project on schedule, communicating clearly and promptly
+                throughout. Strongly recommend his expertise and professionalism.”</p>
+              <h3 class="testimonial-name">Alex</h3>
+              <p class="testimonial-role">Data Visualization Project</p>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <section class="section is-medium is-primary has-text-centered is-long">
+    <section id="about" class="section about-section is-medium has-text-centered has-border-top">
       <div class="container">
         <div class="columns is-centered">
           <div class="column is-three-fifths">
-            <h1 class="title is-spaced is-size-3-desktop is-size-4-mobile">Software Dev | AI Expert | Leader</h1>
-            <h2 class="subtitle is-size-5-desktop has-text-weight-normal">
-              Designing and building easy to use, user-friendly applications is truly a passion of mine.
-              I actively seek out new technologies and stay up-to-date on industry
-              trends and advancements. This has helped me to deliver exceptional work to all of my clients.
+            <h1 class="title is-spaced is-size-3-desktop is-size-4-mobile" style="color:#141c3a">About</h1>
+            <h2 class="subtitle is-size-5-desktop has-text-weight-normal about-intro">
+              I'm Matt Brown, a software developer with 10+ years of experience designing and building enterprise
+              software. Over the past decade I've built everything from enterprise analytics platforms and data pipelines
+              to Shopify apps and Chrome extensions, partnering with teams across healthcare, insurance, and e-commerce.
             </h2>
           </div>
         </div>
       </div>
     </section>
-
-    <section class="section skills has-text-centered">
-      <div class="container is-narrow">
-        <div class="box">
-          <div class="content">
-            <div class="columns is-centered">
-              <div class="column"><span class="fa-stack fa-2x">
-                  <i class="fa-solid fa-computer"></i></span>
-                <!-- <i class="fa-solid fa-circle fa-stack-2x has-text-success"></i><i class="fa-solid fa-computer has-text-dark"></i>-->
-                <h1 class="title is-size-4 is-spaced">Software Developer</h1>
-                <p>My strongest skill is collaborating across teams to deliver products which delight my customers.</p>
-
-                <p class="list-title has-text-primary has-text-weight-normal">My go-to languages and tools:</p>
-                <ul>
-                  <li>Python</li>
-                  <li>R</li>
-                  <li>Django</li>
-                  <li>R Shiny</li>
-                  <li>AWS, GCP</li>
-                  <li>Heroku</li>
-                </ul>
-              </div>
-              <div class="column"><span class="fa-stack fa-2x"><i class="fa-solid fa-brain"></i></span>
-                <h1 class="title is-size-4 is-spaced">AI Expert</h1>
-                <p>I help clients use that data to simply processes and derive value.
-                  I'm well-versed in the variety of AI tools and can help your organization implement the right ones.
-                </p>
-                <p class="list-title has-text-primary has-text-weight-normal">Skills:</p>
-                <ul>
-                  <li>Predictive Modeling</li>
-                  <li>Computer Vision</li>
-                  <li>Machine Learning</li>
-                  <li>OpenCV</li>
-                  <li>LLMs</li>
-                  <li>OpenAI</li>
-                </ul>
-              </div>
-              <div class="column"><span class="fa-stack fa-2x"><i class="fa-regular fa-lightbulb"></i></span>
-                <h1 class="title is-size-4 is-spaced">Leader</h1>
-                <p>I enjoy mentoring junior developers, and watching them grow and suceed. I always lean towards helping
-                  people learn rather than giving them the answer.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <br><br><br><br><br><br>
 
     <section class="section call-to-action is-primary has-text-centered">
       <div class="container is-narrow">
@@ -337,30 +342,77 @@
         </div>
       </div>
     </section>
-    <footer class="section is-primary is-small has-text-centered">
-      <div class="container is-narrow"><a class="logo has-text-white" href="/"><i class="fak fa-mf-logo fa-4x"></i></a>
-        <div class="columns is-centered">
-          <div class="column is-one-third">
-            <a class="is-link" href="mailto:matt@gosolucia.com"><span
-                style="color: whitesmoke">matt@gosolucia.com</span></a>
-            <h1 class="title is-size-4-touch has-text-weight-normal">Building innovation one day at a time</h1>
-          </div>
-        </div>
+    <footer class="footer-slim is-primary has-text-centered">
+      <div class="container is-narrow">
         <div class="social-icons">
           <p class="field">
-            <a class="button is-medium" href="https://www.linkedin.com/in/matthew-brown-44b91017/" target="_blank">
+            <a class="button" href="https://www.linkedin.com/in/matthew-brown-44b91017/" target="_blank">
               <span class="icon is-small"><i class="fab fa-linkedin-in fa-fw"></i></span>
             </a>
-
-            <a class="button is-medium" href="https://github.com/MattBrown88" target="_blank">
+            <a class="button" href="https://github.com/MattBrown88" target="_blank">
               <span class="icon is-small"><i class="fa-brands fa-github"></i></span></a>
-            <a class="button is-medium" href="mailto:matt@gosolucia.com"><span class="icon is-small"><i
+            <a class="button" href="mailto:matt@gosolucia.com"><span class="icon is-small"><i
                   class="far fa-envelope fa-fw"></i></span></a>
           </p>
         </div>
+        <p class="footer-copy">&copy; <span id="footer-year">2026</span> Matt Brown. All Rights Reserved.</p>
       </div>
     </footer>
     <script src="js/main-min.js"></script>
+    <script>
+      // Keep the footer copyright year current
+      (function () {
+        var yearEl = document.getElementById('footer-year');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+      })();
+    </script>
+    <script>
+      // Float-in reveal: stagger elements within each group, then reveal as they enter the viewport
+      (function () {
+        if (!document.documentElement.classList.contains('has-reveal')) return;
+
+        var selector = [
+          '.hero-headshot', '.hero-greeting',
+          '#projects .title', '.blog-head .title',
+          '.startups .startup-grid .level-item',
+          '.startups .container > .title', '.startups .container > .subtitle',
+          '.content-section .title', '.content-section .subtitle',
+          '.content-section .article-list li', '.content-section .container > a.button',
+          '.clients .container .title', '.clients .logo-marquee',
+          '.testimonials .container > .title', '.testimonials .container > .subtitle',
+          '.testimonials .columns .column',
+          '.about-section .column',
+          '.call-to-action .box'
+        ].join(',');
+
+        var els = Array.prototype.slice.call(document.querySelectorAll(selector));
+
+        if (!('IntersectionObserver' in window)) {
+          els.forEach(function (el) { el.classList.add('reveal-in'); });
+          return;
+        }
+
+        // Stagger siblings that share a parent
+        var counts = new Map();
+        els.forEach(function (el) {
+          var parent = el.parentNode;
+          var i = counts.get(parent) || 0;
+          el.style.transitionDelay = Math.min(i * 130, 780) + 'ms';
+          counts.set(parent, i + 1);
+        });
+
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('reveal-in');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+        els.forEach(function (el) { io.observe(el); });
+      })();
+    </script>
 </body>
 
 </html>
