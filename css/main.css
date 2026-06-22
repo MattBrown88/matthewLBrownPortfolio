@@ -4531,9 +4531,9 @@ input[name="carousel"] { display: none; }
 }
 
 /* --- Hero headshot (bigger, circular) --- */
-.hero-headshot { width: 220px; height: 220px; object-fit: cover; border-radius: 50%; margin: 1rem 0 2.5rem; border: 5px solid #141c3a; box-shadow: 0 10px 30px rgba(20, 28, 58, 0.15); }
+.hero-headshot { width: 230px; aspect-ratio: 706 / 774; height: auto; object-fit: cover; border-radius: 24px; margin: 1rem 0 2.5rem; border: 5px solid #141c3a; box-shadow: 0 10px 30px rgba(20, 28, 58, 0.15); }
 
-@media screen and (min-width: 769px) { .hero-headshot { width: 300px; height: 300px; } }
+@media screen and (min-width: 769px) { .hero-headshot { width: 300px; } }
 
 /* --- Project cards (clickable, with cover image) --- */
 .section.startups .startup-grid .box.project-card { padding: 0; overflow: hidden; display: flex; flex-direction: column; height: 100%; text-align: left; color: #141c3a; transition: box-shadow 0.2s, transform 0.2s; }
