@@ -4546,7 +4546,11 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
 
 .project-cover.is-shot { padding: 0; background: #eef3fb; }
 
-.project-cover.is-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.project-cover.is-shot img { width: 100%; height: 100%; object-fit: contain; object-position: center; }
+
+.project-cover.is-illustration { padding: 0; background: linear-gradient(135deg, #6495ED, #2bb6a3); }
+
+.project-cover.is-illustration img { width: 100%; height: 100%; object-fit: contain; object-position: center; }
 
 .project-body { display: flex; flex-direction: column; flex-grow: 1; padding: 1.5rem 1.75rem 1.75rem; }
 
@@ -4588,6 +4592,8 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
 @media screen and (min-width: 1024px) {
   .container:not(.is-narrow-nav) { max-width: 960px; }
   .container.is-narrow { max-width: 960px; }
+  /* Featured/Projects grid runs wider so 3-up cards have more room for their covers and headings */
+  .section.startups .container.is-narrow { max-width: 1440px; }
 }
 
 /* --- Content section --- */
