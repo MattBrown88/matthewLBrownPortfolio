@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GCP to Azure Migration Case Study</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+<style>
+  :root{
+    --navy:#071A44;
+    --blue:#0052CC;
+    --blue2:#1A73E8;
+    --sky:#EAF4FF;
+    --green:#188038;
+    --green-bg:#E6F4EA;
+    --red:#D93025;
+    --red-bg:#FFF0F0;
+    --orange:#F59E0B;
+    --purple:#635BFF;
+    --ink:#102A43;
+    --muted:#627D98;
+    --line:#D6E4F0;
+    --page:#F8FBFF;
+    --card:#FFFFFF;
+  }
+
+  * { box-sizing: border-box; }
+
+  body{
+    margin:0;
+    background:#e8eef7;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    color:var(--ink);
+  }
+
+  .page{
+    width:1200px;
+    min-height:1600px;
+    margin:32px auto;
+    background:
+      radial-gradient(circle at 87% 6%, rgba(112,214,255,.26), transparent 18%),
+      radial-gradient(circle at 9% 96%, rgba(0,82,204,.12), transparent 22%),
+      var(--page);
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 20px 60px rgba(7,26,68,.18);
+  }
+
+  .page:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(0,82,204,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,82,204,.035) 1px, transparent 1px);
+    background-size:32px 32px;
+    pointer-events:none;
+  }
+
+  .content{ position:relative; padding:34px 34px 0; }
+
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    background:var(--blue);
+    color:#fff;
+    padding:10px 18px;
+    border-radius:11px;
+    font-size:18px;
+    letter-spacing:.06em;
+    font-weight:800;
+    margin-bottom:34px;
+  }
+
+  .hero{
+    display:grid;
+    grid-template-columns: 1.55fr .95fr;
+    gap:34px;
+    align-items:start;
+  }
+
+  h1{
+    margin:0;
+    font-size:54px;
+    line-height:1.04;
+    color:var(--navy);
+    font-weight:900;
+  }
+
+  .tagline{
+    margin-top:20px;
+    color:var(--blue);
+    font-size:24px;
+    font-weight:800;
+    line-height:1.3;
+  }
+
+  .subhead{
+    margin-top:18px;
+    max-width:650px;
+    color:#253858;
+    font-size:20px;
+    line-height:1.42;
+  }
+
+  .hero-image{
+    position:relative;
+    border-radius:22px;
+    overflow:hidden;
+    min-height:240px;
+    border:1.5px solid #BFD7FF;
+    background:linear-gradient(135deg,#EAF4FF,#F8FBFF);
+    box-shadow:0 12px 32px rgba(0,82,204,.08);
+  }
+
+  .hero-image img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+
+  .hero-image-placeholder{
+    position:absolute;
+    inset:0;
+    display:grid;
+    place-items:center;
+    color:#9DBCE6;
+    font-size:48px;
+  }
+  /* Hide the placeholder once a real image is provided */
+  .hero-image img[src]:not([src=""]) + .hero-image-placeholder{ display:none; }
+
+  /* ---------- Migration logo graphic ---------- */
+  .hero-logos{
+    border-radius:22px;
+    border:1.5px solid #BFD7FF;
+    background:linear-gradient(135deg,#EAF4FF,#F8FBFF);
+    box-shadow:0 12px 32px rgba(0,82,204,.08);
+    padding:38px 28px 30px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:26px;
+  }
+  .logo-flow{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+    width:100%;
+  }
+  .logo-node{ text-align:center; }
+  .logo-disc{
+    width:96px;
+    height:96px;
+    border-radius:26px;
+    background:#fff;
+    border:1px solid #D6E4F0;
+    box-shadow:0 10px 24px rgba(0,82,204,.12);
+    display:grid;
+    place-items:center;
+    margin:0 auto 12px;
+  }
+  .logo-disc img{ width:54px; height:54px; object-fit:contain; }
+  .logo-label{
+    font-size:15px;
+    font-weight:900;
+    color:var(--navy);
+    text-transform:uppercase;
+    letter-spacing:.02em;
+  }
+  .logo-sep{
+    color:var(--blue);
+    font-size:26px;
+    opacity:.55;
+    margin-bottom:24px;
+  }
+  .logo-powered{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding-top:22px;
+    border-top:1px dashed var(--line);
+    width:100%;
+    justify-content:center;
+    color:#52617a;
+    font-size:15px;
+    font-weight:800;
+  }
+  .logo-disc-sm{
+    width:46px;
+    height:46px;
+    border-radius:14px;
+    margin:0;
+    box-shadow:0 6px 16px rgba(0,82,204,.12);
+  }
+  .logo-disc-sm img{ width:26px; height:26px; }
+
+  /* ---------- Dashboard mockup ---------- */
+  .device{
+    border-radius:10px;
+    overflow:hidden;
+    border:1px solid #d2ddec;
+    box-shadow:0 18px 40px rgba(0,26,71,.18);
+    background:#fff;
+  }
+  .device-top{
+    display:flex; gap:7px; align-items:center;
+    padding:9px 12px; background:#10203f;
+  }
+  .device-top i{ width:11px;height:11px;border-radius:50%;background:#33425f; }
+  .device-top i:nth-child(1){ background:#ff5f57; }
+  .device-top i:nth-child(2){ background:#febc2e; }
+  .device-top i:nth-child(3){ background:#28c840; }
+  .app{ display:grid; grid-template-columns:104px 1fr; background:#f4f7fb; }
+  .side{ background:#0d2f6b; color:#cdd9f0; padding:14px 12px; font-size:9px; }
+  .side .brand{ color:#fff; font-weight:800; font-size:10px; margin-bottom:14px; }
+  .side ul{ list-style:none; margin:0; padding:0; display:grid; gap:11px; }
+  .side li.active{ color:#fff; font-weight:700; }
+  .scr{ padding:12px; }
+  .scr-head{ display:flex; align-items:center; gap:7px; font-size:11px; font-weight:800; color:#10203f; margin-bottom:10px; }
+  .scr-head i{ color:#7d8ba6; }
+  .tiles{ display:grid; grid-template-columns:repeat(4,1fr); gap:7px; margin-bottom:9px; }
+  .tile{ background:#fff; border:1px solid #e6ecf5; border-radius:6px; padding:7px 8px; }
+  .tile small{ display:block; color:#8290a8; font-size:7.5px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; }
+  .tile b{ display:block; color:#0d2f6b; font-size:14px; }
+  .panels{ display:grid; grid-template-columns:1.5fr 1fr; gap:7px; margin-bottom:9px; }
+  .card{ background:#fff; border:1px solid #e6ecf5; border-radius:6px; padding:8px; }
+  .card .ct{ font-size:8px; font-weight:800; color:#5b6b85; text-transform:uppercase; letter-spacing:.04em; margin-bottom:5px; }
+  .lower{ display:grid; grid-template-columns:1.5fr 1fr; gap:7px; }
+  .bars{ display:grid; gap:5px; }
+  .bar{ display:grid; grid-template-columns:64px 1fr 22px; gap:5px; align-items:center; font-size:7.5px; color:#5b6b85; }
+  .bar .track{ height:7px; background:#e8eef7; border-radius:4px; overflow:hidden; }
+  .bar .fill{ height:100%; background:#2f6bd8; border-radius:4px; }
+  .gap{ display:flex; align-items:center; justify-content:space-between; }
+  .gap b{ color:#0d2f6b; font-size:16px; }
+
+  .kpis{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    overflow:hidden;
+  }
+
+  .kpi{
+    padding:6px 28px;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:18px;
+    align-items:center;
+    border-right:1px solid var(--line);
+  }
+
+  .kpi:first-child{ padding-left:0; }
+  .kpi:last-child{ border-right:none; padding-right:0; }
+
+  .kpi .mark{
+    width:54px;
+    height:54px;
+    border-radius:18px;
+    display:grid;
+    place-items:center;
+    color:#fff;
+    font-weight:900;
+    font-size:21px;
+    background:linear-gradient(135deg,var(--blue),#4EA3FF);
+    box-shadow:0 10px 22px rgba(0,82,204,.22);
+  }
+
+  .kpi:nth-child(1) .mark{ background:linear-gradient(135deg,#0052CC,#4EA3FF); }
+  .kpi:nth-child(2) .mark{ background:linear-gradient(135deg,#34A853,#8BD17C); }
+  .kpi:nth-child(3) .mark{ background:linear-gradient(135deg,#F59E0B,#FDBA74); }
+  .kpi:nth-child(4) .mark{ background:linear-gradient(135deg,#673AB7,#A78BFA); }
+
+  .kpi-value{
+    color:var(--navy);
+    font-size:32px;
+    font-weight:900;
+    line-height:1;
+    white-space:nowrap;
+  }
+
+  .kpi-title{
+    color:var(--blue);
+    font-size:16px;
+    line-height:1.12;
+    font-weight:900;
+    letter-spacing:.01em;
+    text-transform:uppercase;
+  }
+  .kpi:nth-child(3) .kpi-title{ color:var(--orange); }
+  .kpi:nth-child(4) .kpi-title{ color:#673AB7; }
+
+  .kpi-copy{
+    margin-top:7px;
+    color:#334E68;
+    font-size:15.5px;
+    line-height:1.25;
+  }
+
+  /* Pipeline architecture (inset within the Solution) */
+  .trace-inset{
+    margin-top:16px;
+    background:var(--sky);
+    border:1px solid #D6E4F0;
+    border-radius:16px;
+    padding:22px 22px 18px;
+  }
+  .trace-inset .trace-icon{
+    width:52px;
+    height:52px;
+    border-radius:15px;
+    font-size:20px;
+    margin-bottom:10px;
+    background:#fff;
+  }
+  .trace-inset .trace-title{ font-size:13.5px; }
+  .trace-inset .trace-copy{ font-size:13px; margin-top:6px; }
+  .trace-inset .trace-arrow{ margin-top:16px; }
+  .trace-inset .trace-caption{ margin-top:18px; font-size:14px; }
+  .trace{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:6px;
+  }
+  .trace-step{
+    flex:1;
+    text-align:center;
+    padding:0 8px;
+  }
+  .trace-icon{
+    width:66px;
+    height:66px;
+    border-radius:20px;
+    margin:0 auto 14px;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(135deg,#EAF4FF,#F8FBFF);
+    border:1.5px solid #C7DBFF;
+    color:var(--blue);
+    font-size:25px;
+  }
+  .trace-icon img{ width:30px; height:30px; object-fit:contain; }
+  .trace-title{
+    font-size:16px;
+    font-weight:900;
+    color:var(--navy);
+    text-transform:uppercase;
+    letter-spacing:.02em;
+    line-height:1.15;
+  }
+  .trace-copy{
+    margin-top:9px;
+    font-size:14.5px;
+    line-height:1.34;
+    color:#334E68;
+  }
+  .trace-arrow{
+    flex:0 0 auto;
+    align-self:flex-start;
+    margin-top:22px;
+    color:var(--blue);
+    font-size:20px;
+    opacity:.55;
+  }
+  .trace-caption{
+    margin-top:24px;
+    padding-top:18px;
+    border-top:1px dashed var(--line);
+    text-align:center;
+    color:#52617a;
+    font-style:italic;
+    font-size:16px;
+  }
+
+  .main{
+    margin-top:28px;
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:24px;
+  }
+
+  .panel{
+    border-radius:22px;
+    background:rgba(255,255,255,.94);
+    border:1.5px solid var(--line);
+    box-shadow:0 14px 36px rgba(7,26,68,.07);
+    padding:28px;
+  }
+
+  .panel h2{
+    margin:0 0 18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:24px;
+    line-height:1;
+    letter-spacing:-.02em;
+    font-weight:900;
+  }
+
+  .panel-intro{
+    color:#334E68;
+    font-size:16px;
+    line-height:1.42;
+    margin:0 0 22px;
+  }
+
+  .challenge{
+    border-color:#FFC9C9;
+    background:linear-gradient(180deg,#fff,#FFFDFD);
+  }
+  .challenge h2{ color:var(--red); }
+
+  .challenge-story{ margin-top:28px; }
+
+  .challenge-bullets{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    column-gap:40px;
+  }
+  .challenge-bullets .bullet:nth-child(2){ border-top:none; padding-top:0; }
+
+  .results-bullets{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    column-gap:40px;
+  }
+  .results-bullets .bullet:nth-child(2){ border-top:none; padding-top:0; }
+  .solution{
+    border-color:#BFD7FF;
+    background:linear-gradient(180deg,#fff,#FBFDFF);
+  }
+  .solution h2{ color:var(--blue); }
+
+  .results{
+    border-color:#BBE6C8;
+    background:linear-gradient(180deg,#fff,#FBFFFC);
+  }
+  .results h2{ color:var(--green); }
+  .results .mini-icon{ color:var(--green); background:var(--green-bg); }
+
+  .mini-icon{
+    width:36px;
+    height:36px;
+    border-radius:12px;
+    display:grid;
+    place-items:center;
+    font-weight:900;
+    font-size:18px;
+  }
+  .challenge .mini-icon{ color:var(--red); background:var(--red-bg); }
+  .solution .mini-icon{ color:var(--blue); background:var(--sky); }
+
+  .bullet{
+    display:grid;
+    grid-template-columns:38px 1fr;
+    gap:14px;
+    padding:17px 0;
+    border-top:1px solid rgba(214,228,240,.9);
+  }
+  .bullet:first-of-type{ border-top:none; padding-top:0; }
+
+  .bullet .dot{
+    width:38px;
+    height:38px;
+    border-radius:12px;
+    display:grid;
+    place-items:center;
+    font-weight:900;
+    font-size:16px;
+    margin-top:1px;
+  }
+  .challenge .dot{ background:var(--red-bg); color:var(--red); }
+  .solution .dot{ background:var(--sky); color:var(--blue); }
+  .results .dot{ background:var(--green-bg); color:var(--green); }
+
+  .bullet-title{
+    font-weight:900;
+    font-size:17px;
+    color:#102A43;
+    text-transform:uppercase;
+    letter-spacing:.01em;
+    line-height:1.2;
+  }
+  .bullet-copy{
+    font-size:15.5px;
+    line-height:1.34;
+    color:#334E68;
+    margin-top:5px;
+  }
+
+  .bullet-logos{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:9px;
+  }
+  .bullet-logos img{
+    width:22px;
+    height:22px;
+    object-fit:contain;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:7px;
+    padding:2px;
+  }
+
+  .quote{
+    max-width:680px;
+    margin:26px auto 0;
+    text-align:center;
+  }
+  .quote p{
+    margin:0;
+    font-size:15.5px;
+    line-height:1.5;
+    color:#52617a;
+    font-style:italic;
+  }
+  .quote .quote-mark{ display:none; }
+  .quote cite{
+    display:block;
+    margin-top:8px;
+    font-style:normal;
+    font-weight:700;
+    color:#9DAEC4;
+    font-size:12px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+
+  /* Technologies used */
+  .tech{
+    margin-top:24px;
+    background:#fff;
+    border:1.5px solid var(--line);
+    border-radius:20px;
+    padding:22px 26px 18px;
+    box-shadow:0 12px 28px rgba(7,26,68,.055);
+  }
+  .tech h2{
+    text-align:center;
+    color:var(--blue);
+    font-size:22px;
+    margin:0 0 20px;
+    font-weight:900;
+  }
+  .tech-row{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    align-items:start;
+    gap:10px;
+  }
+  .tool{
+    text-align:center;
+    border-right:1px solid var(--line);
+    min-height:62px;
+  }
+  .tool:last-child{ border-right:none; }
+  .tool-badge{
+    width:34px;
+    height:34px;
+    margin:0 auto 8px;
+    border-radius:10px;
+    display:grid;
+    place-items:center;
+    color:#fff;
+    font-weight:900;
+    font-size:12px;
+  }
+  .tool-name{
+    font-size:13px;
+    font-weight:800;
+    color:#102A43;
+    line-height:1.1;
+  }
+
+  .footer{
+    margin:32px -34px 0;
+    height:120px;
+    background:var(--navy);
+    color:#fff;
+    display:grid;
+    grid-template-columns:92px 1fr;
+    align-items:center;
+    padding:0 50px;
+    position:relative;
+    overflow:hidden;
+  }
+  .footer:after{
+    content:"";
+    position:absolute;
+    right:34px;
+    bottom:22px;
+    width:190px;
+    height:76px;
+    background-image:radial-gradient(circle, rgba(112,214,255,.5) 4px, transparent 4px);
+    background-size:18px 18px;
+    opacity:.55;
+  }
+  .footer-mark{
+    width:58px;
+    height:58px;
+    border-radius:20px;
+    background:linear-gradient(135deg,#0052CC,#70D6FF);
+    display:grid;
+    place-items:center;
+    font-weight:900;
+    font-size:28px;
+    z-index:1;
+  }
+  .footer-text{
+    font-size:25px;
+    line-height:1.25;
+    max-width:760px;
+    z-index:1;
+  }
+
+  /* Brand-logo helpers */
+  .brand-img{ display:block; object-fit:contain; }
+  .tool-badge.logo-badge{ background:#fff !important; border:1px solid var(--line); }
+  .trace-icon.logo-badge{ background:#fff !important; }
+
+  @media print{
+    body{ background:#fff; }
+    .page{ margin:0; box-shadow:none; width:1080px; min-height:1600px; }
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+    <div class="content">
+      <div class="badge">CASE STUDY</div>
+
+      <section class="hero">
+        <div>
+          <h1>Migrating a healthcare platform from Google Cloud to Azure</h1>
+          <p class="tagline">A strategic migration and modernization, built for security, reliability, and scale</p>
+          <p class="subhead">
+            <em>A phased migration of a production, multi-service healthcare platform off Google Cloud
+            and onto Microsoft Azure, with application services, PostgreSQL databases, networking, secrets,
+            and CI/CD pipelines rebuilt as repeatable infrastructure as code.</em>
+          </p>
+        </div>
+
+        <aside>
+          <!-- Migration logo graphic -->
+          <div class="hero-logos">
+            <div class="logo-flow">
+              <div class="logo-node">
+                <div class="logo-disc"><img src="logos/google-cloud.svg" alt="Google Cloud"/></div>
+                <div class="logo-label">Google Cloud</div>
+              </div>
+              <i class="fa-solid fa-arrow-right-long logo-sep"></i>
+              <div class="logo-node">
+                <div class="logo-disc"><img src="logos/azure.svg" alt="Microsoft Azure"/></div>
+                <div class="logo-label">Microsoft Azure</div>
+              </div>
+            </div>
+            <div class="logo-powered">
+              <div class="logo-disc logo-disc-sm"><img src="logos/terraform.svg" alt="Terraform"/></div>
+              <span>Powered by Terraform</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="panel challenge challenge-story">
+        <h2><span class="mini-icon"><i class="fa-solid fa-triangle-exclamation"></i></span> The Challenge</h2>
+
+        <p class="panel-intro">
+          A healthcare technology company needed to migrate a production multi-service application off
+          Google Cloud and onto Microsoft Azure. The work spanned application services, PostgreSQL
+          databases, networking, secrets, CI/CD pipelines, and frontend applications, and had to deliver
+          a platform built for security, reliability, and scale without disrupting live operations.
+        </p>
+
+        <div class="challenge-bullets">
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-diagram-project"></i></div>
+            <div>
+              <div class="bullet-title">Complex Multi-Service Platform</div>
+              <div class="bullet-copy">A production healthcare application made up of many interconnected services and frontend applications.</div>
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-database"></i></div>
+            <div>
+              <div class="bullet-title">Production Database Modernization</div>
+              <div class="bullet-copy">PostgreSQL databases that had to be migrated and modernized without data loss or downtime.</div>
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-shield-halved"></i></div>
+            <div>
+              <div class="bullet-title">Security &amp; Networking Requirements</div>
+              <div class="bullet-copy">Strict security and networking demands for a regulated healthcare environment.</div>
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-layer-group"></i></div>
+            <div>
+              <div class="bullet-title">Environment Consistency</div>
+              <div class="bullet-copy">Dev, QA, and Prod environments that needed to stay consistent and reproducible.</div>
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-gauge-high"></i></div>
+            <div>
+              <div class="bullet-title">Deployment &amp; Operational Efficiency</div>
+              <div class="bullet-copy">Manual processes that slowed deployments and made operations harder to manage.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="main">
+        <section class="panel solution">
+          <h2><span class="mini-icon"><i class="fa-solid fa-gear"></i></span> The Solution</h2>
+
+          <p class="panel-intro">
+            We ran the migration in phases, inventorying the existing Google Cloud environment, mapping
+            each service to its Azure equivalent, and rebuilding the platform as reusable infrastructure
+            as code with automated deployments.
+          </p>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+            <div>
+              <div class="bullet-title">Inventory &amp; Service Mapping</div>
+              <div class="bullet-copy">Analyzed and mapped more than 30,000 cloud resources in Google Cloud, then mapped each Google Cloud service to its equivalent Azure service and designed the target architecture.</div>
+
+              <div class="trace-inset">
+                <div class="trace">
+                  <div class="trace-step">
+                    <div class="trace-icon logo-badge"><img src="logos/google-cloud.svg" alt="Google Cloud"/></div>
+                    <div class="trace-title">Google Cloud</div>
+                    <div class="trace-copy">Inventoried the existing environment and mapped every resource.</div>
+                  </div>
+
+                  <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+                  <div class="trace-step">
+                    <div class="trace-icon logo-badge"><img src="logos/terraform.svg" alt="Terraform"/></div>
+                    <div class="trace-title">Terraform</div>
+                    <div class="trace-copy">Provisioned Azure with reusable infrastructure-as-code modules.</div>
+                  </div>
+
+                  <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+                  <div class="trace-step">
+                    <div class="trace-icon logo-badge"><img src="logos/github-actions.svg" alt="GitHub Actions"/></div>
+                    <div class="trace-title">GitHub Actions</div>
+                    <div class="trace-copy">Automated builds, tests, and deployments across environments.</div>
+                  </div>
+
+                  <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+                  <div class="trace-step">
+                    <div class="trace-icon logo-badge"><img src="logos/azure.svg" alt="Microsoft Azure"/></div>
+                    <div class="trace-title">Microsoft Azure</div>
+                    <div class="trace-copy">Final cutover to a secure, scalable production platform.</div>
+                  </div>
+                </div>
+                <div class="trace-caption">A phased path from Google Cloud to Azure, rebuilt as repeatable infrastructure with automated delivery.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-cubes"></i></div>
+            <div>
+              <div class="bullet-title">Terraform Infrastructure</div>
+              <div class="bullet-copy">Built reusable Terraform modules for networking, databases, secrets, and application services, making every environment consistent and reproducible.</div>
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-robot"></i></div>
+            <div>
+              <div class="bullet-title">Automated Deployments</div>
+              <div class="bullet-copy">Implemented GitHub Actions pipelines for both application and infrastructure deployment, replacing manual steps with repeatable workflows.</div>
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-database"></i></div>
+            <div>
+              <div class="bullet-title">Data Migration</div>
+              <div class="bullet-copy">Migrated PostgreSQL databases and application data to Azure with validation to protect data integrity.</div>
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
+            <div>
+              <div class="bullet-title">Production Cutover</div>
+              <div class="bullet-copy">Executed the final migration and DNS cutover with validation and monitoring to keep the live platform healthy.</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel results">
+          <h2><span class="mini-icon"><i class="fa-solid fa-chart-line"></i></span> Results</h2>
+
+          <p class="panel-intro">
+            The platform now runs on Azure as repeatable infrastructure as code, with hardened security,
+            automated delivery, and centralized monitoring across Dev, QA, and Prod.
+          </p>
+
+          <div class="results-bullets">
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-cubes"></i></div>
+            <div>
+              <div class="bullet-title">Infrastructure as Code</div>
+              <div class="bullet-copy">Terraform-managed infrastructure with reusable modules and consistent, version-controlled, repeatable environments.</div>
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-lock"></i></div>
+            <div>
+              <div class="bullet-title">Hardened Security</div>
+              <div class="bullet-copy">Private PostgreSQL access, SSL-enforced database connections, Key Vault secret management, and RBAC least-privilege access.</div>
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-rocket"></i></div>
+            <div>
+              <div class="bullet-title">Automated Operations</div>
+              <div class="bullet-copy">GitHub Actions CI/CD with automated builds, tests, and releases for faster, more reliable, more consistent deployments.</div>
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-chart-area"></i></div>
+            <div>
+              <div class="bullet-title">Centralized Monitoring</div>
+              <div class="bullet-copy">Centralized logging and monitoring through Azure Log Analytics, with standardized workflows.</div>
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-sliders"></i></div>
+            <div>
+              <div class="bullet-title">Simplified Configuration</div>
+              <div class="bullet-copy">Environment variables reduced from hundreds to fewer than ten, with secrets cleanly separated from application config.</div>
+            </div>
+          </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="tech">
+        <h2>TECHNOLOGIES USED</h2>
+        <div class="tech-row">
+          <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="logos/google-cloud.svg" alt="Google Cloud" width="24" height="24"/></div><div class="tool-name">Google Cloud</div></div>
+          <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="logos/azure.svg" alt="Microsoft Azure" width="24" height="24"/></div><div class="tool-name">Azure</div></div>
+          <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="logos/postgresql.svg" alt="PostgreSQL" width="24" height="24"/></div><div class="tool-name">PostgreSQL</div></div>
+          <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="logos/terraform.svg" alt="Terraform" width="24" height="24"/></div><div class="tool-name">Terraform</div></div>
+          <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="logos/github-actions.svg" alt="GitHub Actions" width="24" height="24"/></div><div class="tool-name">GitHub Actions</div></div>
+          <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="logos/docker.svg" alt="Docker" width="24" height="24"/></div><div class="tool-name">Docker</div></div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-mark"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
+        <div class="footer-text">
+          A production healthcare platform migrated from Google Cloud to Microsoft Azure with Terraform and GitHub Actions. Secure, scalable, automated, and reliable.
+        </div>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>

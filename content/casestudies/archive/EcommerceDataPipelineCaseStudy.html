@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>E-Commerce Data Pipeline Case Study</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+<style>
+  :root{
+    --navy:#001A47;
+    --navy2:#021F4E;
+    --teal:#2BB6AC;
+    --teal-d:#1C8E86;
+    --blue:#0A3FA0;
+    --ink:#22304d;
+    --muted:#5b6b85;
+    --line:#dbe4ef;
+    --band:#EBF2FC;
+    --page:#ffffff;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    background:#dfe6f0;
+    font-family:"Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .page{
+    width:1024px;
+    margin:32px auto;
+    background:
+      radial-gradient(circle at 87% 6%, rgba(112,214,255,.26), transparent 18%),
+      radial-gradient(circle at 9% 96%, rgba(0,82,204,.12), transparent 22%),
+      var(--page);
+    position:relative;
+    box-shadow:0 24px 70px rgba(0,26,71,.22);
+    overflow:hidden;
+  }
+
+  .page:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(0,82,204,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,82,204,.035) 1px, transparent 1px);
+    background-size:32px 32px;
+    pointer-events:none;
+  }
+
+  .content{ position:relative; padding:46px 54px 0; }
+
+  /* ---------- HERO (top — unchanged from the original) ---------- */
+  .eyebrow{
+    color:var(--blue);
+    font-size:14px;
+    font-weight:800;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    margin:0 0 14px;
+  }
+
+  .hero{
+    display:grid;
+    grid-template-columns:1fr 1.02fr;
+    gap:40px;
+    align-items:start;
+  }
+
+  h1{
+    margin:0;
+    font-size:50px;
+    line-height:1.05;
+    letter-spacing:-.015em;
+    color:var(--navy);
+    font-weight:800;
+  }
+
+  .tagline{
+    margin:22px 0 0;
+    color:var(--blue);
+    font-size:21px;
+    font-weight:700;
+    line-height:1.32;
+  }
+
+  .lead{
+    margin:18px 0 0;
+    color:#41506b;
+    font-size:16px;
+    line-height:1.5;
+    max-width:430px;
+  }
+
+  /* ---------- Dashboard mockup ---------- */
+  .device{
+    border-radius:10px;
+    overflow:hidden;
+    border:1px solid #d2ddec;
+    box-shadow:0 18px 40px rgba(0,26,71,.18);
+    background:#fff;
+  }
+  .device-top{
+    display:flex; gap:7px; align-items:center;
+    padding:9px 12px; background:#10203f;
+  }
+  .device-top i{ width:11px;height:11px;border-radius:50%;background:#33425f; }
+  .device-top i:nth-child(1){ background:#ff5f57; }
+  .device-top i:nth-child(2){ background:#febc2e; }
+  .device-top i:nth-child(3){ background:#28c840; }
+  .app{ display:grid; grid-template-columns:104px 1fr; background:#f4f7fb; }
+  .side{ background:#0d2f6b; color:#cdd9f0; padding:14px 12px; font-size:9px; }
+  .side .brand{ color:#fff; font-weight:800; font-size:10px; margin-bottom:14px; }
+  .side ul{ list-style:none; margin:0; padding:0; display:grid; gap:11px; }
+  .side li.active{ color:#fff; font-weight:700; }
+  .scr{ padding:12px; }
+  .scr-head{ display:flex; align-items:center; gap:7px; font-size:11px; font-weight:800; color:#10203f; margin-bottom:10px; }
+  .scr-head i{ color:#7d8ba6; }
+  .tiles{ display:grid; grid-template-columns:repeat(4,1fr); gap:7px; margin-bottom:9px; }
+  .tile{ background:#fff; border:1px solid #e6ecf5; border-radius:6px; padding:7px 8px; }
+  .tile small{ display:block; color:#8290a8; font-size:7.5px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; }
+  .tile b{ display:block; color:#0d2f6b; font-size:14px; }
+  .panels{ display:grid; grid-template-columns:1.5fr 1fr; gap:7px; margin-bottom:9px; }
+  .card{ background:#fff; border:1px solid #e6ecf5; border-radius:6px; padding:8px; }
+  .card .ct{ font-size:8px; font-weight:800; color:#5b6b85; text-transform:uppercase; letter-spacing:.04em; margin-bottom:5px; }
+  .lower{ display:grid; grid-template-columns:1.5fr 1fr; gap:7px; }
+  .bars{ display:grid; gap:5px; }
+  .bar{ display:grid; grid-template-columns:48px 1fr 22px; gap:5px; align-items:center; font-size:7.5px; color:#5b6b85; }
+  .bar .track{ height:7px; background:#e8eef7; border-radius:4px; overflow:hidden; }
+  .bar .fill{ height:100%; background:#2f6bd8; border-radius:4px; }
+  .gap{ display:flex; align-items:center; justify-content:space-between; }
+  .gap b{ color:#0d2f6b; font-size:16px; }
+
+  /* ---------- KPI band (navy) ---------- */
+  .kpis{
+    margin:44px -54px 0;
+    background:var(--navy);
+    padding:30px 54px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:0;
+  }
+  .kpi{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:16px;
+    align-items:center;
+    padding:0 30px;
+    border-right:1px solid rgba(255,255,255,.12);
+  }
+  .kpi:first-child{ padding-left:0; }
+  .kpi:last-child{ border-right:none; padding-right:0; }
+  .kpi-ring{
+    width:48px; height:48px; border-radius:50%;
+    border:2px solid var(--teal);
+    display:grid; place-items:center;
+    color:var(--teal); font-size:19px;
+  }
+  .kpi-num{ color:var(--teal); font-size:26px; font-weight:800; line-height:1; }
+  .kpi-lab{ color:#fff; font-size:14px; font-weight:800; text-transform:uppercase; letter-spacing:.02em; margin-top:2px; }
+  .kpi-sub{ color:#aebdd6; font-size:12.5px; line-height:1.3; margin-top:5px; }
+
+  /* ---------- Stacked full-width sections ---------- */
+  .sections{ padding:38px 0 4px; }
+
+  .sec{ margin-bottom:34px; }
+  .sec-head{ display:flex; align-items:center; gap:14px; margin-bottom:6px; }
+  .sec-ring{
+    width:42px; height:42px; border-radius:50%;
+    border:2px solid var(--teal);
+    display:grid; place-items:center;
+    color:var(--teal); font-size:17px;
+    flex:0 0 auto;
+  }
+  .sec-title{ color:#1b3a6b; font-size:21px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; line-height:1.1; }
+  .sec-title .sub{ display:block; color:var(--teal-d); font-size:12.5px; font-weight:800; letter-spacing:.06em; margin-top:3px; }
+  .sec-rule{ height:2px; background:linear-gradient(90deg,var(--teal),rgba(43,182,172,0)); margin:10px 0 18px; }
+
+  .sec-intro{ color:#41506b; font-size:15.5px; font-style:italic; line-height:1.5; margin:0 0 18px; max-width:880px; }
+
+  /* simple teal-marker bullets, two columns */
+  .list{ display:grid; grid-template-columns:1fr 1fr; column-gap:48px; row-gap:14px; }
+  .li{ display:grid; grid-template-columns:auto 1fr; gap:13px; align-items:start; }
+  .li i.mk{ color:var(--teal); font-size:13px; margin-top:4px; }
+  .li p{ margin:0; font-size:15px; line-height:1.42; color:#41506b; }
+
+  /* results: titled bullets, two columns */
+  .rlist{ display:grid; grid-template-columns:1fr 1fr; column-gap:48px; row-gap:20px; }
+  .ri{ display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:start; }
+  .ri .rmk{
+    width:34px; height:34px; border-radius:9px;
+    display:grid; place-items:center; color:var(--teal-d); font-size:15px;
+    flex:0 0 auto; margin-top:2px;
+  }
+  .ri h4{ margin:0; color:var(--navy); font-size:15px; font-weight:800; text-transform:uppercase; letter-spacing:.02em; line-height:1.2; }
+  .ri p{ margin:5px 0 0; font-size:14.5px; line-height:1.4; color:#52617c; }
+
+  /* ---------- Architecture diagram (Solution) ---------- */
+  .arch{ margin:24px 0 2px; }
+  .arch-flow{ display:grid; grid-template-columns:1fr auto 1fr auto 1.08fr auto 1fr; align-items:stretch; }
+  .arch-stage{
+    border:1px solid var(--line); border-radius:12px; background:#fff;
+    padding:15px 14px; display:flex; flex-direction:column;
+  }
+  .arch-stage.accent{ border-color:rgba(43,182,172,.55); background:linear-gradient(180deg,#f3fbfa,#fff); }
+  .arch-ic{
+    width:38px; height:38px; border-radius:9px;
+    display:grid; place-items:center;
+    color:var(--teal-d); font-size:16px; margin-bottom:11px;
+  }
+  .arch-ic img{ width:22px; height:22px; object-fit:contain; }
+  .arch-stage h5{ margin:0 0 4px; color:var(--navy); font-size:12.5px; font-weight:800; text-transform:uppercase; letter-spacing:.03em; }
+  .arch-stage .sublab{ margin:0 0 11px; color:var(--muted); font-size:11px; line-height:1.38; }
+  .arch-chips{ display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:auto; }
+  .arch-chips span{ font-size:11px; font-weight:700; color:#3b4a66; background:#eef3fa; border:1px solid #e1e9f4; border-radius:6px; padding:4px 8px; }
+  .arch-arrow{ display:grid; place-items:center; color:var(--teal); font-size:15px; padding:0 7px; }
+  .arch-note{ margin:14px 0 0; font-size:12.5px; color:var(--muted); line-height:1.45; display:flex; align-items:flex-start; gap:9px; }
+  .arch-note i{ color:var(--teal-d); margin-top:2px; }
+
+  /* ---------- System features ---------- */
+  .features{ margin-top:8px; }
+  .feat-title{ display:flex; align-items:center; gap:18px; margin:0 0 24px; }
+  .feat-title span{ color:var(--navy); font-size:18px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; white-space:nowrap; }
+  .feat-title:before, .feat-title:after{ content:""; height:1px; background:var(--line); flex:1; }
+  .feat-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:26px; }
+  .feat{ }
+  .feat-ic{
+    width:46px; height:46px; border-radius:50%;
+    border:2px solid var(--teal);
+    display:grid; place-items:center; color:var(--teal); font-size:18px;
+    margin-bottom:13px;
+  }
+  .feat h4{ margin:0 0 7px; color:var(--navy); font-size:14px; font-weight:800; text-transform:uppercase; letter-spacing:.03em; }
+  .feat p{ margin:0; font-size:13px; line-height:1.42; color:#52617c; }
+
+  /* ---------- Technologies ---------- */
+  .tech{ margin-top:34px; }
+  .tech-row{ display:flex; flex-wrap:wrap; gap:14px; }
+  .tech-pill{
+    display:flex; align-items:center; gap:12px;
+    border:1px solid var(--line); border-radius:12px;
+    background:#fff; padding:13px 20px 13px 14px;
+  }
+  .tech-pill img{ width:30px; height:30px; object-fit:contain; display:block; }
+  .tech-pill span{ color:var(--navy); font-size:14px; font-weight:800; letter-spacing:.02em; }
+
+  /* ---------- Quote band ---------- */
+  .quote{
+    margin:40px 0 0;
+    background:var(--band);
+    border-radius:14px;
+    padding:30px 38px;
+    display:grid;
+    grid-template-columns:1.45fr 1fr;
+    gap:40px;
+    align-items:center;
+  }
+  .quote-body{ display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:start; }
+  .quote-mark{ color:var(--teal); font-size:50px; line-height:.7; font-family:Georgia, serif; }
+  .quote-text{ margin:0; color:var(--navy); font-style:italic; font-size:21px; font-weight:700; line-height:1.32; }
+  .quote cite{ display:block; margin-top:12px; font-style:normal; font-weight:800; font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--teal-d); }
+  .qstats{ display:grid; gap:16px; }
+  .qstat{ display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:center; }
+  .qstat i{ color:var(--teal); font-size:22px; width:26px; text-align:center; }
+  .qstat span{ color:var(--navy); font-size:15px; font-weight:800; letter-spacing:.02em; text-transform:uppercase; }
+
+  /* ---------- Footer ---------- */
+  .footer{
+    margin-top:40px;
+    background:var(--navy2);
+    color:#fff;
+    padding:26px 54px;
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    gap:22px;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .footer-ic{
+    width:50px; height:50px; border-radius:50%;
+    border:2px solid var(--teal);
+    display:grid; place-items:center; color:var(--teal); font-size:20px;
+  }
+  .footer p{ margin:0; font-size:20px; line-height:1.3; font-weight:600; max-width:640px; }
+  .footer-dots{ display:flex; align-items:flex-end; gap:6px; height:40px; opacity:.85; }
+  .footer-dots i{ width:6px; border-radius:3px; background:var(--teal); }
+
+  @media print{
+    body{ background:#fff; }
+    .page{ margin:0; box-shadow:none; }
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+    <div class="content">
+
+      <!-- ============ TOP ============ -->
+      <p class="eyebrow">Case Study</p>
+
+      <section class="hero">
+        <div>
+          <h1>Building an e-commerce data pipeline</h1>
+          <p class="lead">
+            An end-to-end analytics platform that consolidates data from Shopify, Google Analytics 4,
+            and Google Ads into a single, governed data warehouse and enables trusted reporting across
+            all storefronts.
+          </p>
+        </div>
+
+        <!-- Dashboard mockup -->
+        <div class="device">
+          <div class="device-top"><i></i><i></i><i></i></div>
+          <div class="app">
+            <div class="side">
+              <div class="brand">Commerce&nbsp;Analytics</div>
+              <ul>
+                <li class="active">&#9632;&nbsp; Overview</li>
+                <li>Revenue</li>
+                <li>Marketing</li>
+                <li>Customers</li>
+                <li>Storefronts</li>
+                <li>Data Exports</li>
+              </ul>
+            </div>
+            <div class="scr">
+              <div class="scr-head"><i class="fa-solid fa-arrow-left"></i> Store Performance</div>
+              <div class="tiles">
+                <div class="tile"><small>Revenue</small><b>$8.4M</b></div>
+                <div class="tile"><small>Orders</small><b>62K</b></div>
+                <div class="tile"><small>AOV</small><b>$135</b></div>
+                <div class="tile"><small>ROAS</small><b>4.2x</b></div>
+              </div>
+              <div class="panels">
+                <div class="card">
+                  <div class="ct">Revenue Over Time</div>
+                  <svg viewBox="0 0 220 70" width="100%" height="62">
+                    <polyline fill="none" stroke="#2f6bd8" stroke-width="2"
+                      points="0,55 22,48 44,52 66,40 88,44 110,30 132,34 154,22 176,26 198,14 220,18"/>
+                    <polyline fill="rgba(47,107,216,.10)" stroke="none"
+                      points="0,55 22,48 44,52 66,40 88,44 110,30 132,34 154,22 176,26 198,14 220,18 220,70 0,70"/>
+                  </svg>
+                </div>
+                <div class="card">
+                  <div class="ct">Revenue by Channel</div>
+                  <svg viewBox="0 0 70 70" width="100%" height="62">
+                    <circle cx="35" cy="35" r="24" fill="none" stroke="#e6ecf5" stroke-width="11"/>
+                    <circle cx="35" cy="35" r="24" fill="none" stroke="#2f6bd8" stroke-width="11"
+                      stroke-dasharray="90 151" transform="rotate(-90 35 35)"/>
+                    <circle cx="35" cy="35" r="24" fill="none" stroke="#2bb6ac" stroke-width="11"
+                      stroke-dasharray="45 151" stroke-dashoffset="-90" transform="rotate(-90 35 35)"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="lower">
+                <div class="card">
+                  <div class="ct">Top Products</div>
+                  <div class="bars">
+                    <div class="bar"><span>Hoodie</span><div class="track"><div class="fill" style="width:82%"></div></div><span>26%</span></div>
+                    <div class="bar"><span>Sneakers</span><div class="track"><div class="fill" style="width:64%"></div></div><span>21%</span></div>
+                    <div class="bar"><span>Backpack</span><div class="track"><div class="fill" style="width:52%"></div></div><span>16%</span></div>
+                    <div class="bar"><span>Cap</span><div class="track"><div class="fill" style="width:40%"></div></div><span>12%</span></div>
+                    <div class="bar"><span>Socks</span><div class="track"><div class="fill" style="width:30%"></div></div><span>9%</span></div>
+                  </div>
+                </div>
+                <div class="card gap">
+                  <div>
+                    <div class="ct">Repeat Rate</div>
+                    <div style="font-size:7.5px;color:#8290a8;">Returning Customers</div>
+                  </div>
+                  <b>34%</b>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ Stacked full-width sections ============ -->
+      <div class="sections">
+
+        <!-- THE CHALLENGE (full width) -->
+        <section class="sec">
+          <div class="sec-head">
+            <div class="sec-ring"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div class="sec-title">The Challenge</div>
+          </div>
+          <div class="sec-rule"></div>
+          <p class="sec-intro">
+            The client ran several Shopify storefronts with data scattered across Shopify, GA4, and
+            Google Ads. With no central environment for cross-store analytics, each platform reported
+            its own numbers, and reporting depended on manual exports, spreadsheets, and cleanup.
+          </p>
+          <div class="rlist">
+            <div class="ri">
+              <div class="rmk"><i class="fa-solid fa-puzzle-piece"></i></div>
+              <div>
+                <h4>Fragmented Data</h4>
+                <p>Data spread across Shopify, GA4, and Google Ads with no shared home.</p>
+              </div>
+            </div>
+            <div class="ri">
+              <div class="rmk"><i class="fa-solid fa-chart-column"></i></div>
+              <div>
+                <h4>No Centralized Reporting</h4>
+                <p>No single environment for cross-store analytics.</p>
+              </div>
+            </div>
+            <div class="ri">
+              <div class="rmk"><i class="fa-solid fa-scale-unbalanced"></i></div>
+              <div>
+                <h4>Inconsistent Metrics</h4>
+                <p>Different platforms produced different numbers.</p>
+              </div>
+            </div>
+            <div class="ri">
+              <div class="rmk"><i class="fa-solid fa-clipboard-list"></i></div>
+              <div>
+                <h4>Manual Reconciliation</h4>
+                <p>Reporting relied on exports, spreadsheets, and manual cleanup.</p>
+              </div>
+            </div>
+            <div class="ri">
+              <div class="rmk"><i class="fa-solid fa-store"></i></div>
+              <div>
+                <h4>Multi-Store Complexity</h4>
+                <p>Difficult to analyze performance across multiple storefronts.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- THE SOLUTION (full width) -->
+        <section class="sec">
+          <div class="sec-head">
+            <div class="sec-ring"><i class="fa-solid fa-gear"></i></div>
+            <div class="sec-title">The Solution</div>
+          </div>
+          <div class="sec-rule"></div>
+          <div class="rlist">
+            <div class="ri">
+              <div class="rmk"><i class="fa-solid fa-arrows-turn-right"></i></div>
+              <div>
+                <h4>Automated Data Ingestion</h4>
+                <p>Airbyte automatically ingests data from Shopify, GA4, and Google Ads into the warehouse, replacing manual exports with scheduled, repeatable pipelines.</p>
+              </div>
+            </div>
+            <div class="ri">
+              <div class="rmk"><i class="fa-solid fa-database"></i></div>
+              <div>
+                <h4>Centralized Data Warehouse</h4>
+                <p>Consolidated every source into BigQuery as a single, governed home for all storefront data.</p>
+              </div>
+            </div>
+            <div class="ri">
+              <div class="rmk"><i class="fa-solid fa-diagram-project"></i></div>
+              <div>
+                <h4>Data Modeling &amp; Transformation</h4>
+                <p>Modeled and transformed raw data with dbt into clean, tested tables with standardized business logic.</p>
+              </div>
+            </div>
+            <div class="ri">
+              <div class="rmk"><i class="fa-solid fa-chart-line"></i></div>
+              <div>
+                <h4>Self-Service Reporting</h4>
+                <p>Exposed governed business metrics through a Lightdash semantic layer, with interactive dashboards and visualizations for every storefront.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- System architecture diagram -->
+          <div class="arch">
+            <div class="arch-flow">
+
+              <!-- Airbyte -->
+              <div class="arch-stage">
+                <div class="arch-ic"><img src="logos/airbyte.svg" alt="Airbyte logo"></div>
+                <h5>Airbyte</h5>
+                <p class="sublab">Automated ingestion from Shopify, GA4, and Google Ads.</p>
+                <div class="arch-chips">
+                  <span>Shopify</span>
+                  <span>GA4</span>
+                  <span>Google Ads</span>
+                </div>
+              </div>
+
+              <div class="arch-arrow"><i class="fa-solid fa-arrow-right-long"></i></div>
+
+              <!-- BigQuery -->
+              <div class="arch-stage accent">
+                <div class="arch-ic"><img src="logos/bigquery.svg" alt="BigQuery logo"></div>
+                <h5>BigQuery</h5>
+                <p class="sublab">A central, governed warehouse for all storefront data.</p>
+              </div>
+
+              <div class="arch-arrow"><i class="fa-solid fa-arrow-right-long"></i></div>
+
+              <!-- dbt -->
+              <div class="arch-stage">
+                <div class="arch-ic"><img src="logos/dbt.svg" alt="dbt logo"></div>
+                <h5>dbt</h5>
+                <p class="sublab">Data modeling and transformation into clean, tested tables.</p>
+              </div>
+
+              <div class="arch-arrow"><i class="fa-solid fa-arrow-right-long"></i></div>
+
+              <!-- Lightdash -->
+              <div class="arch-stage">
+                <div class="arch-ic"><img src="logos/lightdash.svg" alt="Lightdash logo"></div>
+                <h5>Lightdash</h5>
+                <p class="sublab">A semantic layer and dashboards for self-service reporting.</p>
+              </div>
+
+            </div>
+            <p class="arch-note"><i class="fa-solid fa-circle-info"></i> Data flows from source systems through a governed warehouse into trusted, self-service reporting.</p>
+          </div>
+        </section>
+
+        <!-- RESULTS full width -->
+        <section class="sec">
+          <div class="sec-head">
+            <div class="sec-ring"><i class="fa-solid fa-chart-simple"></i></div>
+            <div class="sec-title">Results</div>
+          </div>
+          <div class="sec-rule"></div>
+          <p class="sec-intro">
+            With every source consolidated and modeled in one place, the client gained a single, trusted
+            analytics platform spanning all storefronts, replacing fragmented exports and conflicting
+            numbers with consistent, self-service reporting.
+          </p>
+          <div class="rlist">
+            <div class="ri">
+              <div class="rmk"><i class="fa-solid fa-layer-group"></i></div>
+              <div>
+                <h4>Unified Data Platform</h4>
+                <p>Consolidated Shopify, GA4, and Google Ads into one analytics environment.</p>
+              </div>
+            </div>
+            <div class="ri">
+              <div class="rmk"><i class="fa-solid fa-robot"></i></div>
+              <div>
+                <h4>Automated Data Pipelines</h4>
+                <p>Automated ingestion and processing workflows.</p>
+              </div>
+            </div>
+            <div class="ri">
+              <div class="rmk"><i class="fa-solid fa-circle-check"></i></div>
+              <div>
+                <h4>Trusted Reporting</h4>
+                <p>Standardized business logic and metric definitions.</p>
+              </div>
+            </div>
+            <div class="ri">
+              <div class="rmk"><i class="fa-solid fa-store"></i></div>
+              <div>
+                <h4>Multi-Store Architecture</h4>
+                <p>One platform supporting all storefronts.</p>
+              </div>
+            </div>
+            <div class="ri">
+              <div class="rmk"><i class="fa-solid fa-layer-group"></i></div>
+              <div>
+                <h4>Modern Data Stack</h4>
+                <p>Built on BigQuery, dbt, Lightdash, and cloud-native infrastructure.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Technologies -->
+        <section class="tech">
+          <div class="feat-title"><span>Technologies Used</span></div>
+          <div class="tech-row">
+            <div class="tech-pill"><img src="logos/shopify.svg" alt="Shopify logo"><span>Shopify</span></div>
+            <div class="tech-pill"><img src="logos/ga4.svg" alt="Google Analytics 4 logo"><span>GA4</span></div>
+            <div class="tech-pill"><img src="logos/google-ads.svg" alt="Google Ads logo"><span>Google Ads</span></div>
+            <div class="tech-pill"><img src="logos/airbyte.svg" alt="Airbyte logo"><span>Airbyte</span></div>
+            <div class="tech-pill"><img src="logos/bigquery.svg" alt="BigQuery logo"><span>BigQuery</span></div>
+            <div class="tech-pill"><img src="logos/dbt.svg" alt="dbt logo"><span>dbt</span></div>
+            <div class="tech-pill"><img src="logos/lightdash.svg" alt="Lightdash logo"><span>Lightdash</span></div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-ic"><i class="fa-solid fa-database"></i></div>
+      <p>An analytics platform built to consolidate e-commerce, marketing, and customer data into a single source of truth.</p>
+      <div class="footer-dots">
+        <i style="height:14px"></i><i style="height:22px"></i><i style="height:12px"></i>
+        <i style="height:28px"></i><i style="height:18px"></i><i style="height:34px"></i><i style="height:24px"></i>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>

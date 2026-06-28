@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Solucia: Capabilities</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+    :root {
+      --navy: #071A44;
+      --blue: #0052CC;
+      --sky: #EAF4FF;
+      --green: #188038;
+      --green-bg: #E6F4EA;
+      --orange: #F59E0B;
+      --line: #D6E4F0;
+      --ink: #102A43;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #e8eef7;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+    }
+
+    .page {
+      width: 900px;
+      margin: 32px auto;
+      background:
+        radial-gradient(circle at 88% 4%, rgba(112, 214, 255, .22), transparent 20%),
+        #F8FBFF;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(7, 26, 68, .18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 82, 204, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 82, 204, .035) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      padding: 38px 42px 44px;
+    }
+
+    /* Header */
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 21px;
+      background: linear-gradient(135deg, #0052CC, #70D6FF);
+      box-shadow: 0 10px 22px rgba(0, 82, 204, .22);
+    }
+
+    .brand-name {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: -.01em;
+    }
+
+    .brand-name span {
+      color: var(--blue);
+    }
+
+    .badge {
+      background: var(--blue);
+      color: #fff;
+      padding: 7px 14px;
+      border-radius: 9px;
+      font-size: 12px;
+      letter-spacing: .06em;
+      font-weight: 800;
+    }
+
+    h1 {
+      margin: 26px 0 0;
+      font-size: 34px;
+      line-height: 1.1;
+      color: var(--navy);
+      font-weight: 900;
+      max-width: 720px;
+    }
+
+    .lede {
+      margin: 13px 0 0;
+      color: #334E68;
+      font-size: 16px;
+      line-height: 1.5;
+      max-width: 680px;
+    }
+
+    .section {
+      margin-top: 28px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin: 0 0 14px;
+    }
+
+    .section-head .mi {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+      color: var(--blue);
+      background: var(--sky);
+    }
+
+    /* Who I help */
+    .who-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .who {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--blue);
+      border-radius: 12px;
+      padding: 18px 22px;
+      font-size: 15.5px;
+      line-height: 1.5;
+      color: #243B53;
+    }
+
+    .who b {
+      color: var(--navy);
+    }
+
+    /* Problems sidebar */
+    .problems-side {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--orange);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+
+    .ps-head {
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin: 0 0 11px;
+    }
+
+    .ps-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 9px;
+    }
+
+    .ps-list li {
+      font-size: 12.5px;
+      line-height: 1.35;
+      color: #52617a;
+      font-style: italic;
+    }
+
+    /* Services grid */
+    .services {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .svc {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 14px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 16px 18px;
+    }
+
+    .svc .dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      background: var(--sky);
+      color: var(--blue);
+      font-size: 16px;
+    }
+
+    .svc-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+
+    .svc-copy {
+      margin-top: 4px;
+      font-size: 13.5px;
+      line-height: 1.4;
+      color: #52617a;
+    }
+
+    /* How I work */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .step {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 16px 14px;
+      text-align: center;
+      position: relative;
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      margin: 0 auto 9px;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      font-weight: 900;
+      color: #fff;
+      background: var(--blue);
+    }
+
+    .step-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+
+    .step-copy {
+      margin-top: 5px;
+      font-size: 12px;
+      line-height: 1.35;
+      color: #52617a;
+    }
+
+    /* Proof */
+    .proof {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .stat {
+      padding: 18px 20px;
+      border-right: 1px solid var(--line);
+    }
+
+    .stat:last-child {
+      border-right: none;
+    }
+
+    .stat-val {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+    }
+
+    .stat-lbl {
+      margin-top: 6px;
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      color: var(--blue);
+      line-height: 1.2;
+    }
+
+    .stat:nth-child(1) .stat-val {
+      color: var(--green);
+    }
+
+    .proof-note {
+      margin: 10px 2px 0;
+      font-size: 13px;
+      color: #52617a;
+      font-style: italic;
+    }
+
+    /* Footer / contact */
+    .footer {
+      margin-top: 30px;
+      background: var(--navy);
+      color: #fff;
+      border-radius: 16px;
+      padding: 22px 26px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .bio {
+      font-size: 14px;
+      line-height: 1.5;
+      max-width: 520px;
+      color: #D7E6FF;
+    }
+
+    .bio b {
+      color: #fff;
+    }
+
+    .contact {
+      text-align: right;
+      font-size: 14px;
+      line-height: 1.7;
+      white-space: nowrap;
+    }
+
+    .contact a {
+      color: #9ED2FF;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact .cta {
+      display: inline-block;
+      margin-top: 6px;
+      background: linear-gradient(135deg, #0052CC, #70D6FF);
+      color: #fff;
+      padding: 9px 16px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .page {
+        margin: 0;
+        box-shadow: none;
+        width: auto;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <div class="content">
+
+      <div class="top">
+        <div class="badge">CAPABILITIES</div>
+        <div class="brand">
+          <div class="logo"><i class="fa-solid fa-qrcode"></i></div>
+          <div class="brand-name">Solu<span>cia</span></div>
+        </div>
+      </div>
+
+      <h1>Custom software and data analytics for manufacturers</h1>
+      <p class="lede">
+        Custom software that fits how your plant already runs and captures the data your floor
+        generates. Then analytics that turn that data into a clear view of where to act. No
+        bloated platforms, no year-long projects.
+      </p>
+
+      <!-- Who I help -->
+      <section class="section">
+        <h2 class="section-head"><span class="mi"><i class="fa-solid fa-industry"></i></span> Who I help</h2>
+        <div class="who-grid">
+          <div class="who">
+            <b>Small and mid-sized manufacturers</b> running on spreadsheets, manual steps, and disconnected
+            tools where systems don&rsquo;t talk to each other, and off-the-shelf software doesn't quite fit.
+          </div>
+          <aside class="problems-side">
+            <p class="ps-head">Sound familiar?</p>
+            <ul class="ps-list">
+              <li>Can't trace a product to a production run.</li>
+              <li>Our inventory count is really just a guess.</li>
+              <li>Machine settings live in one person&rsquo;s head.</li>
+              <li>We&rsquo;re buried in manual data entry.</li>
+              <li>Total downtime and scrap is unclear</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <!-- What I build -->
+      <section class="section">
+        <h2 class="section-head"><span class="mi"><i class="fa-solid fa-gear"></i></span> A few examples of what
+          I&rsquo;ve built</h2>
+        <div class="services">
+          <div class="svc">
+            <div class="dot"><i class="fa-solid fa-clipboard-list"></i></div>
+            <div>
+              <div class="svc-title">Shop-Floor Data Collection</div>
+              <div class="svc-copy">Capture machine settings and measurements on every run, building a record that links
+                settings to outcomes.</div>
+            </div>
+          </div>
+          <div class="svc">
+            <div class="dot"><i class="fa-solid fa-qrcode"></i></div>
+            <div>
+              <div class="svc-title">End-to-End QR Traceability</div>
+              <div class="svc-copy">A unique code per product, scanned from production through QA, inventory, and
+                shipping.</div>
+            </div>
+          </div>
+          <div class="svc">
+            <div class="dot"><i class="fa-solid fa-boxes-stacked"></i></div>
+            <div>
+              <div class="svc-title">Real-Time Inventory</div>
+              <div class="svc-copy">Stock and location update automatically as product moves, across WIP and finished
+                goods. No guessing.</div>
+            </div>
+          </div>
+          <div class="svc">
+            <div class="dot"><i class="fa-solid fa-tags"></i></div>
+            <div>
+              <div class="svc-title">Automatic Label Printing</div>
+              <div class="svc-copy">Generate and print product, lot, and shipping labels on the spot, with no manual
+                data entry or mismatched tags.</div>
+            </div>
+          </div>
+          <div class="svc">
+            <div class="dot"><i class="fa-solid fa-chart-line"></i></div>
+            <div>
+              <div class="svc-title">Operational Dashboards</div>
+              <div class="svc-copy">Production, quality, downtime, and inventory in one place for supervisors and
+                leadership.</div>
+            </div>
+          </div>
+          <div class="svc">
+            <div class="dot"><i class="fa-solid fa-brain"></i></div>
+            <div>
+              <div class="svc-title">Analytics &amp; Data Science</div>
+              <div class="svc-copy">Statistical models that surface the settings driving quality and predict scrap and
+                downtime before they happen.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How I work -->
+      <section class="section">
+        <h2 class="section-head"><span class="mi"><i class="fa-solid fa-route"></i></span> How I work</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-title">Discovery</div>
+            <div class="step-copy">We talk through where you&rsquo;re losing time, money, or visibility, and what a fix
+              should do.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-title">Research &amp; Proposal</div>
+            <div class="step-copy">I dig into your workflow and systems, then come back with a clear plan and a scoped
+              proposal.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-title">Prototype</div>
+            <div class="step-copy">I build a working tool fast and get it in your hands to prove the value on real work.
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-title">Scale</div>
+            <div class="step-copy">Once it&rsquo;s earning its keep, we expand it into a connected, plant-wide system.
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Contact -->
+      <div class="footer">
+        <div class="bio">
+          <b>Matt Brown.</b> I build custom software for manufacturers who need a tool that
+          actually fits how their plant works. Hands-on from first conversation to working product
+          on the floor: fast, practical, and built to grow with you.
+        </div>
+        <div class="contact">
+          <a href="mailto:matt@gosolucia.com">matt@gosolucia.com</a><br />
+          <a href="https://gosolucia.com">gosolucia.com</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</body>
+
+</html>

@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Manufacturer Outreach — Conversation Cheat Sheet</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+<style>
+  :root{
+    --navy:#071A44;
+    --blue:#0052CC;
+    --sky:#EAF4FF;
+    --red:#D93025;
+    --red-bg:#FFF0F0;
+    --green:#188038;
+    --green-bg:#E6F4EA;
+    --line:#D6E4F0;
+    --ink:#102A43;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:#e8eef7;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    color:var(--ink);
+  }
+  .page{
+    width:900px;
+    margin:32px auto;
+    background:#F8FBFF;
+    border-radius:20px;
+    box-shadow:0 20px 60px rgba(7,26,68,.18);
+    overflow:hidden;
+  }
+  .content{ padding:38px 40px 44px; }
+
+  .badge{
+    display:inline-flex;
+    background:var(--blue);
+    color:#fff;
+    padding:8px 15px;
+    border-radius:10px;
+    font-size:13px;
+    letter-spacing:.06em;
+    font-weight:800;
+    margin-bottom:20px;
+  }
+  h1{
+    margin:0;
+    font-size:34px;
+    line-height:1.08;
+    color:var(--navy);
+    font-weight:900;
+  }
+  .sub{
+    margin:12px 0 0;
+    color:#334E68;
+    font-size:16px;
+    line-height:1.45;
+    max-width:640px;
+  }
+
+  .section{ margin-top:30px; }
+  .section-head{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    font-size:20px;
+    font-weight:900;
+    letter-spacing:-.01em;
+    margin:0 0 6px;
+  }
+  .mini-icon{
+    width:32px;
+    height:32px;
+    border-radius:10px;
+    display:grid;
+    place-items:center;
+    font-size:15px;
+  }
+  .section-note{
+    margin:0 0 16px 43px;
+    color:#52617a;
+    font-size:14px;
+    font-style:italic;
+    line-height:1.4;
+  }
+
+  /* Symptom opener */
+  .opener .section-head{ color:var(--red); }
+  .opener .mini-icon{ color:var(--red); background:var(--red-bg); }
+  .symptoms{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:grid;
+    gap:10px;
+  }
+  .symptoms li{
+    display:grid;
+    grid-template-columns:22px 1fr;
+    gap:12px;
+    align-items:start;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:13px 16px;
+    font-size:15px;
+    line-height:1.4;
+    color:#243B53;
+  }
+  .symptoms li i{ color:var(--red); margin-top:3px; font-size:14px; }
+
+  /* Discovery questions */
+  .discovery .section-head{ color:var(--blue); }
+  .discovery .mini-icon{ color:var(--blue); background:var(--sky); }
+  .qgroups{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px 24px;
+  }
+  .qgroup{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:16px 18px;
+  }
+  .qgroup h3{
+    margin:0 0 10px;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--blue);
+  }
+  .qgroup ul{ margin:0; padding-left:18px; }
+  .qgroup li{
+    font-size:14px;
+    line-height:1.4;
+    color:#243B53;
+    margin-bottom:8px;
+  }
+  .qgroup li:last-child{ margin-bottom:0; }
+
+  .close{
+    margin-top:26px;
+    background:var(--green-bg);
+    border:1px solid #BBE6C8;
+    border-left:4px solid var(--green);
+    border-radius:12px;
+    padding:16px 20px;
+  }
+  .close .k{
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--green);
+    margin-bottom:6px;
+  }
+  .close p{ margin:0; font-size:14.5px; line-height:1.45; color:#1c3a26; }
+  .close .q{ font-weight:700; color:var(--navy); }
+
+  @media print{
+    body{ background:#fff; }
+    .page{ margin:0; box-shadow:none; width:auto; border-radius:0; }
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+    <div class="content">
+      <div class="badge">OUTREACH CHEAT SHEET</div>
+      <h1>Starting the conversation</h1>
+      <p class="sub">
+        The goal of the first chat isn't to pitch &mdash; it's to get them talking about where
+        they're losing time, quality, or money. Lead with a symptom, then ask. You're listening for
+        a &ldquo;yeah, that's us.&rdquo;
+      </p>
+
+      <!-- 1. Symptom opener -->
+      <section class="section opener">
+        <h2 class="section-head"><span class="mini-icon"><i class="fa-solid fa-triangle-exclamation"></i></span> Does any of this sound familiar?</h2>
+        <p class="section-note">Drop one or two of these into a message or the opening of a call. You only need one to land.</p>
+        <ul class="symptoms">
+          <li><i class="fa-solid fa-circle-dot"></i><span>Your operators dial in machine settings from experience &mdash; and when a run goes bad, there's no record of what changed.</span></li>
+          <li><i class="fa-solid fa-circle-dot"></i><span>If a customer flags a defect, you can't easily trace that part back to the run that made it.</span></li>
+          <li><i class="fa-solid fa-circle-dot"></i><span>You're half-guessing at what's actually on the floor right now &mdash; WIP and finished goods.</span></li>
+          <li><i class="fa-solid fa-circle-dot"></i><span>When a machine goes down, nobody really captures why &mdash; so the true cost of downtime is a mystery.</span></li>
+          <li><i class="fa-solid fa-circle-dot"></i><span>Scrap and rework quietly eat into material cost, but no one could tell you what it adds up to in a year.</span></li>
+        </ul>
+      </section>
+
+      <!-- 2. Discovery questions -->
+      <section class="section discovery">
+        <h2 class="section-head"><span class="mini-icon"><i class="fa-solid fa-comments"></i></span> Questions to keep it going</h2>
+        <p class="section-note">Open-ended, not leading. These make you sound like someone who's been in a plant &mdash; not a software vendor.</p>
+        <div class="qgroups">
+          <div class="qgroup">
+            <h3>Quality &amp; Scrap</h3>
+            <ul>
+              <li>When a bad batch happens, how do you figure out why?</li>
+              <li>What share of what you run ends up as scrap or rework?</li>
+              <li>Could anyone here tell me what scrap costs you in a year?</li>
+            </ul>
+          </div>
+          <div class="qgroup">
+            <h3>Traceability</h3>
+            <ul>
+              <li>If a customer returns a defect, can you trace it to the run that made it?</li>
+              <li>How long would that take you today?</li>
+            </ul>
+          </div>
+          <div class="qgroup">
+            <h3>Inventory</h3>
+            <ul>
+              <li>How do you know what's on the floor right now?</li>
+              <li>How often is the system wrong vs. what's actually there?</li>
+            </ul>
+          </div>
+          <div class="qgroup">
+            <h3>Capacity &amp; Downtime</h3>
+            <ul>
+              <li>Where do you think you're losing the most capacity?</li>
+              <li>Do you know your OEE &mdash; or how much more you could ship with what you already have?</li>
+            </ul>
+          </div>
+          <div class="qgroup">
+            <h3>What's running the floor</h3>
+            <ul>
+              <li>What runs the floor today &mdash; paper, spreadsheets, an ERP, tribal knowledge?</li>
+              <li>What's the one thing you wish you could see that you can't?</li>
+            </ul>
+          </div>
+          <div class="qgroup">
+            <h3>The priority</h3>
+            <ul>
+              <li>If we fixed just one of these next quarter, which would matter most?</li>
+              <li>What's stopped you from tackling it so far?</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Close -->
+      <div class="close">
+        <div class="k">How to close</div>
+        <p>
+          No pitch. End with: <span class="q">&ldquo;Let me send you a short note &mdash; what I heard, and the one thing I'd look at first.&rdquo;</span>
+          Then deliver that half-page the same day. The recap is your real first product: fast, free, and specific.
+        </p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
