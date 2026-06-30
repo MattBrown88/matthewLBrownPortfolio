@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script async="" src="https://cdn.splitbee.io/sb.js"></script>
+  <title>Tableau and dbt: From Undocumented Calculations to Version-Controlled Business Rules</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content='How to move business logic out of Tableau and into dbt so your metrics are consistent, testable, and version-controlled.'>
+  <link rel="canonical" href="https://www.matthewlbrown.com/blog/tableau-and-dbt-from-undocumented-calculations-to-version-controlled-business-rules.html">
+  <meta property="og:site_name" content="Matt Brown">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content='Tableau and dbt: From Undocumented Calculations to Version-Controlled Business Rules'>
+  <meta property="og:description" content='How to move business logic out of Tableau and into dbt so your metrics are consistent, testable, and version-controlled.'>
+  <meta property="og:url" content="https://www.matthewlbrown.com/blog/tableau-and-dbt-from-undocumented-calculations-to-version-controlled-business-rules.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content='Tableau and dbt: From Undocumented Calculations to Version-Controlled Business Rules'>
+  <meta name="twitter:description" content='How to move business logic out of Tableau and into dbt so your metrics are consistent, testable, and version-controlled.'>
+  <meta property="og:image" content="https://www.matthewlbrown.com/blog/images/tableau-dbt-cover.png">
+  <meta name="twitter:image" content="https://www.matthewlbrown.com/blog/images/tableau-dbt-cover.png">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+  <link rel="icon" type="image/x-icon" href="/favicon_io/favicon.ico">
+  <link rel="manifest" href="/favicon_io/site.webmanifest">
+  <link rel="stylesheet" href="/css/main.css">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/v4-shims.min.css"
+    integrity="sha512-ARfx5eajdcCAuWvuJrgUuJ6D25ON3KZRTCghNXXKeJldCQJ5bXS+6CvG2EhcFWITF95uwZydzpufSKvhmSpTxA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+    <div class="container is-narrow-nav">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/" aria-label="Matt Brown home">
+          <span class="mb-logo">MB</span>
+        </a>
+        <a class="navbar-burger" role="button" aria-label="menu" aria-expanded="false" data-target="#navMenu">
+          <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+      </div>
+      <div class="navbar-menu is-shadowless" id="navMenu">
+        <div class="navbar-start">
+          <a class="navbar-item has-text-weight-normal" href="/#projects">Projects</a>
+          <a class="navbar-item has-text-weight-normal" href="/blog/">Blog</a>
+          <a class="navbar-item has-text-weight-normal" href="/#about">About</a>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <a class="button is-primary is-outlined is-rounded has-text-weight-normal" target="_blank"
+              href="https://calendly.com/matt-1176">
+              Book a meeting</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="section blog-post" style="padding-top:1.5rem;">
+    <div class="container is-narrow" style="max-width:720px;">
+      <header class="blog-post-header" style="text-align:left;margin-bottom:2.5rem;">
+        <h1 class="title is-spaced is-size-2-desktop is-size-3-mobile" style="color:#141c3a;text-align:left;">
+          Tableau and dbt: From Undocumented Calculations to Version-Controlled Business Rules
+        </h1>
+        <div class="blog-byline"
+          style="display:flex;align-items:center;gap:0.55rem;color:#8a8fa3;font-size:0.95rem;margin-top:0.75rem;">
+          <span style="color:#41476b;font-weight:600;">Matt Brown</span>
+          <span aria-hidden="true">·</span>
+          <span>Jun 2026</span>          <span aria-hidden="true">·</span>
+          <span>Data</span>        </div>
+      </header>
+      <figure class="blog-featured-image" style="margin:0 0 2.75rem;">
+        <img src="/blog/images/tableau-dbt-cover.png" alt="Tableau dbt cover"
+          style="display:block;width:100%;height:auto;border-radius:10px;">
+      </figure>
+      <article class="content blog-article">
+<p>Tableau is a great tool.</p>
+<p>Your analysts are producing insights daily.</p>
+<p>But the system continues to grow.</p>
+<p>Numbers are no longer matching.</p>
+<p>Analysts are taking days to answer seemingly simple questions.</p>
+<h2 id="why-is-this-happening">Why is this happening?</h2>
+<p>Often, it is because <strong>data modeling and business logic are defined directly in Tableau</strong>. Tableau is great for visualization but not as good for data modeling. This causes a variety of issues, including:</p>
+<ul>
+<li><strong>Repeated calculated fields and data joins.</strong> The same logic is defined in multiple places. Difficult to handle transitional periods such as upstream API changes.</li>
+<li><strong>Slow data queries and workbooks</strong>. Data transformations are generally faster outside of Tableau.</li>
+<li><strong>Vendor lock-in</strong>. Keeping logic out of the BI platform makes your system more flexible.</li>
+</ul>
+<figure>
+<img src="https://miro.medium.com/v2/resize:fit:700/1*mndKdidTrRxVpxa8gwylBg.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h2 id="migrating-tableau-environment-to-dbt">Migrating Tableau Environment to dbt</h2>
+<p>The solution is to move data modeling and business logic into dbt and use Tableau as the display layer. Here’s the basic architecture:</p>
+<h3 id="dbt-project-architecture-and-example-files">dbt project architecture and example files</h3>
+<ol type="1">
+<li>Raw Data — <code>sales.csv</code></li>
+<li>Staging — <code>stg_sales.sql</code></li>
+<li>Business Logic — <code>sales_dashboard.sql</code></li>
+<li>Metadata &amp; Testing — <code>_marts_models.yml</code></li>
+<li>Semantic Layer — <code>sales_dashboard.yml</code></li>
+<li>Visualization Tableau workbook</li>
+</ol>
+<p>To do this, we need to untangle the mess that is data modeling in Tableau. But the great news is the visuals shouldn’t actually change. And these infrastructure and architectural improvements provide a series of cascading benefits.</p>
+<h3 id="benefits">Benefits</h3>
+<ul>
+<li><strong>Validation of the numbers.</strong> Re-creating the existing logic often uncovers hidden assumptions and bugs in the existing system.</li>
+<li><strong>One source of truth.</strong> Consistent and reliable metrics across the org.</li>
+<li><strong>Cheaper compute costs.</strong> Less duplication and better usage of pre-aggregated datasets.</li>
+<li><strong>Higher quality data for AI applications</strong>. Models are most effective when they have access to well-defined business concepts.</li>
+</ul>
+<h3 id="steps-to-migrate-to-dbt">Steps to migrate to dbt</h3>
+<ol type="1">
+<li>Create a prioritized inventory of Tableau workbooks to move.</li>
+<li>Create an inventory of data sources used in those Tableau workbooks and ensure they are in the data warehouse.</li>
+</ol>
+<figure>
+<img src="https://miro.medium.com/v2/resize:fit:700/1*r-zdbcIgroDZmOdJY8Chxw.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<ol start="3" type="1">
+<li>Identify data transformations currently in Tableau and create equivalent dbt logic.</li>
+</ol>
+<h2 id="example">Example</h2>
+<p>In this section, we’ll go through an example of how to move basic logic from Tableau into dbt. We will show how to migrate a <em>join</em> and a <em>calculated field</em>.</p>
+<blockquote>
+<p>The full project is available on GitHub:
+github.com/MattBrown88/tableau_dbt_demo</p>
+</blockquote>
+<h3 id="join">Join</h3>
+<p>Joining <code>product</code>and <code>customer</code> reference tables to <code>sales_data</code>.</p>
+<figure>
+<img src="https://miro.medium.com/v2/resize:fit:700/1*TjtPqhDhAnZ6Ol6kciHadw.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>​ Create a calculated field in Tableau</p>
+<h3 id="calculated-field">Calculated Field</h3>
+<p>Here’s a calculated field in Tableau. By defining it in a Tableau workbook, it’s not available in other workbooks or anywhere else in the org. So reuse will result in duplication.</p>
+<figure>
+<img src="https://miro.medium.com/v2/resize:fit:534/1*xmJMmKzvyTsfHidZVIjicw.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>We can move this logic to dbt so that it is documented and readily available. This is a simplistic example but if you’re here, you understand that Tableau data modeling can quickly become unmanageable.</p>
+      </article>
+
+      <div class="has-text-centered">
+        <a class="button is-primary is-rounded is-medium has-text-weight-normal" target="_blank" href="https://calendly.com/matt-1176">
+          <span class="icon"><i class="fa-solid fa-comments"></i></span><span>Work with me</span></a>
+      </div>
+
+      <p class="has-text-centered" style="margin-top:1.5rem;">
+        <a href="/blog/" style="color:#6495ED;">&larr; Back to all posts</a>
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer-slim is-primary has-text-centered">
+    <div class="container is-narrow">
+      <div class="social-icons">
+        <p class="field">
+          <a class="button" href="https://www.linkedin.com/in/matthew-brown-44b91017/" target="_blank">
+            <span class="icon is-small"><i class="fab fa-linkedin-in fa-fw"></i></span>
+          </a>
+          <a class="button" href="https://github.com/MattBrown88" target="_blank">
+            <span class="icon is-small"><i class="fa-brands fa-github"></i></span></a>
+          <a class="button" href="mailto:matt@gosolucia.com"><span class="icon is-small"><i
+                class="far fa-envelope fa-fw"></i></span></a>
+        </p>
+      </div>
+      <p class="footer-copy">&copy; <span id="footer-year">2026</span> Matt Brown. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/js/main-min.js"></script>
+  <script>
+    // Keep the footer copyright year current
+    (function () {
+      var yearEl = document.getElementById('footer-year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+
+</html>

@@ -1,6 +1,13 @@
-# Tableau and dbt: From **undocumented calculations to version-controlled business rules** [2026]
+---
+title: 'Tableau and dbt: From Undocumented Calculations to Version-Controlled Business Rules'
+description: 'How to move business logic out of Tableau and into dbt so your metrics are consistent, testable, and version-controlled.'
+date: 'Jun 2026'
+category: Data
+image: 'blog/images/tableau-dbt-cover.png'
+image_alt: 'Tableau dbt cover'
+cta: 'Work with me'
 
-![img](https://miro.medium.com/v2/resize:fit:700/1*o_zwC2I9z_HvYMHldvUrsQ.png)
+---
 
 Tableau is a great tool.
 

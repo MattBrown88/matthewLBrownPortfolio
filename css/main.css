@@ -4797,3 +4797,7 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
   font-weight: 600;
   color: #6495ED;
 }
+
+.blog-article ol { list-style: decimal outside; margin-left: 2em; margin-bottom: 1em; }
+.blog-article ul { list-style: disc outside; margin-left: 2em; margin-bottom: 1em; }
+.blog-article li { margin-bottom: 0.35em; }

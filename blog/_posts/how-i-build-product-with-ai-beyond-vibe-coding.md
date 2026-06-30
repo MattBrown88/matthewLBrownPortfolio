@@ -15,10 +15,10 @@ AI doesn't eliminate product development. It compresses it. Vibe-coding is the r
 
 The biggest gains don't come from asking AI to build an app from scratch. They come from using AI to critique your thinking at every stage of product development.
 
-1. Define requirements: Problem, Customer / User, Workflow, Non-functional Requirements, Technical Requirements, Rules, Edge cases, Success Criteria
-2. Build data model: Tables, Relationships, Enums, Constraints, Permissions
-3. UI/UX design 
-4. Initial MVP build
+1. **Define requirements:** Problem, Customer / User, Workflow, Non-functional Requirements, Technical Requirements, Rules, Edge cases, Success Criteria
+2. **Build data model:** Tables, Relationships, Enums, Constraints, Permissions
+3. **UI/UX design**
+4. **Initial MVP build**
 
 At each step, I get as far as I can alone before sharing with AI to critique the requirements, identify blind spots and refine the design
 

@@ -1,26 +1,14 @@
 ---
-
-layout: '../../layouts/MarkdownPost.astro'
-
 title: 'Paid Media Strategy: How to Diagnose Campaign Performance Problems'
-
-description: 'An interactive paid media strategy framework showing how first-party data, targeting, bidding, attribution, experimentation, landing pages, and external market forces connect, and how to use the system to diagnose performance problems.'
-
-subtitle: 'Paid media performance emerges from a system of interconnected components. This guide maps how the pieces fit together and how to use that map to diagnose performance problems.'
-
-author: 'Matt Brown'
-
-category: 'Paid Media'
-
-date: 'June 2026'
-
-pubDate: '2026-06-05'
-
-datePublished: '2026-06-05'
+description: 'A paid media strategy framework showing how first-party data, targeting, bidding, attribution, experimentation, landing pages, and external market forces connect — and how to use the system to diagnose performance problems.'
+date: 'Jun 30, 2026'
+category: Paid Media
+image: 'blog/images/paid-media-strategy-cover.png'
+image_alt: 'Paid media strategy framework'
+cta: 'Work with me'
 
 ---
 
-![image-20260608101332621](/Users/matthewbrown/Library/Application Support/typora-user-images/image-20260608101332621.png)
 
 Most paid media advice focuses on optimizing individual metrics like CTR, CPA or conversion rate. The problem with this is the metrics don't exist in isolation. Performance results from the system of interconnected components including offer, creatives, audience, bidding, attribution, landing page, first-party data and external market forces.
 
