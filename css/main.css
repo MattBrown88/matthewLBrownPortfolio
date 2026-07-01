@@ -4801,3 +4801,6 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
 .blog-article ol { list-style: decimal outside; margin-left: 2em; margin-bottom: 1em; }
 .blog-article ul { list-style: disc outside; margin-left: 2em; margin-bottom: 1em; }
 .blog-article li { margin-bottom: 0.35em; }
+
+.blog-article figure { margin: 1.75rem 0; }
+.blog-article figcaption { font-size: 0.85rem; color: #8a8fa3; text-align: center; margin-top: 0.5rem; }
