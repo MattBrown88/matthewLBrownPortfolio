@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script async="" src="https://cdn.splitbee.io/sb.js"></script>
+  <title>How to Debug Supabase Edge Functions in VS Code</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content='Step-by-step walkthrough of setting up debugging in VS Code for Supabase'>
+  <link rel="canonical" href="https://www.matthewlbrown.com/blog/how-to-debug-supabase-edge-functions-directly-in-vs-code.html">
+  <meta property="og:site_name" content="Matt Brown">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content='How to Debug Supabase Edge Functions in VS Code'>
+  <meta property="og:description" content='Step-by-step walkthrough of setting up debugging in VS Code for Supabase'>
+  <meta property="og:url" content="https://www.matthewlbrown.com/blog/how-to-debug-supabase-edge-functions-directly-in-vs-code.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content='How to Debug Supabase Edge Functions in VS Code'>
+  <meta name="twitter:description" content='Step-by-step walkthrough of setting up debugging in VS Code for Supabase'>
+  <meta property="og:image" content="https://www.matthewlbrown.com/img/blog/debug-edge-functions-cover.svg">
+  <meta name="twitter:image" content="https://www.matthewlbrown.com/img/blog/debug-edge-functions-cover.svg">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+  <link rel="icon" type="image/x-icon" href="/favicon_io/favicon.ico">
+  <link rel="manifest" href="/favicon_io/site.webmanifest">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/analytics.js"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/v4-shims.min.css"
+    integrity="sha512-ARfx5eajdcCAuWvuJrgUuJ6D25ON3KZRTCghNXXKeJldCQJ5bXS+6CvG2EhcFWITF95uwZydzpufSKvhmSpTxA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+    <div class="container is-narrow-nav">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/" aria-label="Matt Brown home">
+          <span class="mb-logo">MB</span>
+        </a>
+        <a class="navbar-burger" role="button" aria-label="menu" aria-expanded="false" data-target="#navMenu">
+          <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+      </div>
+      <div class="navbar-menu is-shadowless" id="navMenu">
+        <div class="navbar-start">
+          <a class="navbar-item has-text-weight-normal" href="/#projects">Projects</a>
+          <a class="navbar-item has-text-weight-normal" href="/blog/">Blog</a>
+          <a class="navbar-item has-text-weight-normal" href="/#about">About</a>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <a class="button is-primary is-outlined is-rounded has-text-weight-normal" target="_blank"
+              href="https://calendly.com/matt-1176">
+              Book a meeting</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="section blog-post" style="padding-top:1.5rem;">
+    <div class="container is-narrow" style="max-width:720px;">
+      <header class="blog-post-header" style="text-align:left;margin-bottom:2.5rem;">
+        <h1 class="title is-spaced is-size-2-desktop is-size-3-mobile" style="color:#141c3a;text-align:left;">
+          How to Debug Supabase Edge Functions in VS Code
+        </h1>
+        <div class="blog-byline"
+          style="display:flex;align-items:center;gap:0.55rem;color:#8a8fa3;font-size:0.95rem;margin-top:0.75rem;">
+          <span style="color:#41476b;font-weight:600;">Matt Brown</span>
+          <span aria-hidden="true">·</span>
+          <span>Jun 25, 2026</span>          <span aria-hidden="true">·</span>
+          <span>Supabase</span>        </div>
+      </header>
+      <figure class="blog-featured-image" style="margin:0 0 2.75rem;">
+        <img src="/img/blog/debug-edge-functions-cover.svg" alt="How to Debug Supabase Edge Functions in VS Code"
+          style="display:block;width:100%;height:auto;border-radius:10px;">
+      </figure>
+      <article class="content blog-article">
+<p>Console logging works for quick troubleshooting, but breakpoints make it so much easier to understand what’s happening inside a request.</p>
+<p>This article will show you how to debug both Supabase Edge Functions and a Vite frontend directly from VS Code using breakpoints. No log statements or jumping between debuggers. And it all works directly from VS Code.</p>
+<p>We will keep things simple in this article and just show the pieces that you need to add to an existing project to get debugging set up in five minutes.</p>
+<blockquote>
+<p><em>Looking for a complete walkthrough from scratch? Watch the accompanying</em> <a href="https://youtu.be/lPFVhmd5LAM">YouTube video</a>.</p>
+<p>Just want the code? Here’s the <a href="https://github.com/MattBrown88/supabase-debug-vscode.git">GitHub repo</a></p>
+</blockquote>
+<h2 id="create-launch.json-debug-configuration">Create launch.json debug configuration</h2>
+<p>In VS Code, <code>launch.json</code> is used to specify debug configurations. Adding these configurations to the <code>launch.json</code> is the only code change required to enable debugging. This config file has two debugger profiles:</p>
+<pre><code>{
+  &quot;version&quot;: &quot;0.2.0&quot;,
+  &quot;configurations&quot;: [
+    {
+      &quot;name&quot;: &quot;Debug Vite Frontend&quot;,
+      &quot;type&quot;: &quot;chrome&quot;,
+      &quot;request&quot;: &quot;launch&quot;,
+      &quot;url&quot;: &quot;http://localhost:8080&quot;,
+      &quot;webRoot&quot;: &quot;${workspaceFolder}/src&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Debug Edge Functions&quot;,
+      &quot;type&quot;: &quot;node&quot;,
+      &quot;request&quot;: &quot;attach&quot;,
+      &quot;address&quot;: &quot;127.0.0.1&quot;,
+      &quot;port&quot;: 8083,
+      &quot;sourceMaps&quot;: true,
+      &quot;enableContentValidation&quot;: false,
+      &quot;restart&quot;: true,
+      &quot;timeout&quot;: 1000000,
+      &quot;sourceMapPathOverrides&quot;: {
+        &quot;file:///var/tmp/sb-compile-edge-runtime/*&quot;: &quot;${workspaceFolder}/supabase/functions/*&quot;
+      }
+    }
+  ]
+}</code></pre>
+<p>The Edge Function debugger attaches to port <code>8083</code>, which is the default Supabase inspector port.</p>
+<p>The most important setting is <code>sourceMapPathOverrides</code>.</p>
+<p>This tells VS Code how to map the compiled Edge Function code back to your original TypeScript source files. This is the only setting you typically need to update.</p>
+<h3 id="find-the-compiled-edge-function-path">Find the compiled Edge Function path</h3>
+<ol type="1">
+<li><p>Start the Edge Function runtime in debug mode:</p>
+<pre><code>supabase functions serve --inspect-mode brk</code></pre></li>
+<li><p>Navigate to <code>chrome://inspect</code> in Chrome</p></li>
+<li><p>Trigger an Edge Function request</p></li>
+<li><p>Highlighted below is the compiled script path shown on <code>chrome://inspect</code></p></li>
+</ol>
+<figure>
+<img src="/img/blog/chrome-inspect.png" alt="Chrome Inspect showing the compiled Edge Function path" />
+<figcaption aria-hidden="true">Chrome Inspect showing the compiled Edge Function path</figcaption>
+</figure>
+<p>Supabase officially documents debugging through Chrome DevTools. We can use the same inspector information to configure VS Code debugging. Update sourceMapPathOverrides <code>file:///var/tmp/sb-compile-edge-runtime/*</code> to match what’s shown in Chrome.</p>
+<p>If Chrome shows:</p>
+<pre><code>file:///var/tmp/sb-compile-edge-runtime/greet/index.ts</code></pre>
+<p>Then the left side of your mapping should be:</p>
+<pre><code>file:///var/tmp/sb-compile-edge-runtime/*</code></pre>
+<p>Remove the function-specific portion of the path (<code>greet/index.ts</code>) and keep only the common root directory.</p>
+<blockquote>
+<p>The compiled path may differ between operating systems and Supabase CLI versions. If breakpoints are not being hit, check the path shown in <code>chrome://inspect</code> and update <code>sourceMapPathOverrides</code> accordingly.</p>
+</blockquote>
+<h2 id="debugging">Debugging</h2>
+<p>You can debug both the frontend and Edge Functions at the same time.</p>
+<p>This provides a much smoother debugging workflow than relying solely on console logs.</p>
+<h3 id="frontend">Frontend</h3>
+<ol type="1">
+<li>Start the <strong>Debug Vite Frontend</strong> configuration.</li>
+<li>Set a breakpoint somewhere in your frontend code.</li>
+<li>Trigger the code path from the browser.</li>
+<li>If VS Code stops at the breakpoint, frontend debugging is working.</li>
+</ol>
+<h3 id="edge-functions">Edge Functions</h3>
+<ol type="1">
+<li><p>Start the Edge Function runtime:</p>
+<pre><code>supabase functions serve --inspect-mode brk</code></pre></li>
+<li><p>In VS Code, start the “Debug Edge Functions” configuration. The Debug toolbar should appear.</p></li>
+<li><p>Set a breakpoint in</p></li>
+</ol>
+<pre><code>supabase/functions/&lt;function-name&gt;/index.ts</code></pre>
+<ol start="4" type="1">
+<li>Trigger the function from your frontend or browser.</li>
+</ol>
+<p>The debugger will stop on the Edge Runtime bootstrap code first because of <code>--inspect-mode brk</code>.</p>
+<p>Press <strong>Continue</strong> once and execution will proceed to your breakpoint.</p>
+<p>To debug a different Edge function, you will need to restart the function server.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="breakpoint-is-hollow-or-never-gets-hit">Breakpoint is hollow or never gets hit</h3>
+<p>Your <code>sourceMapPathOverrides</code> path is likely incorrect.</p>
+<p>Verify the compiled path in <code>chrome://inspect</code> and update the mapping.</p>
+<h3 id="debugger-attaches-but-execution-never-stops">Debugger attaches but execution never stops</h3>
+<p>Make sure:</p>
+<pre class="bash"><code>supabase functions serve --inspect-mode brk</code></pre>
+<p>is running before attaching the VS Code debugger.</p>
+<h3 id="debugger-stops-in-bootstrap-code">Debugger stops in bootstrap code</h3>
+<p>This is expected behavior when using:</p>
+<pre class="bash"><code>--inspect-mode brk</code></pre>
+<p>Press <strong>Continue</strong> and execution will continue to your breakpoint.</p>
+<h3 id="debugging-a-different-edge-function">Debugging a different Edge Function</h3>
+<p>You will need to restart:</p>
+<pre><code>supabase functions serve --inspect-mode brk</code></pre>
+<p>when switching to a different Edge Function.</p>
+<p>Once configured, you only need to:</p>
+<ol type="1">
+<li>Start <code>supabase functions serve --inspect-mode brk</code></li>
+<li>Press F5 in VS Code</li>
+<li>Set breakpoints</li>
+</ol>
+<p>After that, debugging works much like any Node.js backend project.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Once configured, debugging Supabase Edge Functions feels much more like debugging a traditional backend application.</p>
+<p>You can inspect variables, step through code, and trace requests across both your frontend and Edge Functions without filling your codebase with temporary <code>console.log</code> statements.</p>
+      </article>
+
+      <div class="has-text-centered">
+        <a class="button is-primary is-rounded is-medium has-text-weight-normal" target="_blank" href="https://calendly.com/matt-1176">
+          <span class="icon"><i class="fa-solid fa-comments"></i></span><span>Get your Supabase issue fixed</span></a>
+      </div>
+
+      <p class="has-text-centered" style="margin-top:1.5rem;">
+        <a href="/blog/" style="color:#6495ED;">&larr; Back to all posts</a>
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer-slim is-primary has-text-centered">
+    <div class="container is-narrow">
+      <div class="social-icons">
+        <p class="field">
+          <a class="button" href="https://www.linkedin.com/in/matthew-brown-44b91017/" target="_blank">
+            <span class="icon is-small"><i class="fab fa-linkedin-in fa-fw"></i></span>
+          </a>
+          <a class="button" href="https://github.com/MattBrown88" target="_blank">
+            <span class="icon is-small"><i class="fa-brands fa-github"></i></span></a>
+          <a class="button" href="mailto:matt@gosolucia.com"><span class="icon is-small"><i
+                class="far fa-envelope fa-fw"></i></span></a>
+        </p>
+      </div>
+      <p class="footer-copy">&copy; <span id="footer-year">2026</span> Matt Brown. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/js/main-min.js"></script>
+  <script>
+    // Keep the footer copyright year current
+    (function () {
+      var yearEl = document.getElementById('footer-year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script async="" src="https://cdn.splitbee.io/sb.js"></script>
+  <title>How to Migrate Existing Supabase Project to Declarative Schema</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content='How to Migrate Existing Supabase Project to Declarative Schema'>
+  <link rel="canonical" href="https://www.matthewlbrown.com/blog/how-to-migrate-existing-supabase-project-to-declarative-schema.html">
+  <meta property="og:site_name" content="Matt Brown">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content='How to Migrate Existing Supabase Project to Declarative Schema'>
+  <meta property="og:description" content='How to Migrate Existing Supabase Project to Declarative Schema'>
+  <meta property="og:url" content="https://www.matthewlbrown.com/blog/how-to-migrate-existing-supabase-project-to-declarative-schema.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content='How to Migrate Existing Supabase Project to Declarative Schema'>
+  <meta name="twitter:description" content='How to Migrate Existing Supabase Project to Declarative Schema'>
+  <meta property="og:image" content="https://www.matthewlbrown.com/img/blog/migrate-declarative-schema-cover.svg">
+  <meta name="twitter:image" content="https://www.matthewlbrown.com/img/blog/migrate-declarative-schema-cover.svg">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+  <link rel="icon" type="image/x-icon" href="/favicon_io/favicon.ico">
+  <link rel="manifest" href="/favicon_io/site.webmanifest">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/analytics.js"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/v4-shims.min.css"
+    integrity="sha512-ARfx5eajdcCAuWvuJrgUuJ6D25ON3KZRTCghNXXKeJldCQJ5bXS+6CvG2EhcFWITF95uwZydzpufSKvhmSpTxA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+    <div class="container is-narrow-nav">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/" aria-label="Matt Brown home">
+          <span class="mb-logo">MB</span>
+        </a>
+        <a class="navbar-burger" role="button" aria-label="menu" aria-expanded="false" data-target="#navMenu">
+          <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+      </div>
+      <div class="navbar-menu is-shadowless" id="navMenu">
+        <div class="navbar-start">
+          <a class="navbar-item has-text-weight-normal" href="/#projects">Projects</a>
+          <a class="navbar-item has-text-weight-normal" href="/blog/">Blog</a>
+          <a class="navbar-item has-text-weight-normal" href="/#about">About</a>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <a class="button is-primary is-outlined is-rounded has-text-weight-normal" target="_blank"
+              href="https://calendly.com/matt-1176">
+              Book a meeting</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="section blog-post" style="padding-top:1.5rem;">
+    <div class="container is-narrow" style="max-width:720px;">
+      <header class="blog-post-header" style="text-align:left;margin-bottom:2.5rem;">
+        <h1 class="title is-spaced is-size-2-desktop is-size-3-mobile" style="color:#141c3a;text-align:left;">
+          How to Migrate Existing Supabase Project to Declarative Schema
+        </h1>
+        <div class="blog-byline"
+          style="display:flex;align-items:center;gap:0.55rem;color:#8a8fa3;font-size:0.95rem;margin-top:0.75rem;">
+          <span style="color:#41476b;font-weight:600;">Matt Brown</span>
+          <span aria-hidden="true">·</span>
+          <span>July 9, 2026</span>          <span aria-hidden="true">·</span>
+          <span>Supabase</span>        </div>
+      </header>
+      <figure class="blog-featured-image" style="margin:0 0 2.75rem;">
+        <img src="/img/blog/migrate-declarative-schema-cover.svg" alt="How to Migrate an Existing Supabase Project to Declarative Schema"
+          style="display:block;width:100%;height:auto;border-radius:10px;">
+      </figure>
+      <article class="content blog-article">
+<p>Supabase migrations can quickly get complicated. Early in a project the database structure rapidly evolves, often resulting in a complex array of migration files. It can be difficult to find the most recent table, view or enum when there are many different versions of it in the change history.</p>
+<p>This slows down the development process because you’re constantly looking for the correct file. It also reduces clarity around the database architecture, making it more difficult to understand the codebase.</p>
+<p>This article will show how to convert an existing Supabase project to a Declarative Schema pattern, bringing clarity and simplicity to your project.</p>
+<p>Here’s the <a href="https://github.com/MattBrown88/supabase-audit">GitHub Repo</a> with the conversion scripts.</p>
+<h2 id="tldr-process-steps">TLDR Process Steps</h2>
+<pre class="bash"><code>supabase start
+supabase db reset
+./supabase-inventory/scripts/supabase_db_dump.sh
+python3 ./supabase-inventory/scripts/split_schema.py
+cp ./supabase-inventory/templates/grants.sql supabase/migrations/$(date +%Y%m%d%H%M%S)_grants.sql
+supabase db reset
+supabase db diff
+supabase db diff --linked</code></pre>
+<h2 id="what-is-declarative-schema">What is declarative schema?</h2>
+<p>The simplest way to demonstrate is with tables. Rather than creating a new migration each time you add a field, you have a schemas folder that specifies the table structure, and the migrations are generated from there.</p>
+<p>Here’s a quick example. With classic migrations, tables and views get redefined again and again across the history:</p>
+<pre class="text"><code>supabase/migrations/
+  20240103091412_create_projects.sql
+  20240117103055_create_reports_view.sql
+  20240215142207_add_project_status.sql
+  20240302091733_create_teams.sql
+  20240402113045_update_reports_view.sql
+  20240518084921_add_project_due_date.sql
+  20240607120310_add_teams_billing_fields.sql
+  20240701174502_update_reports_view_again.sql</code></pre>
+<p>Which file has the current definition of the <code>reports</code> view? What columns does <code>projects</code> actually have today? You have to replay the history in your head — and real projects have dozens more of these.</p>
+<p>Declarative schemas bring structure. Now you just need to update the files below and new migrations are automatically generated by running <code>supabase db diff -f name_of_change</code>.</p>
+<p>The existing migrations don’t change. You can squash them if you want but it is not necessary.</p>
+<pre class="text"><code>supabase/
+  schemas/
+    00_extensions.sql
+    01_types.sql
+    02_policy_helpers.sql
+    tables/
+       001_tablename.sql
+       002_tablename.sql
+       ...
+    functions.sql
+    grants.sql
+    views.sql
+    manual.sql        (auth triggers, storage policies — edit by hand)</code></pre>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Python 3.11+</li>
+<li>Supabase CLI 2.108+</li>
+<li>Docker</li>
+</ul>
+<h2 id="process-steps">Process steps</h2>
+<p>Copy supabase-inventory/ folder from GitHub into the root of your project.</p>
+<pre class="text"><code>supabase/
+   migrations/
+   functions/
+supabase-inventory/</code></pre>
+<h3 id="step-1-start-supabase-and-reset-the-database">Step 1: Start Supabase and reset the database</h3>
+<pre class="bash"><code>supabase start
+supabase db reset</code></pre>
+<h3 id="step-2-create-schema-file-that-holds-the-database-structure">Step 2: Create schema file that holds the database structure</h3>
+<p>This can be based on your local Supabase instance.</p>
+<pre class="bash"><code>./supabase-inventory/scripts/supabase_db_dump.sh</code></pre>
+<p>Or you can add a project ref and it will be based on that remote instance. The project ref is the ~20-character id in your dashboard URL: <code>supabase.com/dashboard/project/&lt;project-ref&gt;</code>.</p>
+<pre class="bash"><code>PROJECT_REF=&quot;abcdefghijklmnopqrst&quot; ./supabase-inventory/scripts/supabase_db_dump.sh</code></pre>
+<p>This outputs <code>supabase-inventory/output/schema.sql</code>, which has all of the sql used to define the database.</p>
+<h3 id="step-3-split-schema.sql-into-separate-schema-files">Step 3: Split schema.sql into separate schema files</h3>
+<pre class="bash"><code>python3 ./supabase-inventory/scripts/split_schema.py</code></pre>
+<p><code>split_schema.py</code> organizes sql around tables. So for a particular table, the schema, RLS, constraints, keys, grants are all in the same file.</p>
+<p>Safe to rerun any time. Each run:</p>
+<ul>
+<li>Deletes and regenerates all generated files, including <code>tables/*.sql</code> — renamed or reordered tables never leave stale copies behind. Never edit generated files by hand; edit via rerunning, or use <code>manual.sql</code>.</li>
+<li>Never touches <code>schemas/manual.sql</code>.</li>
+<li>Updates <code>schema_paths</code> in <code>supabase/config.toml</code> automatically. This specifies the order the schema files are applied when building the shadow database. Anything that’s depended on must be listed first.</li>
+<li>Moves functions referenced by policies or triggers into <code>02_policy_helpers.sql</code>, which loads before the table files. That file starts with <code>SET check_function_bodies = off;</code> so function bodies can reference tables that don’t exist yet — bodies are only validated on first call. Functions are otherwise kept exactly as dumped, so schema files always match what migrations built.</li>
+<li>Anything it can’t classify goes to <code>output/extracted/review.sql</code> with a warning — inspect it if the warning appears.</li>
+</ul>
+<p>Each file will look something like this:</p>
+<pre class="sql"><code>create table public.projects (...);
+
+alter table public.projects
+  add constraint ...;
+
+create index ...;
+
+create trigger ...;
+
+alter table public.projects
+  enable row level security;
+
+create policy ...;
+
+grant ...;
+
+create function ...;
+
+create or replace trigger ...;
+</code></pre>
+<p>Other supporting sql (extensions, types, functions, views, grants) is stored in the relevant files shown in the folder structure above.</p>
+<h3 id="step-4-add-the-grants-migration">Step 4: Add the grants migration</h3>
+<pre class="bash"><code>cp ./supabase-inventory/templates/grants.sql \
+   supabase/migrations/$(date +%Y%m%d%H%M%S)_grants.sql</code></pre>
+<p>Then run <code>supabase db reset</code> to apply it.</p>
+<p><strong>Why is this needed?</strong> The grants that let <code>anon</code>, <code>authenticated</code>, and <code>service_role</code> touch your tables come from default privileges, not from your migration files. Recent CLI versions seed the same default privileges locally, so a fresh <code>supabase db reset</code> usually gets the grants for free — but depending on your CLI version and migration history (e.g. a <code>REVOKE</code> in an old migration, or objects created under a different role), a rebuilt database can be missing grants, and <code>supabase db diff</code> then shows grant drift that no schema edit can fix. This migration guarantees the grants exist either way; if they already do, every statement is a no-op:</p>
+<ol type="1">
+<li><code>GRANT ... ON ALL TABLES IN SCHEMA public</code> covers every existing table, sequence, and function in one statement each. Postgres resolves “all tables” against the live database when the migration runs, so there’s nothing to generate or keep in sync.</li>
+<li><code>ALTER DEFAULT PRIVILEGES</code> makes tables created by future migrations get the same grants automatically, so the drift never comes back.</li>
+</ol>
+<p>Copy it in once during initial setup — after that it’s a plain migration file like any other.</p>
+<h3 id="step-5-compare-declarative-schema-with-database">Step 5: Compare declarative schema with database</h3>
+<p><code>supabase db diff</code> validates your schema files:
+1. Spins up a shadow database and applies your <code>schemas/</code> files to it
+2. Compares that shadow DB against your local DB (built from migrations)
+3. Outputs SQL needed to reconcile the two</p>
+<p>A shadow build failure means a syntax error or ordering problem in your schema files.</p>
+<p>Locally:</p>
+<pre class="bash"><code>supabase db diff</code></pre>
+<p>With linked remote (compares local against prod):</p>
+<pre class="bash"><code>supabase db diff --linked</code></pre>
+<p>If there are differences, reconcile by either adding to <code>manual.sql</code> (below) or creating a new migration with <code>supabase db diff -f my_new_migration_name</code>.</p>
+<h4 id="auth-triggers-storage-policies-etc.">Auth triggers, storage policies, etc.</h4>
+<p><code>supabase db dump --local</code> only exports the public schema. Auth-schema triggers and storage policies are <strong>never in the dump</strong>, so <code>split_schema.py</code> cannot auto-place them. Whenever the diff shows an unexpected <code>drop trigger</code> on <code>auth.*</code> or <code>drop policy</code> on <code>storage.objects</code>, copy the <code>CREATE</code> statement from the relevant migration into <code>schemas/manual.sql</code> — that file is never overwritten by <code>split_schema.py</code>.</p>
+<p>Once <code>supabase db diff</code> is empty and <code>supabase db diff --linked</code> shows only platform-managed items like <code>pg_cron</code>, then you are done. This shows that there is parity between the new declarative schema and the current db.</p>
+<h3 id="how-to-update-schema">How to update schema</h3>
+<p>Never write a migration by hand for structural changes. Edit the schema file, run one diff, commit both. One <code>db diff</code> covers all changes regardless of how many schema files you touched.</p>
+<ol type="1">
+<li><p>Edit the relevant file in <code>supabase/schemas/</code> — e.g. add a column to <code>tables/007_teams.sql</code></p></li>
+<li><p>Generate the migration:</p>
+<pre class="bash"><code>supabase db diff -f describe_your_change</code></pre>
+<p>This compares ALL schema files against the local DB in one pass and writes one migration file.</p></li>
+<li><p>Commit the edited schema file and the generated migration together.</p></li>
+<li><p>Run <code>supabase db reset</code> to verify the full history still builds cleanly.</p></li>
+</ol>
+<p>That’s it. Your project is now set up to use declarative schemas. You shouldn’t need to write migrations by hand in the future. It’s still helpful to look at the generated migration file after each <code>supabase db diff -f</code> to confirm it does what’s intended.</p>
+      </article>
+
+      <div class="has-text-centered">
+        <a class="button is-primary is-rounded is-medium has-text-weight-normal" target="_blank" href="https://calendly.com/matt-1176">
+          <span class="icon"><i class="fa-solid fa-comments"></i></span><span>Get your Supabase issue fixed</span></a>
+      </div>
+
+      <p class="has-text-centered" style="margin-top:1.5rem;">
+        <a href="/blog/" style="color:#6495ED;">&larr; Back to all posts</a>
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer-slim is-primary has-text-centered">
+    <div class="container is-narrow">
+      <div class="social-icons">
+        <p class="field">
+          <a class="button" href="https://www.linkedin.com/in/matthew-brown-44b91017/" target="_blank">
+            <span class="icon is-small"><i class="fab fa-linkedin-in fa-fw"></i></span>
+          </a>
+          <a class="button" href="https://github.com/MattBrown88" target="_blank">
+            <span class="icon is-small"><i class="fa-brands fa-github"></i></span></a>
+          <a class="button" href="mailto:matt@gosolucia.com"><span class="icon is-small"><i
+                class="far fa-envelope fa-fw"></i></span></a>
+        </p>
+      </div>
+      <p class="footer-copy">&copy; <span id="footer-year">2026</span> Matt Brown. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/js/main-min.js"></script>
+  <script>
+    // Keep the footer copyright year current
+    (function () {
+      var yearEl = document.getElementById('footer-year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+
+</html>
