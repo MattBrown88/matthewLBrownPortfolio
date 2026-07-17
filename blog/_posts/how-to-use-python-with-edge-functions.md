@@ -115,7 +115,7 @@ python env. Run `supabase status` to get the SUPABASE vars.
 PYTHON_API_KEY=test
 SUPABASE_URL=http://127.0.0.1:54321
 SUPABASE_PUBLISHABLE_KEY=sb_publishable_ACJWlzQHlZjBrEguHvfOxg_3BJgxAaH
-SUPABASE_SECRET_KEY=sb_secret_N7UND0UgjKTVK-Uodkm0Hg_xSvEMPvz
+SUPABASE_SECRET_KEY=sb_secret_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 Supabase env
