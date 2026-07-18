@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script async="" src="https://cdn.splitbee.io/sb.js"></script>
+  <title>Vibe-Coded App Production Checklist: Security and Deployment Checks Before You Launch</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content='A practical checklist for reviewing AI-built apps before production, with a focus on Supabase, React, Vercel, security, RLS, secrets, deployments, and reliability.'>
+  <link rel="canonical" href="https://www.matthewlbrown.com/blog/production-readiness-checklist.html">
+  <meta property="og:site_name" content="Matt Brown">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content='Vibe-Coded App Production Checklist: Security and Deployment Checks Before You Launch'>
+  <meta property="og:description" content='A practical checklist for reviewing AI-built apps before production, with a focus on Supabase, React, Vercel, security, RLS, secrets, deployments, and reliability.'>
+  <meta property="og:url" content="https://www.matthewlbrown.com/blog/production-readiness-checklist.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content='Vibe-Coded App Production Checklist: Security and Deployment Checks Before You Launch'>
+  <meta name="twitter:description" content='A practical checklist for reviewing AI-built apps before production, with a focus on Supabase, React, Vercel, security, RLS, secrets, deployments, and reliability.'>
+  <meta property="og:image" content="https://www.matthewlbrown.com/img/blog/production-readiness-checklist-cover.png">
+  <meta name="twitter:image" content="https://www.matthewlbrown.com/img/blog/production-readiness-checklist-cover.png">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+  <link rel="icon" type="image/x-icon" href="/favicon_io/favicon.ico">
+  <link rel="manifest" href="/favicon_io/site.webmanifest">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/analytics.js"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/v4-shims.min.css"
+    integrity="sha512-ARfx5eajdcCAuWvuJrgUuJ6D25ON3KZRTCghNXXKeJldCQJ5bXS+6CvG2EhcFWITF95uwZydzpufSKvhmSpTxA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+    <div class="container is-narrow-nav">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/" aria-label="Matt Brown home">
+          <span class="mb-logo">MB</span>
+        </a>
+        <a class="navbar-burger" role="button" aria-label="menu" aria-expanded="false" data-target="#navMenu">
+          <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
+      </div>
+      <div class="navbar-menu is-shadowless" id="navMenu">
+        <div class="navbar-start">
+          <a class="navbar-item has-text-weight-normal" href="/#projects">Projects</a>
+          <a class="navbar-item has-text-weight-normal" href="/blog/">Blog</a>
+          <a class="navbar-item has-text-weight-normal" href="/#about">About</a>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <a class="button is-primary is-outlined is-rounded has-text-weight-normal" target="_blank"
+              href="https://calendly.com/matt-1176">
+              Book a meeting</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="section blog-post" style="padding-top:1.5rem;">
+    <nav class="blog-toc" aria-label="Table of contents">
+      <div class="blog-toc-inner">
+        <p class="blog-toc-label">On this page</p>
+        <div class="blog-toc-rail">
+          <span class="blog-toc-marker" aria-hidden="true"></span>
+          <ul class="blog-toc-list"></ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container is-narrow" style="max-width:720px;">
+      <header class="blog-post-header" style="text-align:left;margin-bottom:2.5rem;">
+        <h1 class="title is-spaced is-size-2-desktop is-size-3-mobile" style="color:#141c3a;text-align:left;">
+          Vibe-Coded App Production Checklist: Security and Deployment Checks Before You Launch
+        </h1>
+        <div class="blog-byline"
+          style="display:flex;align-items:center;gap:0.55rem;color:#8a8fa3;font-size:0.95rem;margin-top:0.75rem;">
+          <span style="color:#41476b;font-weight:600;">Matt Brown</span>
+          <span aria-hidden="true">·</span>
+          <span>Jul 6, 2026</span>          <span aria-hidden="true">·</span>
+          <span>Supabase</span>        </div>
+      </header>
+      <figure class="blog-featured-image" style="margin:0 0 2.75rem;">
+        <img src="/img/blog/production-readiness-checklist-cover.png" alt="Vibe-coded app production checklist for Supabase, React, and Vercel"
+          style="display:block;width:100%;height:auto;border-radius:10px;">
+      </figure>
+      <article class="content blog-article">
+<h2 id="overview">Overview</h2>
+<p>I put together a checklist of items to review before going live with an app. These are relevant to any application but were generally written to check vibe-coded apps that weren’t as rigorously validated. This list focuses on my favorite stack, Supabase, React and Vercel but most of the steps are relevant to any stack.</p>
+<h2 id="security-data-boundaries">Security / data boundaries</h2>
+<h3 id="review-supabase-security-findings">Review Supabase Security findings</h3>
+<p>Supabase highlights security and configuration issues. You should review each one. You don’t necessarily have to fix each issue (some may not be relevant to your app) but at least write a note on why you don’t need to fix.</p>
+<p>Supabase Security Advisor is a good starting point, but it is not a complete security audit. It can flag common configuration issues, but it cannot determine whether your access rules match your app’s business logic.</p>
+<h3 id="evaluate-rls-to-ensure-that-its-not-too-broad">Evaluate RLS to ensure that it’s not too broad</h3>
+<p>One of Supabase’s biggest strengths is that RLS can make direct client-to-database access safe, but only if the policies match the app’s actual business rules. Supabase can flag some RLS issues, but it cannot tell whether a user should have access to a specific row, team, workspace, or organization.</p>
+<p>If RLS is enabled and no policy exists, the database request would fail. The real risk is a policy that was created to just make the app work.</p>
+<p>A policy like this would make the app work, but would open up that table to all authenticated users.</p>
+<pre><code>create policy &quot;Authenticated users can do anything&quot; 
+on todos 
+for all 
+to authenticated using (true) with check (true); </code></pre>
+<p>As a rule of thumb, users should have access to their data and data from teams they belong to.</p>
+<h3 id="prefer-the-newer-sb_publishable_-and-sb_secret_-api-keys">Prefer the newer sb_publishable_… and sb_secret_… API keys</h3>
+<figure>
+<img src="/img/blog/supabase-creds.png" alt="Supabase API keys" />
+<figcaption aria-hidden="true">Supabase API keys</figcaption>
+</figure>
+<p>Use the <code>sb_publishable_...</code> key in the browser. Use <code>sb_secret_...</code> in trusted backend code only.</p>
+<p><code>sb_secret_...</code> keys bypass RLS through the <code>service_role</code> role. Supabase adds browser protection for these keys: requests made from a browser return <code>401 Unauthorized</code> based on the <code>User-Agent</code> header. However, that does not make a leaked key safe. A leaked secret key could still be used outside the browser.</p>
+<p>If the backend uses a secret key, that route needs to do the security checks that RLS would normally handle. It needs to authenticate the user and verify that they are allowed to read or modify the data. Do not trust user-supplied values like <code>user_id</code>, <code>team_id</code>, <code>organization_id</code>, or <code>role</code> without verifying them server-side.</p>
+<h3 id="review-environment-variables-and-secrets">Review environment variables and secrets</h3>
+<p>Environment variables should be separated into frontend and backend values. In Next.js, variables prefixed with <code>NEXT_PUBLIC_</code> are exposed to the browser. In Vite, variables prefixed with <code>VITE_</code> are exposed to the browser. These are not secrets and should only contain values you are comfortable making public.</p>
+<p>Search the frontend for <code>SUPABASE_SERVICE_ROLE_KEY</code>, <code>sb_secret_</code>, private API keys, webhook secrets, and other backend-only values.</p>
+<p>Are there any hard-coded creds in the code?</p>
+<p>If any keys may have been exposed during development, rotate them. This can also help identify hard-coded values because anything still using the old key should break.</p>
+<h3 id="review-database-functions-and-rpc-permissions">Review database functions and RPC permissions</h3>
+<p>Check which functions are exposed through the API. Revoke <code>EXECUTE</code> from <code>anon</code> / <code>authenticated</code> unless the function should be callable by those roles. Review any <code>SECURITY DEFINER</code> functions carefully because they may run with elevated permissions.</p>
+<p>Also review default privileges so newly created functions are not automatically executable by roles that should not have access.</p>
+<h3 id="review-storage-permissions">Review storage permissions</h3>
+<ul>
+<li>Are buckets public or private?</li>
+<li>Should users be able to list files, or only access known paths?</li>
+<li>Are upload, download, update, and delete policies separate?</li>
+<li>Are file paths scoped by user/team?</li>
+<li>Are signed URLs used for private files?</li>
+<li>Are allowed MIME types and max file size configured?</li>
+</ul>
+<p>Supabase Storage buckets are private by default; private bucket downloads are subject to RLS or signed URLs. Public buckets bypass access control for retrieving files by URL, though upload/delete/move/copy operations still use access control.</p>
+<h3 id="cors-redirect-url-review">CORS / redirect URL review</h3>
+<p>Review allowed origins, redirect URLs, and callback URLs. Make sure production auth flows cannot redirect to arbitrary or old preview URLs.</p>
+<h2 id="reliability-deployment-readiness">Reliability / deployment readiness</h2>
+<h3 id="verify-migrations-are-reproducible">Verify migrations are reproducible</h3>
+<p>Run <code>supabase db reset</code> locally. The application should still function correctly after the database is rebuilt from migrations and seed data. This helps confirm that your migration history is complete and reproducible.</p>
+<h3 id="make-sure-the-app-builds-from-a-clean-clone">Make sure the app builds from a clean clone</h3>
+<p>Clone the repo into a fresh directory and verify that a new developer could install dependencies, configure environment variables, run migrations, and start the app without relying on hidden local state.</p>
+<p>This is one of the best checks for vibe-coded apps. These apps often work only on the original machine because of issues like hard-coded paths, missing environment variables, uncommitted files, local database state, or undocumented setup steps.</p>
+<h3 id="separate-local-preview-and-production-environments">Separate local, preview, and production environments</h3>
+<p>Local, preview, and production environments should be clearly separated.</p>
+<ul>
+<li>Local should use local Supabase or a dedicated dev project.</li>
+<li>Preview deployments should not point at production data by accident.</li>
+<li>Production secrets should only exist in the production environment.</li>
+<li>OAuth redirect URLs, email redirect URLs, webhook URLs, and CORS settings should be correct per environment.</li>
+</ul>
+<p>These are common places where an app works locally but breaks after deployment.</p>
+<h3 id="authentication-edge-cases">Authentication edge cases</h3>
+<p>Test all authentication paths, including sign up, login, logout, forgot password, password reset, magic links, expired links, duplicate email registration, and redirect behavior after authentication.</p>
+<p>Ensure that logged out users cannot access protected pages or APIs after they log out.</p>
+<h3 id="identify-duplicate-or-unused-routes-andor-functions">Identify duplicate or unused routes and/or functions</h3>
+<p>This is an issue especially with AI-built apps. When you’re moving fast, it can be easy to recreate functionality multiple times. This can create a nightmare down the line.</p>
+<p>To identify, separately list all of the API routes and functions alphabetically. First identify if any are not used at all. After removing unused routes or functions, look for duplicated functionality and consolidate it. Pay special attention to functions with similar names, old versions, or routes that perform the same mutation in slightly different ways.</p>
+<h3 id="database-fields-are-the-correct-type">Database fields are the correct type</h3>
+<p>Review important columns and make sure their types match the data. Numbers should not be stored as text. Dates should use date/timestamp types. Booleans should not be stored as strings like <code>"true"</code> or <code>"false"</code>. IDs and foreign keys should be consistent across related tables.</p>
+<p>Add constraints where possible: <code>not null</code>, foreign keys, unique constraints, check constraints, and enum types.</p>
+<h3 id="data-query-efficiency">Data query efficiency</h3>
+<ul>
+<li>Are there any places where the app currently loads slowly?</li>
+<li>Are there any places where data volume could grow quickly?</li>
+<li>Are common filters backed by indexes?</li>
+<li>Are large list pages paginated?</li>
+<li>Are queries selecting only needed columns?</li>
+<li>Are expensive queries happening on every page load?</li>
+</ul>
+<h3 id="payment-handling">Payment handling</h3>
+<p>Ensure that there are routes to receive webhooks for all important payment events such as failed payments, cancellations, refunds and disputes.</p>
+<p>The app should not rely only on the frontend success screen to update payment state.</p>
+<h2 id="operations">Operations</h2>
+<h3 id="add-observability-error-handling">Add observability / error handling</h3>
+<p>Add structured logging and error tracking for critical paths. Catch expected errors and return useful messages to the user, but avoid swallowing errors silently. Unexpected production errors should be visible somewhere you will actually check.</p>
+<p>For early-stage apps, it can also be useful to send yourself an email when a critical error occurs, such as failed payments, failed webhooks, background job failures, or exceptions in important workflows. Make sure these alerts are limited to high-signal events so you do not create noisy notifications that get ignored.</p>
+<h3 id="enable-backupspitr-if-production-data-matters">Enable backups/PITR if production data matters</h3>
+<p>If production data matters, make sure it is backed up periodically. Also test the restore process so you know how to recover if data is deleted, corrupted, or accidentally changed.</p>
+<h3 id="add-rate-and-spend-limits">Add rate and spend limits</h3>
+<p>Add rate limits to public or expensive actions. This helps protect the app if there are traffic spikes, an attack or a user triggers an expensive action repeatedly.</p>
+<p>Also set spend limits on external APIs and hosting platform. This protects you from financial damage if usage spikes.</p>
+<h3 id="audit-important-mutations">Audit important mutations</h3>
+<p>Identify the mutations that can change important business state: creating records, updating ownership, changing permissions, submitting payments, deleting data, inviting users, or modifying account settings. Review each one to confirm it validates inputs, checks authorization, writes the correct data, and handles failure cases.</p>
+<p>Consider adding an audit log that records who did what for important actions.</p>
+<h3 id="dependency-and-package-audit">Dependency and package audit</h3>
+<p>Remove unused or vulnerable dependencies and packages.</p>
+<h3 id="admin-access">Admin access</h3>
+<p>Review admin screens and actions, and confirm that admin checks happen server-side and not just in frontend logic. Hiding a button or route is not sufficient because the API could still be called directly.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>There are many spots where apps can fall down once they get to production. Running through this list will reduce the chance of serious security, reliability, or scalability issues as your user base grows.</p>
+      </article>
+
+      <div class="has-text-centered">
+        <a class="button is-primary is-rounded is-medium has-text-weight-normal" target="_blank" href="https://calendly.com/matt-1176">
+          <span class="icon"><i class="fa-solid fa-comments"></i></span><span>Get your app production-ready</span></a>
+      </div>
+
+      <p class="has-text-centered" style="margin-top:1.5rem;">
+        <a href="/blog/" style="color:#6495ED;">&larr; Back to all posts</a>
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer-slim is-primary has-text-centered">
+    <div class="container is-narrow">
+      <div class="social-icons">
+        <p class="field">
+          <a class="button" href="https://www.linkedin.com/in/matthew-brown-44b91017/" target="_blank">
+            <span class="icon is-small"><i class="fab fa-linkedin-in fa-fw"></i></span>
+          </a>
+          <a class="button" href="https://github.com/MattBrown88" target="_blank">
+            <span class="icon is-small"><i class="fa-brands fa-github"></i></span></a>
+          <a class="button" href="mailto:matt@gosolucia.com"><span class="icon is-small"><i
+                class="far fa-envelope fa-fw"></i></span></a>
+        </p>
+      </div>
+      <p class="footer-copy">&copy; <span id="footer-year">2026</span> Matt Brown. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/js/main-min.js"></script>
+  <script>
+    // Keep the footer copyright year current
+    (function () {
+      var yearEl = document.getElementById('footer-year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+    })();
+
+    // Table of contents: built from the article's h2 headings, with scroll-spy
+    (function () {
+      var toc = document.querySelector('.blog-toc');
+      if (!toc) return;
+      var headings = Array.prototype.slice.call(document.querySelectorAll('.blog-article h2[id]'));
+      if (headings.length < 2) return;
+
+      var list = toc.querySelector('.blog-toc-list');
+      var marker = toc.querySelector('.blog-toc-marker');
+      var links = headings.map(function (h) {
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.className = 'blog-toc-link';
+        a.href = '#' + h.id;
+        a.textContent = h.textContent;
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.replaceState(null, '', '#' + h.id);
+        });
+        li.appendChild(a);
+        list.appendChild(li);
+        return a;
+      });
+      toc.classList.add('is-visible');
+
+      // Start the rail beside the article body, below the title and hero media
+      var article = document.querySelector('.blog-article');
+      var post = document.querySelector('.blog-post');
+      function alignTop() {
+        toc.style.top = Math.round(
+          article.getBoundingClientRect().top - post.getBoundingClientRect().top
+        ) + 'px';
+      }
+      alignTop();
+
+      var active = -1;
+      function setActive(i) {
+        if (i === active) return;
+        if (active >= 0) links[active].classList.remove('is-active');
+        links[i].classList.add('is-active');
+        marker.style.top = links[i].offsetTop + 'px';
+        marker.style.height = links[i].offsetHeight + 'px';
+        active = i;
+      }
+
+      function onScroll() {
+        // Active section: last heading above the top quarter of the viewport
+        var line = window.innerHeight * 0.25;
+        var idx = 0;
+        for (var i = 0; i < headings.length; i++) {
+          if (headings[i].getBoundingClientRect().top <= line) idx = i;
+        }
+        setActive(idx);
+      }
+
+      var ticking = false;
+      window.addEventListener('scroll', function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () { onScroll(); ticking = false; });
+      }, { passive: true });
+      window.addEventListener('resize', function () { alignTop(); onScroll(); });
+      onScroll();
+    })();
+  </script>
+</body>
+
+</html>

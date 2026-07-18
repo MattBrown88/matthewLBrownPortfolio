@@ -3,6 +3,7 @@ title: 'Paid Media Strategy: How to Diagnose Campaign Performance Problems'
 description: 'A paid media strategy framework showing how first-party data, targeting, bidding, attribution, experimentation, landing pages, and external market forces connect — and how to use the system to diagnose performance problems.'
 date: 'Jun 30, 2026'
 category: Paid Media
+tags: [Paid Media, Analytics]
 image: 'blog/images/paid-media-strategy-cover.png'
 image_alt: 'Paid media strategy framework'
 cta: 'Work with me'

@@ -10,6 +10,13 @@
 # and written next to the other blog pages in blog/. The slug used for the
 # canonical URL is derived from that filename, so name your .md file exactly
 # what you want the URL to be.
+#
+# Posts without YAML frontmatter are treated as drafts: they are not built,
+# not listed, and not added to the sitemap.
+#
+# After building, the blog index (blog/index.html), the home-page blog
+# section (index.html), and sitemap.xml are regenerated from frontmatter
+# by blog/_generate_listings_and_sitemap.py.
 
 set -euo pipefail
 
@@ -24,6 +31,11 @@ build_one() {
   slug="$(basename "${src%.md}")"
   local out="blog/${slug}.html"
 
+  if [ "$(head -1 "$src")" != "---" ]; then
+    echo "Skipped draft (no frontmatter): $src"
+    return 0
+  fi
+
   pandoc "$src" \
     --from markdown \
     --to html5 \
@@ -37,41 +49,6 @@ build_one() {
   echo "Built $out"
 }
 
-generate_sitemap() {
-  local sitemap="sitemap.xml"
-  local base_url="https://www.matthewlbrown.com"
-
-  cat > "$sitemap" <<EOF
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>${base_url}/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>${base_url}/blog/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-EOF
-
-  for f in blog/_posts/*.md; do
-    local slug
-    slug="$(basename "${f%.md}")"
-    cat >> "$sitemap" <<EOF
-  <url>
-    <loc>${base_url}/blog/${slug}.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-EOF
-  done
-
-  echo "</urlset>" >> "$sitemap"
-  echo "Generated $sitemap"
-}
-
 if [ "$#" -ge 1 ]; then
   build_one "$1"
 else
@@ -80,4 +57,5 @@ else
   done
 fi
 
-generate_sitemap
+# Regenerate blog index cards, home-page latest posts, and sitemap.xml.
+python3 blog/_generate_listings_and_sitemap.py

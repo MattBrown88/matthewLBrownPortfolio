@@ -3,6 +3,7 @@ title: 'How to Migrate Existing Supabase Project to Declarative Schema'
 description: 'How to Migrate Existing Supabase Project to Declarative Schema'
 date: 'July 9, 2026'
 category: Supabase
+tags: [Supabase, PostgreSQL]
 summary: "How to Migrate Existing Supabase Project to Declarative Schema"
 video: aRvhVqLSuow
 video_caption: 'Watch an example migration'

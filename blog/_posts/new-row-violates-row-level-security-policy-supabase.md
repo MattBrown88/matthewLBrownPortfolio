@@ -3,6 +3,7 @@ title: 'How to Fix "new row violates row-level security policy" in Supabase'
 description: 'Learn why Supabase returns this RLS error and how to fix common insert policy, auth, and user_id issues.'
 date: 'Jun 25, 2026'
 category: Supabase
+tags: [Supabase, RLS]
 summary: "This error means your insert was blocked by Row Level Security. Here's why it happens and how to fix it for good."
 image: 'img/blog/rls-supabase-cover.svg'
 image_alt: 'Supabase row-level security policy error, fixed'

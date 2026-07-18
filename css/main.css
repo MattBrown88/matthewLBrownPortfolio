@@ -4736,8 +4736,9 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
 }
 
 /* ── Blog page (standalone /blog/ index) ── */
-.blog-page-hero { padding: 4rem 1.5rem 3rem; }
-.blog-page-section { padding: 2rem 1.5rem 5rem; }
+.blog-page-hero { padding: 2.5rem 1.5rem 0; }
+.blog-page-hero .hero-body { min-height: 0; padding: 1.5rem 1.5rem 0.75rem; }
+.blog-page-section { padding: 1.5rem 1.5rem 5rem; }
 
 .blog-grid { margin-top: 1rem; }
 
@@ -4805,6 +4806,46 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
   color: #6495ED;
 }
 
+.blog-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+/* ---- Blog index tag filter bar ---- */
+.blog-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.blog-filter {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #41476b;
+  background: #ffffff;
+  border: 1px solid #E6ECF8;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+}
+
+.blog-filter:hover {
+  color: #6495ED;
+  border-color: #6495ED;
+}
+
+.blog-filter.is-active {
+  color: #ffffff;
+  background: #141c3a;
+  border-color: #141c3a;
+}
+
 .blog-article ol { list-style: decimal outside; margin-left: 2em; margin-bottom: 1em; }
 .blog-article ul { list-style: disc outside; margin-left: 2em; margin-bottom: 1em; }
 .blog-article li { margin-bottom: 0.35em; }
@@ -4812,12 +4853,81 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
 .blog-article figure { margin: 1.75rem 0; }
 .blog-article figcaption { font-size: 0.85rem; color: #8a8fa3; text-align: center; margin-top: 0.5rem; }
 
+/* ---- Blog post table of contents (left rail, wide screens only) ---- */
+.blog-article h2 { scroll-margin-top: 1.75rem; }
+
+.blog-toc { display: none; }
+
+@media screen and (min-width: 1216px) {
+  .blog-post { position: relative; }
+
+  /* Absolute column spanning the post section; JS sets `top` to the article
+     body's offset so the rail starts beside the text, not the hero. */
+  .blog-toc.is-visible {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: max(1rem, calc(50vw - 360px - 248px));
+    width: 200px;
+    animation: blog-toc-in 0.5s ease both;
+  }
+
+  .blog-toc-inner { position: sticky; top: 2.5rem; }
+}
+
+@keyframes blog-toc-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+.blog-toc-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8a8fa3;
+  margin-bottom: 0.85rem;
+}
+
+.blog-toc-rail {
+  position: relative;
+  border-left: 1px solid #E6ECF8;
+}
+
+.blog-toc-marker {
+  position: absolute;
+  left: -1px;
+  width: 2px;
+  background: #6495ED;
+  border-radius: 2px;
+  transition: top 0.25s ease, height 0.25s ease;
+}
+
+.blog-toc-list { list-style: none; margin: 0; padding: 0; }
+
+.blog-toc-link {
+  display: block;
+  padding: 0.3rem 0 0.3rem 1rem;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: #8a8fa3;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.blog-toc-link:hover { color: #6495ED; }
+
+.blog-toc-link.is-active { color: #141c3a; font-weight: 600; }
+
 /* ---- Hero body height: push intro below the fold ---- */
 .hero.is-white .hero-body { min-height: 50vh; will-change: transform, opacity; }
 
 @media screen and (max-width: 768px) {
   .hero.is-white .hero-body { min-height: 0; }
 }
+
+.blog-page-hero .hero-body { min-height: 0; }
 
 /* ---- Hero clients marquee ---- */
 .hero-clients { padding: 2.5rem 0 1.5rem; }
