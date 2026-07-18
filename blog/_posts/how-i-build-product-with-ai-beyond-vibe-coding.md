@@ -7,7 +7,6 @@ tags: [AI]
 summary: "Step by step AI-assisted MVP development process."
 image: 'blog/images/ai-assisted-dev.png'
 image_alt: 'How I Build Products with AI'
-cta: 'Work with me on AI-assisted development'
 
 ---
 

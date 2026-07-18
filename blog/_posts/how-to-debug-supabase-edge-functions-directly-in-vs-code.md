@@ -7,7 +7,6 @@ tags: [Supabase, Edge Functions, VS Code]
 summary: "Set breakpoints in Supabase Edge Functions and your Vite frontend straight from VS Code — no console.log required. Here's the five-minute setup."
 image: 'img/blog/debug-edge-functions-cover.svg'
 image_alt: 'How to Debug Supabase Edge Functions in VS Code'
-cta: 'Get your Supabase issue fixed'
 
 ---
 

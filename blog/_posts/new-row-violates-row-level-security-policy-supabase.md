@@ -7,7 +7,6 @@ tags: [Supabase, RLS]
 summary: "This error means your insert was blocked by Row Level Security. Here's why it happens and how to fix it for good."
 image: 'img/blog/rls-supabase-cover.svg'
 image_alt: 'Supabase row-level security policy error, fixed'
-cta: 'Get your Supabase issue fixed'
 
 ---
 

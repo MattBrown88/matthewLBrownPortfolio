@@ -6,7 +6,6 @@ category: Data
 tags: [dbt]
 image: 'blog/images/tableau-dbt-cover.png'
 image_alt: 'Tableau dbt cover'
-cta: 'Work with me'
 
 ---
 

@@ -6,7 +6,6 @@ category: Paid Media
 tags: [Data Science, PPC]
 image: 'blog/images/paid-media-strategy-cover.png'
 image_alt: 'The PPC Performance Framework'
-cta: 'Work with me'
 
 ---
 

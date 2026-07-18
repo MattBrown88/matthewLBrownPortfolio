@@ -9,7 +9,6 @@ video: aRvhVqLSuow
 video_caption: 'Watch an example migration'
 image: 'img/blog/migrate-declarative-schema-cover.svg'
 image_alt: 'How to Migrate an Existing Supabase Project to Declarative Schema'
-cta: 'Get your Supabase issue fixed'
 
 ---
 
