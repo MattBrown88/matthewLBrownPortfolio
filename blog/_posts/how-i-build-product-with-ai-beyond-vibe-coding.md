@@ -1,12 +1,12 @@
 ---
-title: 'How I Build Products with AI: Think First, Code Second'
+title: 'How I Build Products with AI'
 description: 'Step by step AI-assisted MVP development process'
 date: 'Jun 30, 2026'
 category: AI-assisted development
-tags: [AI, Product]
+tags: [MVP Dev Process]
 summary: "Step by step AI-assisted MVP development process."
 image: 'blog/images/ai-assisted-dev.png'
-image_alt: 'How I Build Products with AI: Think First, Code Second'
+image_alt: 'How I Build Products with AI'
 cta: 'Work with me on AI-assisted development'
 
 ---

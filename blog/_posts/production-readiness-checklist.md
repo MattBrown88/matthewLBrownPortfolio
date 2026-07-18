@@ -1,12 +1,12 @@
 ---
-title: 'Vibe-Coded App Production Checklist: Security and Deployment Checks Before You Launch'
-description: 'A practical checklist for reviewing AI-built apps before production, with a focus on Supabase, React, Vercel, security, RLS, secrets, deployments, and reliability.'
+title: 'How to Audit a Vibe-Coded App Before Production'
+description: 'A practical checklist used to review apps for security, RLS, secrets, deployments, and reliability issues.'
 date: 'Jul 6, 2026'
 category: Supabase
 tags: [Supabase, React, Vercel]
-summary: 'Before launching a vibe-coded app, review the security, data boundaries, deployments, payments, observability, backups, and admin access that can break in production.'
+summary: 'A practical checklist used to review apps for security, RLS, secrets, deployments, and reliability issues.'
 image: 'img/blog/production-readiness-checklist-cover.png'
-image_alt: 'Vibe-coded app production checklist for Supabase, React, and Vercel'
+image_alt: 'How to Audit a Vibe-Coded App Before Production'
 cta: 'Get your app production-ready'
 
 ---

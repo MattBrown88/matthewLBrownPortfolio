@@ -3,7 +3,7 @@ title: 'Tableau and dbt: From Undocumented Calculations to Version-Controlled Bu
 description: 'How to move business logic out of Tableau and into dbt so your metrics are consistent, testable, and version-controlled.'
 date: 'Jun 2026'
 category: Data
-tags: [Tableau, dbt]
+tags: [dbt]
 image: 'blog/images/tableau-dbt-cover.png'
 image_alt: 'Tableau dbt cover'
 cta: 'Work with me'
