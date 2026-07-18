@@ -3,7 +3,7 @@ title: 'How I Build Products with AI'
 description: 'Step by step AI-assisted MVP development process'
 date: 'Jun 30, 2026'
 category: AI-assisted development
-tags: [MVP Dev Process]
+tags: [AI]
 summary: "Step by step AI-assisted MVP development process."
 image: 'blog/images/ai-assisted-dev.png'
 image_alt: 'How I Build Products with AI'
