@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="How to Debug Supabase Edge Functions in VS Code">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#141c3a"/>
+      <stop offset="1" stop-color="#1f2a52"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1040" cy="120" r="240" fill="#6495ED" opacity="0.12"/>
+  <circle cx="120" cy="560" r="180" fill="#2bb6a3" opacity="0.12"/>
+  <rect x="96" y="150" width="72" height="6" rx="3" fill="#6495ED"/>
+  <text x="96" y="250" font-family="Verdana, Geneva, sans-serif" font-size="34" fill="#8ea2d6" font-weight="700">SUPABASE · VS CODE</text>
+  <text x="96" y="340" font-family="Verdana, Geneva, sans-serif" font-size="62" fill="#ffffff" font-weight="700">How to Debug Supabase</text>
+  <text x="96" y="415" font-family="Verdana, Geneva, sans-serif" font-size="62" fill="#ffffff" font-weight="700">Edge Functions in</text>
+  <text x="96" y="490" font-family="Verdana, Geneva, sans-serif" font-size="62" fill="#6495ED" font-weight="700">VS Code</text>
+  <text x="96" y="572" font-family="Verdana, Geneva, sans-serif" font-size="28" fill="#aab4d4">aiapprescue.com</text>
+</svg>

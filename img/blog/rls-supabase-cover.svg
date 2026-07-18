@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Fixing the Supabase row-level security policy error">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#141c3a"/>
+      <stop offset="1" stop-color="#1f2a52"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1040" cy="120" r="240" fill="#6495ED" opacity="0.12"/>
+  <circle cx="120" cy="560" r="180" fill="#2bb6a3" opacity="0.12"/>
+  <rect x="96" y="150" width="72" height="6" rx="3" fill="#6495ED"/>
+  <text x="96" y="250" font-family="Verdana, Geneva, sans-serif" font-size="34" fill="#8ea2d6" font-weight="700">SUPABASE · RLS</text>
+  <text x="96" y="335" font-family="Verdana, Geneva, sans-serif" font-size="62" fill="#ffffff" font-weight="700">new row violates</text>
+  <text x="96" y="410" font-family="Verdana, Geneva, sans-serif" font-size="62" fill="#ffffff" font-weight="700">row-level security</text>
+  <text x="96" y="485" font-family="Verdana, Geneva, sans-serif" font-size="62" fill="#6495ED" font-weight="700">policy — fixed.</text>
+  <text x="96" y="568" font-family="Verdana, Geneva, sans-serif" font-size="28" fill="#aab4d4">aiapprescue.com</text>
+</svg>
