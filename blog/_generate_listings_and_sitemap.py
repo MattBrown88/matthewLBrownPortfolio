@@ -84,21 +84,20 @@ def load_posts():
 def render_card(post):
     esc = html.escape
     tags = "".join(
-        f'\n              <span class="blog-tag is-tech">{esc(t)}</span>'
+        f'\n                <span class="blog-tag">{esc(t)}</span>'
         for t in post["tags"]
     )
     data_tags = esc("|".join(post["tags"]))
     return f'''        <div class="column is-one-third-desktop is-half-tablet blog-grid-item" data-tags="{data_tags}">
           <a class="blog-card" href="/blog/{post["slug"]}.html">
-            <div class="blog-card-cover">
-              <span class="blog-card-brand"><i class="fa-solid fa-pen-nib"></i> Matt Brown</span>
-              <span class="blog-card-cover-title">{esc(post["title"])}</span>
-            </div>
             <div class="blog-card-body">
-              <div class="blog-card-meta">
-                <span class="blog-editorial-date">{esc(post["date_display"])}</span>{tags}
-              </div>
+              <span class="blog-card-date">{esc(post["date_display"])}</span>
+              <h2 class="blog-card-title">{esc(post["title"])}</h2>
               <p class="blog-card-excerpt">{esc(post["excerpt"])}</p>
+            </div>
+            <div class="blog-card-band">
+              <span class="blog-card-tags">{tags}
+              </span>
               <span class="blog-card-more">Read More <i class="fa-solid fa-arrow-right"></i></span>
             </div>
           </a>

@@ -63,20 +63,14 @@
     </div>
   </nav>
 
-  <section class="hero is-white has-text-centered blog-page-hero">
+  <section class="hero is-primary has-text-centered blog-page-hero">
     <div class="hero-body">
       <div class="container is-narrow">
-        <h1 class="title is-spaced is-size-2-desktop is-size-3-mobile" style="color:#141c3a">Blog</h1>
-        <p class="subtitle is-size-5-desktop has-text-weight-normal" style="color:#41476b;max-width:640px;margin:0 auto;">
+        <h1 class="title is-spaced is-size-2-desktop is-size-3-mobile">Blog</h1>
+        <p class="subtitle is-size-5-desktop has-text-weight-normal">
           Writing on software, AI-assisted development, data, and product.
         </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section blog-page-section">
-    <div class="container is-narrow">
-      <div class="blog-filter-bar">
+        <div class="blog-filter-bar">
         <!-- blog:filters:start -->
         <button class="blog-filter is-active" type="button" data-filter="">All</button>
         <button class="blog-filter" type="button" data-filter="Supabase">Supabase</button>
@@ -93,126 +87,125 @@
         <button class="blog-filter" type="button" data-filter="Vercel">Vercel</button>
         <button class="blog-filter" type="button" data-filter="VS Code">VS Code</button>
         <!-- blog:filters:end -->
+        </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section blog-page-section">
+    <div class="container is-narrow">
       <div class="columns is-multiline blog-grid">
         <!-- blog:cards:start -->
         <div class="column is-one-third-desktop is-half-tablet blog-grid-item" data-tags="Supabase|PostgreSQL">
           <a class="blog-card" href="/blog/how-to-migrate-existing-supabase-project-to-declarative-schema.html">
-            <div class="blog-card-cover">
-              <span class="blog-card-brand"><i class="fa-solid fa-pen-nib"></i> Matt Brown</span>
-              <span class="blog-card-cover-title">How to Migrate Existing Supabase Project to Declarative Schema</span>
-            </div>
             <div class="blog-card-body">
-              <div class="blog-card-meta">
-                <span class="blog-editorial-date">Jul 2026</span>
-              <span class="blog-tag is-tech">Supabase</span>
-              <span class="blog-tag is-tech">PostgreSQL</span>
-              </div>
-              <p class="blog-card-excerpt">How to Migrate Existing Supabase Project to Declarative Schema</p>
+              <span class="blog-card-date">Jul 2026</span>
+              <h2 class="blog-card-title">How to Migrate Existing Supabase Project to Declarative Schema</h2>
+              <p class="blog-card-excerpt">Convert a Supabase project with a tangle of migration files to declarative schema, so every table, view, and enum lives in one readable file.</p>
+            </div>
+            <div class="blog-card-band">
+              <span class="blog-card-tags">
+                <span class="blog-tag">Supabase</span>
+                <span class="blog-tag">PostgreSQL</span>
+              </span>
               <span class="blog-card-more">Read More <i class="fa-solid fa-arrow-right"></i></span>
             </div>
           </a>
         </div>
         <div class="column is-one-third-desktop is-half-tablet blog-grid-item" data-tags="Supabase|React|Vercel">
           <a class="blog-card" href="/blog/production-readiness-checklist.html">
-            <div class="blog-card-cover">
-              <span class="blog-card-brand"><i class="fa-solid fa-pen-nib"></i> Matt Brown</span>
-              <span class="blog-card-cover-title">Vibe-Coded App Production Checklist: Security and Deployment Checks Before You Launch</span>
-            </div>
             <div class="blog-card-body">
-              <div class="blog-card-meta">
-                <span class="blog-editorial-date">Jul 2026</span>
-              <span class="blog-tag is-tech">Supabase</span>
-              <span class="blog-tag is-tech">React</span>
-              <span class="blog-tag is-tech">Vercel</span>
-              </div>
+              <span class="blog-card-date">Jul 2026</span>
+              <h2 class="blog-card-title">Vibe-Coded App Production Checklist: Security and Deployment Checks Before You Launch</h2>
               <p class="blog-card-excerpt">Before launching a vibe-coded app, review the security, data boundaries, deployments, payments, observability, backups, and admin access that can break in production.</p>
+            </div>
+            <div class="blog-card-band">
+              <span class="blog-card-tags">
+                <span class="blog-tag">Supabase</span>
+                <span class="blog-tag">React</span>
+                <span class="blog-tag">Vercel</span>
+              </span>
               <span class="blog-card-more">Read More <i class="fa-solid fa-arrow-right"></i></span>
             </div>
           </a>
         </div>
         <div class="column is-one-third-desktop is-half-tablet blog-grid-item" data-tags="Paid Media|Analytics">
           <a class="blog-card" href="/blog/paid-media-strategy.html">
-            <div class="blog-card-cover">
-              <span class="blog-card-brand"><i class="fa-solid fa-pen-nib"></i> Matt Brown</span>
-              <span class="blog-card-cover-title">Paid Media Strategy: How to Diagnose Campaign Performance Problems</span>
-            </div>
             <div class="blog-card-body">
-              <div class="blog-card-meta">
-                <span class="blog-editorial-date">Jun 2026</span>
-              <span class="blog-tag is-tech">Paid Media</span>
-              <span class="blog-tag is-tech">Analytics</span>
-              </div>
+              <span class="blog-card-date">Jun 2026</span>
+              <h2 class="blog-card-title">Paid Media Strategy: How to Diagnose Campaign Performance Problems</h2>
               <p class="blog-card-excerpt">A paid media strategy framework showing how first-party data, targeting, bidding, attribution, experimentation, landing pages, and external market forces connect — and how to use the system to diagnose performance problems.</p>
+            </div>
+            <div class="blog-card-band">
+              <span class="blog-card-tags">
+                <span class="blog-tag">Paid Media</span>
+                <span class="blog-tag">Analytics</span>
+              </span>
               <span class="blog-card-more">Read More <i class="fa-solid fa-arrow-right"></i></span>
             </div>
           </a>
         </div>
         <div class="column is-one-third-desktop is-half-tablet blog-grid-item" data-tags="AI|Product">
           <a class="blog-card" href="/blog/how-i-build-product-with-ai-beyond-vibe-coding.html">
-            <div class="blog-card-cover">
-              <span class="blog-card-brand"><i class="fa-solid fa-pen-nib"></i> Matt Brown</span>
-              <span class="blog-card-cover-title">How I Build Products with AI: Think First, Code Second</span>
-            </div>
             <div class="blog-card-body">
-              <div class="blog-card-meta">
-                <span class="blog-editorial-date">Jun 2026</span>
-              <span class="blog-tag is-tech">AI</span>
-              <span class="blog-tag is-tech">Product</span>
-              </div>
+              <span class="blog-card-date">Jun 2026</span>
+              <h2 class="blog-card-title">How I Build Products with AI: Think First, Code Second</h2>
               <p class="blog-card-excerpt">Step by step AI-assisted MVP development process.</p>
+            </div>
+            <div class="blog-card-band">
+              <span class="blog-card-tags">
+                <span class="blog-tag">AI</span>
+                <span class="blog-tag">Product</span>
+              </span>
               <span class="blog-card-more">Read More <i class="fa-solid fa-arrow-right"></i></span>
             </div>
           </a>
         </div>
         <div class="column is-one-third-desktop is-half-tablet blog-grid-item" data-tags="Supabase|RLS">
           <a class="blog-card" href="/blog/new-row-violates-row-level-security-policy-supabase.html">
-            <div class="blog-card-cover">
-              <span class="blog-card-brand"><i class="fa-solid fa-pen-nib"></i> Matt Brown</span>
-              <span class="blog-card-cover-title">How to Fix &quot;new row violates row-level security policy&quot; in Supabase</span>
-            </div>
             <div class="blog-card-body">
-              <div class="blog-card-meta">
-                <span class="blog-editorial-date">Jun 2026</span>
-              <span class="blog-tag is-tech">Supabase</span>
-              <span class="blog-tag is-tech">RLS</span>
-              </div>
+              <span class="blog-card-date">Jun 2026</span>
+              <h2 class="blog-card-title">How to Fix &quot;new row violates row-level security policy&quot; in Supabase</h2>
               <p class="blog-card-excerpt">This error means your insert was blocked by Row Level Security. Here&#x27;s why it happens and how to fix it for good.</p>
+            </div>
+            <div class="blog-card-band">
+              <span class="blog-card-tags">
+                <span class="blog-tag">Supabase</span>
+                <span class="blog-tag">RLS</span>
+              </span>
               <span class="blog-card-more">Read More <i class="fa-solid fa-arrow-right"></i></span>
             </div>
           </a>
         </div>
         <div class="column is-one-third-desktop is-half-tablet blog-grid-item" data-tags="Supabase|Edge Functions|VS Code">
           <a class="blog-card" href="/blog/how-to-debug-supabase-edge-functions-directly-in-vs-code.html">
-            <div class="blog-card-cover">
-              <span class="blog-card-brand"><i class="fa-solid fa-pen-nib"></i> Matt Brown</span>
-              <span class="blog-card-cover-title">How to Debug Supabase Edge Functions in VS Code</span>
-            </div>
             <div class="blog-card-body">
-              <div class="blog-card-meta">
-                <span class="blog-editorial-date">Jun 2026</span>
-              <span class="blog-tag is-tech">Supabase</span>
-              <span class="blog-tag is-tech">Edge Functions</span>
-              <span class="blog-tag is-tech">VS Code</span>
-              </div>
+              <span class="blog-card-date">Jun 2026</span>
+              <h2 class="blog-card-title">How to Debug Supabase Edge Functions in VS Code</h2>
               <p class="blog-card-excerpt">Set breakpoints in Supabase Edge Functions and your Vite frontend straight from VS Code — no console.log required. Here&#x27;s the five-minute setup.</p>
+            </div>
+            <div class="blog-card-band">
+              <span class="blog-card-tags">
+                <span class="blog-tag">Supabase</span>
+                <span class="blog-tag">Edge Functions</span>
+                <span class="blog-tag">VS Code</span>
+              </span>
               <span class="blog-card-more">Read More <i class="fa-solid fa-arrow-right"></i></span>
             </div>
           </a>
         </div>
         <div class="column is-one-third-desktop is-half-tablet blog-grid-item" data-tags="Tableau|dbt">
           <a class="blog-card" href="/blog/tableau-and-dbt-from-undocumented-calculations-to-version-controlled-business-rules.html">
-            <div class="blog-card-cover">
-              <span class="blog-card-brand"><i class="fa-solid fa-pen-nib"></i> Matt Brown</span>
-              <span class="blog-card-cover-title">Tableau and dbt: From Undocumented Calculations to Version-Controlled Business Rules</span>
-            </div>
             <div class="blog-card-body">
-              <div class="blog-card-meta">
-                <span class="blog-editorial-date">Jun 2026</span>
-              <span class="blog-tag is-tech">Tableau</span>
-              <span class="blog-tag is-tech">dbt</span>
-              </div>
+              <span class="blog-card-date">Jun 2026</span>
+              <h2 class="blog-card-title">Tableau and dbt: From Undocumented Calculations to Version-Controlled Business Rules</h2>
               <p class="blog-card-excerpt">How to move business logic out of Tableau and into dbt so your metrics are consistent, testable, and version-controlled.</p>
+            </div>
+            <div class="blog-card-band">
+              <span class="blog-card-tags">
+                <span class="blog-tag">Tableau</span>
+                <span class="blog-tag">dbt</span>
+              </span>
               <span class="blog-card-more">Read More <i class="fa-solid fa-arrow-right"></i></span>
             </div>
           </a>

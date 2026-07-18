@@ -1,10 +1,10 @@
 ---
 title: 'How to Migrate Existing Supabase Project to Declarative Schema'
-description: 'How to Migrate Existing Supabase Project to Declarative Schema'
+description: 'Convert a Supabase project with a tangle of migration files to declarative schema, so every table, view, and enum lives in one readable file.'
 date: 'July 9, 2026'
 category: Supabase
 tags: [Supabase, PostgreSQL]
-summary: "How to Migrate Existing Supabase Project to Declarative Schema"
+summary: "Convert a Supabase project with a tangle of migration files to declarative schema, so every table, view, and enum lives in one readable file."
 video: aRvhVqLSuow
 video_caption: 'Watch an example migration'
 image: 'img/blog/migrate-declarative-schema-cover.svg'
