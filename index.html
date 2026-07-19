@@ -48,24 +48,20 @@
   <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
     <div class="container is-narrow-nav">
       <div class="navbar-brand">
-        <a class="navbar-item" href="/" aria-label="Matt Brown home">
-          <span class="mb-logo">MB</span>
-        </a>
+        <a class="navbar-item navbar-social" href="https://github.com/MattBrown88" target="_blank" rel="noopener" aria-label="GitHub">
+          <i class="fa-brands fa-github"></i></a>
+        <a class="navbar-item navbar-social" href="https://www.linkedin.com/in/matthew-brown-44b91017/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <i class="fa-brands fa-linkedin-in"></i></a>
+        <a class="navbar-item navbar-social" href="https://www.youtube.com/@MatthewBrown-gf5fw" target="_blank" rel="noopener" aria-label="YouTube">
+          <i class="fa-brands fa-youtube"></i></a>
         <a class="navbar-burger" role="button" aria-label="menu" aria-expanded="false" data-target="#navMenu">
           <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a>
       </div>
       <div class="navbar-menu is-shadowless" id="navMenu">
-        <div class="navbar-start">
+        <div class="navbar-end">
           <a class="navbar-item has-text-weight-normal" href="#projects">Projects</a>
           <a class="navbar-item has-text-weight-normal" href="blog">Blog</a>
           <a class="navbar-item has-text-weight-normal" href="#about">About</a>
-        </div>
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <a class="button is-primary is-outlined is-rounded has-text-weight-normal" target="_blank"
-              href="https://calendly.com/matt-1176">
-              Book a meeting</a>
-          </div>
         </div>
       </div>
     </div>
@@ -78,10 +74,14 @@
             <img class="hero-headshot" src="img/linkedinprofile2.png" alt="Matt Brown">
             <h1 class="hero-greeting title is-spaced is-size-1-desktop is-size-2-tablet is-size-3-mobile">
               I'm <span style="color:#6495ED">Matt Brown</span> <span class="wave">👋</span>
-              <span class="hero-subline">A freelance full-stack developer</span>
+              <span class="hero-subline">I help businesses build <span style="color:#6495ED">resilient</span> &amp; <span style="color:#6495ED">scalable</span> apps with <img class="supabase-inline-logo" src="img/supabase-logo.svg" alt=""> Supabase</span>
             </h1>
           </div>
         </div>
+      </div>
+      <div class="hero-cta">
+        <a class="button is-primary is-outlined is-rounded is-medium has-text-weight-normal"
+          href="https://calendly.com/matt-1176"><span>Book a consult</span></a>
       </div>
       <div class="hero-clients">
         <p class="hero-clients-label">Companies I've worked with</p>
@@ -116,6 +116,35 @@
             <p class="intro-para">AI has made writing code cheap. Building production systems is still hard. </p>
               <p class="intro-para">I've been developing software for enterprises and startups for 10+ years. Whether it's a greenfield project, an analytics platform that's difficult to maintain, or a gnarly codebase that needs untangling, I partner with teams to build robust systems.</p>  
           </div>
+        </div>
+      </div>
+    </section>
+    <section class="section services has-text-centered has-border-top">
+      <div class="container is-narrow">
+        <div class="services-grid services-grid--three">
+          <div class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-bolt"></i></div>
+            <p class="service-title">Supabase Expert</p>
+            <p class="service-desc">Postgres, RLS, auth, and edge functions. I design and build on Supabase the way it's meant to be used.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-diagram-project"></i></div>
+            <p class="service-title">Experienced Solutions Architect</p>
+            <p class="service-desc">10+ years building production systems for enterprises and startups. I turn business problems into the right architecture.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-life-ring"></i></div>
+            <p class="service-title">AI App Rescue</p>
+            <p class="service-desc">Security hardening, refactoring, and production readiness for apps that need to grow up fast.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section hero-quote">
+      <div class="container is-narrow">
+        <div class="hero-quote-block">
+          <p class="hero-quote-text">"Matt has worked with my team for two years...He is a great team player with strong technical and communication skills. We have been very satisfied with his work..."</p>
+          <p class="hero-quote-attr">Taya I. &mdash; Healthcare Executive</p>
         </div>
       </div>
     </section>
@@ -160,46 +189,23 @@
             </div>
           </a>
         </div>
-        <div class="column is-one-third-desktop is-half-tablet blog-grid-item" data-tags="AI|Product">
-          <a class="blog-card" href="/blog/how-i-build-product-with-ai-beyond-vibe-coding.html">
+        <div class="column is-one-third-desktop is-half-tablet blog-grid-item" data-tags="Data Science|PPC">
+          <a class="blog-card" href="/blog/paid-media-strategy.html">
             <div class="blog-card-body">
               <span class="blog-card-date">Jun 2026</span>
-              <h2 class="blog-card-title">How I Build Products with AI</h2>
-              <p class="blog-card-excerpt">The biggest gains don't come from asking AI to build an app from scratch. They come from using AI to critique your thinking at every stage of product development.</p>
+              <h2 class="blog-card-title">The PPC Performance Framework</h2>
+              <p class="blog-card-excerpt">Strategy framework showing how first-party data, targeting, bidding, attribution, experimentation, landing pages, and external market forces connect.</p>
             </div>
             <div class="blog-card-band">
               <span class="blog-card-tags">
-                <span class="blog-tag">AI</span>
-                <span class="blog-tag">Product</span>
+                <span class="blog-tag">Data Science</span>
+                <span class="blog-tag">PPC</span>
               </span>
               <span class="blog-card-more">Read More <i class="fa-solid fa-arrow-right"></i></span>
             </div>
           </a>
         </div>
         <!-- blog:latest:end -->
-        </div>
-      </div>
-    </section>
-    <section class="section services is-medium has-text-centered has-border-top">
-      <div class="container is-narrow">
-        <div class="columns is-centered">
-          <div class="column is-three-fifths">
-            <h1 class="title is-spaced is-size-3-desktop is-size-4-mobile" style="color:#141c3a">How I can help</h1>
-          </div>
-        </div>
-        <div class="services-grid services-grid--three">
-          <div class="service-card">
-            <p class="service-title">Fractional Full Stack Developer</p>
-            <p class="service-desc">Available as a fractional team member or for scoped project engagements.</p>
-          </div>
-          <div class="service-card">
-            <p class="service-title">New Product Development</p>
-            <p class="service-desc">From blank page to working product. I help teams turn ideas into production software.</p>
-          </div>
-          <div class="service-card">
-            <p class="service-title">AI App Rescue</p>
-            <p class="service-desc">Security hardening, refactoring, and production readiness for apps that need to grow up fast.</p>
-          </div>
         </div>
       </div>
     </section>
@@ -234,6 +240,29 @@
                 throughout. Strongly recommend his expertise and professionalism."</p>
               <h3 class="testimonial-name">Alex</h3>
               <p class="testimonial-role">Data Visualization Project</p>
+            </div>
+          </div>
+        </div>
+        <div class="columns is-centered">
+          <div class="column is-one-third">
+            <div class="testimonial-card">
+              <p class="quote">"This is the most professional tool that I have seen at this organization."</p>
+              <h3 class="testimonial-name">VP, Clinical Evaluation</h3>
+              <p class="testimonial-role">Healthcare</p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="testimonial-card">
+              <p class="quote">"This was one of the most impressive systems I've seen in my 21-year career."</p>
+              <h3 class="testimonial-name">David</h3>
+              <p class="testimonial-role">Senior Developer</p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="testimonial-card">
+              <p class="quote">"The system is sooo easy to use."</p>
+              <h3 class="testimonial-name">Victoria</h3>
+              <p class="testimonial-role">Business Analyst</p>
             </div>
           </div>
         </div>

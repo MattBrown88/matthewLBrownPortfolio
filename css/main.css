@@ -4213,6 +4213,34 @@ hr { background-color: #E6ECF8; }
   color: #8a8fa3;
 }
 
+.section.hero-quote {
+  background-color: #6495ED;
+  padding: 1.25rem 1.5rem;
+}
+
+.hero-quote-block {
+  padding: 0.25rem 0;
+}
+
+.hero-quote-text {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.hero-quote-attr {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
+}
+
+@media screen and (min-width: 769px) {
+  .hero-quote-text { font-size: 2.25rem; }
+}
+
 .callout .title { font-size: 20px; font-weight: 500; }
 
 @media screen and (min-width: 769px) { .callout .title { font-size: 26px; } }
@@ -4488,20 +4516,23 @@ input[name="carousel"] { display: none; }
     }
 }
 
-/* --- MB square logo (navbar) --- */
-.mb-logo { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px; background-color: #ffffff; color: #6495ED; border: 2px solid #6495ED; font-weight: 800; font-size: 1.2rem; letter-spacing: 1px; line-height: 1; transition: background-color 0.2s, color 0.2s, transform 0.2s; }
+/* --- Sticky tinted navbar --- */
+.navbar.is-transparent { position: sticky; top: 0; z-index: 40; background-color: #f6f8fc; border-bottom: 1px solid #e7ebf5; }
 
-.mb-logo:hover { background-color: #6495ED; color: #ffffff; transform: translateY(-1px); }
+.navbar.is-transparent .navbar-menu { background-color: #f6f8fc; }
+
+/* --- Navbar social icons (upper left) --- */
+.navbar-brand a.navbar-item.navbar-social { color: #111111; font-size: 1.35rem; padding: 0.5rem 0.65rem; }
+
+.navbar-brand a.navbar-item.navbar-social:hover, .navbar-brand a.navbar-item.navbar-social:focus { color: #555555; background-color: transparent; }
 
 /* --- Narrower navbar container --- */
 .navbar > .container.is-narrow-nav { max-width: 960px; }
 
 /* --- Navbar links: bold, bigger, more spacing --- */
-.navbar-start a.navbar-item { font-weight: 800; font-size: 1.5rem; color: #141c3a; margin: 0 0.6rem; }
+.navbar-end a.navbar-item { font-weight: 800; font-size: 1.5rem; color: #141c3a; margin: 0 0.6rem; }
 
-.navbar-start a.navbar-item:hover, .navbar-start a.navbar-item:focus { color: #6495ED; background-color: transparent; }
-
-@media screen and (min-width: 1024px) { .navbar-start { margin-left: 0.75rem; } }
+.navbar-end a.navbar-item:hover, .navbar-end a.navbar-item:focus { color: #6495ED; background-color: transparent; }
 
 /* --- Hero greeting (constrained width + fun) --- */
 .hero-greeting { color: #141c3a; max-width: 820px; margin-left: auto; margin-right: auto; line-height: 1.15; }
@@ -4511,6 +4542,8 @@ input[name="carousel"] { display: none; }
 @media screen and (max-width: 768px) {
   .hero-greeting .hero-subline { font-size: 1.1rem; }
 }
+
+.supabase-inline-logo { display: inline-block; height: 1em; width: auto; vertical-align: -0.1em; margin-left: 0.15em; }
 
 .hero-greeting .wave { display: inline-block; transform-origin: 70% 70%; animation: wave-hand 2.4s ease-in-out infinite; }
 
@@ -4960,8 +4993,11 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
   .hero.is-white .hero-body { min-height: 0; }
 }
 
+/* ---- Hero CTA ---- */
+.hero-cta { padding-top: 1.25rem; }
+
 /* ---- Hero clients marquee ---- */
-.hero-clients { padding: 2.5rem 0 1.5rem; }
+.hero-clients { padding: 1.75rem 0 0.75rem; }
 
 .hero-clients-label {
   font-size: 0.7rem;
@@ -5014,12 +5050,12 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
 
 /* ---- Intro section ---- */
 .section.intro {
-  padding: 4rem 1.5rem;
+  padding: 2rem 1.5rem;
   will-change: transform, opacity;
 }
 
 @media screen and (max-width: 768px) {
-  .section.intro { padding: 3rem 1.5rem; }
+  .section.intro { padding: 1.75rem 1.5rem; }
 }
 
 .section.intro .columns { align-items: flex-start; text-align: left; }
@@ -5106,9 +5142,10 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.25rem;
-  margin-top: 2.5rem;
   text-align: left;
 }
+
+.section.services { padding-top: 2.5rem; padding-bottom: 2.5rem; }
 
 @media screen and (min-width: 769px) {
   .services-grid { grid-template-columns: repeat(2, 1fr); }
@@ -5126,8 +5163,21 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
   padding: 1.5rem 1.75rem;
 }
 
+.service-card .service-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  background: #eef3fd;
+  color: #6495ED;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
 .service-card .service-title {
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: #141c3a;
   margin-bottom: 0.5rem;
