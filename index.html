@@ -83,6 +83,18 @@
         <a class="button is-primary is-outlined is-rounded is-medium has-text-weight-normal"
           href="https://calendly.com/matt-1176"><span>Book a consult</span></a>
       </div>
+    </div>
+    <section class="section intro has-text-centered has-border-top">
+      <div class="container is-narrow">
+        <div class="columns is-centered">
+          <div class="column is-three-fifths">
+            <p class="intro-para">AI has made writing code cheap. Building production systems is still hard. </p>
+              <p class="intro-para">I've been developing software for enterprises and startups for 10+ years. Whether it's a greenfield project, an analytics platform that's difficult to maintain, or a gnarly codebase that needs untangling, I partner with teams to build robust systems.</p>  
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section clients-strip has-border-top">
       <div class="hero-clients">
         <p class="hero-clients-label">Companies I've worked with</p>
         <div class="logo-marquee">
@@ -105,16 +117,6 @@
             <figure class="logo-slide" aria-hidden="true"><img class="client-logo" src="img/bahlogo.png" alt=""></figure>
             <figure class="logo-slide logo-slide--text" aria-hidden="true">The Demex Group</figure>
             <figure class="logo-slide logo-slide--text" aria-hidden="true">Unified Women's Healthcare</figure>
-          </div>
-        </div>
-      </div>
-    </div>
-    <section class="section intro has-text-centered has-border-top">
-      <div class="container is-narrow">
-        <div class="columns is-centered">
-          <div class="column is-three-fifths">
-            <p class="intro-para">AI has made writing code cheap. Building production systems is still hard. </p>
-              <p class="intro-para">I've been developing software for enterprises and startups for 10+ years. Whether it's a greenfield project, an analytics platform that's difficult to maintain, or a gnarly codebase that needs untangling, I partner with teams to build robust systems.</p>  
           </div>
         </div>
       </div>
@@ -492,7 +494,7 @@
 
         var heroBody = document.querySelector('.hero-body');
         var heroContent = document.querySelector('.hero-body .container');
-        var heroClients = document.querySelector('.hero-clients');
+        var heroCta = document.querySelector('.hero-cta');
         var introSection = document.querySelector('.section.intro');
 
         function applyExit(el, topOffset, fadeMultiplier) {
@@ -528,7 +530,7 @@
               heroBody.style.transform = 'translateY(-' + (Math.abs(heroTop) * 0.5) + 'px)';
             }
             if (heroContent) applyFade(heroContent, heroTop, 0.55);
-            if (heroClients) applyFade(heroClients, heroTop, 1.2);
+            if (heroCta) applyFade(heroCta, heroTop, 0.55);
           }
           if (introSection) {
             applyExit(introSection, introSection.getBoundingClientRect().top);

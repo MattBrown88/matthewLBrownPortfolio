@@ -4997,7 +4997,8 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
 .hero-cta { padding-top: 1.25rem; }
 
 /* ---- Hero clients marquee ---- */
-.hero-clients { padding: 1.75rem 0 0.75rem; }
+.section.clients-strip { padding: 2rem 0; }
+.hero-clients { padding: 0; }
 
 .hero-clients-label {
   font-size: 0.7rem;
