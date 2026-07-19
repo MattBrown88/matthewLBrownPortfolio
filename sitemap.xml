@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.matthewlbrown.com/</loc>
+    <loc>https://matthewlbrown.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.matthewlbrown.com/blog/</loc>
+    <loc>https://matthewlbrown.com/blog/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.matthewlbrown.com/blog/how-to-migrate-existing-supabase-project-to-declarative-schema.html</loc>
+    <loc>https://matthewlbrown.com/blog/how-to-migrate-existing-supabase-project-to-declarative-schema.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.matthewlbrown.com/blog/production-readiness-checklist.html</loc>
+    <loc>https://matthewlbrown.com/blog/production-readiness-checklist.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.matthewlbrown.com/blog/paid-media-strategy.html</loc>
+    <loc>https://matthewlbrown.com/blog/paid-media-strategy.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.matthewlbrown.com/blog/how-i-build-product-with-ai-beyond-vibe-coding.html</loc>
+    <loc>https://matthewlbrown.com/blog/how-i-build-product-with-ai-beyond-vibe-coding.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.matthewlbrown.com/blog/new-row-violates-row-level-security-policy-supabase.html</loc>
+    <loc>https://matthewlbrown.com/blog/new-row-violates-row-level-security-policy-supabase.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.matthewlbrown.com/blog/how-to-debug-supabase-edge-functions-directly-in-vs-code.html</loc>
+    <loc>https://matthewlbrown.com/blog/how-to-debug-supabase-edge-functions-directly-in-vs-code.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.matthewlbrown.com/blog/tableau-and-dbt-from-undocumented-calculations-to-version-controlled-business-rules.html</loc>
+    <loc>https://matthewlbrown.com/blog/tableau-and-dbt-from-undocumented-calculations-to-version-controlled-business-rules.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
