@@ -2,6 +2,7 @@
 title: 'How to Audit a Vibe-Coded App Before Production'
 description: 'A practical checklist used to review apps for security, RLS, secrets, deployments, and reliability issues.'
 date: 'Jul 6, 2026'
+featured: true
 category: Supabase
 tags: [Supabase, React, Vercel]
 summary: 'A practical checklist used to review apps for security, RLS, secrets, deployments, and reliability issues.'

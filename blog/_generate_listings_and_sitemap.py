@@ -76,6 +76,7 @@ def load_posts():
             "date_display": date.strftime("%b %Y") if date != datetime.min else "",
             "tags": meta.get("tags", []),
             "excerpt": meta.get("summary") or meta.get("description", ""),
+            "featured": str(meta.get("featured", "")).strip().lower() in ("true", "yes", "1"),
         })
     posts.sort(key=lambda p: (p["date"], p["slug"]), reverse=True)
     return posts, drafts
@@ -133,6 +134,21 @@ def inject(path, marker, content):
     path.write_text(new)
 
 
+def select_home_posts(posts):
+    """Posts shown on the home page.
+
+    Any post with `featured: true` in its frontmatter is shown first (newest
+    featured first). If fewer than HOME_POST_COUNT are featured, the remaining
+    slots are filled with the most recent non-featured posts. This keeps the
+    home-page selection curated in the .md files so it survives every rebuild.
+    """
+    featured = [p for p in posts if p["featured"]]
+    if not featured:
+        return posts[:HOME_POST_COUNT]
+    rest = [p for p in posts if not p["featured"]]
+    return (featured + rest)[:HOME_POST_COUNT]
+
+
 def write_sitemap(posts):
     urls = [(f"{BASE_URL}/", "weekly", "1.0"), (f"{BASE_URL}/blog/", "weekly", "0.9")]
     urls += [(f"{BASE_URL}/blog/{p['slug']}.html", "monthly", "0.8") for p in posts]
@@ -158,9 +174,11 @@ def main():
     inject(ROOT / "blog" / "index.html", "blog:filters", render_filters(posts))
     print(f"Updated blog/index.html ({len(posts)} posts)")
 
-    latest = "\n".join(render_card(p) for p in posts[:HOME_POST_COUNT])
+    home_posts = select_home_posts(posts)
+    latest = "\n".join(render_card(p) for p in home_posts)
     inject(ROOT / "index.html", "blog:latest", latest)
-    print(f"Updated index.html (latest {min(HOME_POST_COUNT, len(posts))} posts)")
+    featured_count = sum(1 for p in home_posts if p["featured"])
+    print(f"Updated index.html ({len(home_posts)} home posts, {featured_count} featured)")
 
     write_sitemap(posts)
 
