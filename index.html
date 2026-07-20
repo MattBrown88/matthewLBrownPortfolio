@@ -85,13 +85,13 @@
   </nav>
   <section class="hero is-white has-text-centered">
     <div class="hero-body">
-      <div class="container">
+      <div class="container is-hero-wide">
         <div class="columns is-centered">
           <div class="column" style="display: grid; place-items: center;">
             <img class="hero-headshot" src="img/linkedinprofile2.png" alt="Matt Brown">
             <h1 class="hero-greeting title is-spaced is-size-1-desktop is-size-2-tablet is-size-3-mobile">
               I'm <span style="color:#6495ED">Matt Brown</span> <span class="wave">👋</span>
-              <span class="hero-subline">I help businesses build <span style="color:#6495ED">resilient</span> &amp; <span style="color:#6495ED">scalable</span> analytical applications</span>
+              <span class="hero-subline">I help businesses build software that's <span class="hero-rotator" aria-live="polite"><span class="hero-rotator-text">reliable</span></span></span>
               <span class="hero-tech-stack">
                 <span class="tech-item"><img src="img/logos/supabase.svg" alt="Supabase"><span class="tech-label">Supabase</span></span>
                 <span class="tech-divider">·</span>
@@ -292,7 +292,7 @@
         </div>
       </div>
     </section>
-    <section id="projects" class="section is-medium is-primary is-long-ish">
+    <section id="projects" class="section is-medium is-long-ish">
       <div class="container">
         <h1 class="title section-title is-size-3-desktop is-size-4-mobile">Featured Work</h1>
       </div>
@@ -481,6 +481,69 @@
       (function () {
         var yearEl = document.getElementById('footer-year');
         if (yearEl) yearEl.textContent = new Date().getFullYear();
+      })();
+
+      // Typewriter that rotates the hero adjective through a set of qualities
+      (function () {
+        var rotator = document.querySelector('.hero-rotator');
+        var textEl = rotator && rotator.querySelector('.hero-rotator-text');
+        if (!rotator || !textEl) return;
+
+        var words = ['reliable', 'secure', 'resilient', 'scalable'];
+
+        // Reserve width for the widest word so the surrounding text never shifts
+        function sizeToLongest() {
+          var cs = window.getComputedStyle(rotator);
+          var probe = document.createElement('span');
+          probe.style.position = 'absolute';
+          probe.style.visibility = 'hidden';
+          probe.style.whiteSpace = 'nowrap';
+          probe.style.fontFamily = cs.fontFamily;
+          probe.style.fontSize = cs.fontSize;
+          probe.style.fontWeight = cs.fontWeight;
+          probe.style.fontStyle = cs.fontStyle;
+          probe.style.letterSpacing = cs.letterSpacing;
+          document.body.appendChild(probe);
+          var max = 0;
+          words.forEach(function (w) { probe.textContent = w; max = Math.max(max, probe.offsetWidth); });
+          document.body.removeChild(probe);
+          rotator.style.minWidth = Math.ceil(max) + 'px';
+        }
+        sizeToLongest();
+        window.addEventListener('resize', sizeToLongest);
+
+        // Reduced motion: swap whole words on a gentle interval, no typing
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          var i = 0;
+          setInterval(function () {
+            i = (i + 1) % words.length;
+            textEl.textContent = words[i];
+          }, 2400);
+          return;
+        }
+
+        var typeSpeed = 90, deleteSpeed = 45, holdFull = 1500, holdEmpty = 350;
+        var wordIndex = 0, charIndex = words[0].length, deleting = true;
+
+        function tick() {
+          var word = words[wordIndex];
+          if (!deleting) {
+            charIndex++;
+            textEl.textContent = word.slice(0, charIndex);
+            if (charIndex === word.length) { deleting = true; return setTimeout(tick, holdFull); }
+            return setTimeout(tick, typeSpeed);
+          }
+          charIndex--;
+          textEl.textContent = word.slice(0, charIndex);
+          if (charIndex === 0) {
+            deleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            return setTimeout(tick, holdEmpty);
+          }
+          return setTimeout(tick, deleteSpeed);
+        }
+
+        setTimeout(tick, holdFull);
       })();
     </script>
     <script>

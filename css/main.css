@@ -4533,8 +4533,11 @@ input[name="carousel"] { display: none; }
 
 .navbar-brand a.navbar-item.navbar-social:hover, .navbar-brand a.navbar-item.navbar-social:focus { color: #555555; background-color: transparent; }
 
-/* --- Narrower navbar container --- */
-.navbar > .container.is-narrow-nav { max-width: 960px; }
+/* --- Navbar container: track the content `.container.is-narrow` width so the
+   navbar aligns with the sections below the hero at every breakpoint --- */
+.navbar > .container.is-narrow-nav { max-width: 1200px; }
+@media screen and (min-width: 1024px) { .navbar > .container.is-narrow-nav { max-width: 960px; } }
+@media screen and (min-width: 1408px) { .navbar > .container.is-narrow-nav { max-width: 1344px; } }
 
 /* --- Navbar links: bold, bigger, more spacing --- */
 .navbar-end a.navbar-item { font-weight: 800; font-size: 1.5rem; color: #141c3a; margin: 0 0.6rem; background-image: linear-gradient(#6495ED, #6495ED); background-repeat: no-repeat; background-size: 100% 0.18em; background-position: 0 100%; background-origin: content-box; transition: background-size 0.2s ease, color 0.2s ease; }
@@ -4542,12 +4545,50 @@ input[name="carousel"] { display: none; }
 .navbar-end a.navbar-item:hover, .navbar-end a.navbar-item:focus { color: #6495ED; background-color: transparent; background-size: 100% 0.28em; }
 
 /* --- Hero greeting (constrained width + fun) --- */
-.hero-greeting { color: #141c3a; max-width: 820px; margin-left: auto; margin-right: auto; line-height: 1.15; }
+.hero-greeting { color: #141c3a; max-width: 1400px; margin-left: auto; margin-right: auto; line-height: 1.15; }
 
 .hero-greeting .hero-subline { display: block; margin-top: 1.25rem; }
 
 @media screen and (max-width: 768px) {
   .hero-greeting .hero-subline { font-size: 1.1rem; }
+}
+
+/* Wider hero container so the full-size subline can sit on one line */
+@media screen and (min-width: 1024px) {
+  .hero-body > .container.is-hero-wide { max-width: 1300px; }
+}
+
+@media screen and (min-width: 1408px) {
+  .hero-body > .container.is-hero-wide { max-width: 1400px; }
+}
+
+.hero-greeting .hero-rotator {
+  display: inline-block;
+  color: #6495ED;
+  font-weight: inherit;
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* Blinking typewriter caret after the typed text */
+.hero-greeting .hero-rotator::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 3px;
+  background: currentColor;
+  vertical-align: -0.1em;
+  animation: hero-caret-blink 1s steps(1) infinite;
+}
+
+@keyframes hero-caret-blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-greeting .hero-rotator::after { animation: none; opacity: 1; }
 }
 
 .supabase-inline-logo { display: inline-block; height: 1.1em; width: auto; vertical-align: -0.15em; }
