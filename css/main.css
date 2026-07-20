@@ -4166,6 +4166,8 @@ hr { background-color: #E6ECF8; }
 
 .section.about-section { background: #ffffff; }
 
+.section.about-section .container { text-align: center; }
+
 .section.about-section .title { display: inline-block; }
 
 .section.about-section .title::after {
@@ -4178,7 +4180,7 @@ hr { background-color: #E6ECF8; }
   border-radius: 2px;
 }
 
-.section.about-section .about-intro { color: #41476b; }
+.section.about-section .about-intro { color: #41476b; max-width: 760px; margin-left: auto; margin-right: auto; }
 
 .section.testimonials .columns { margin-top: 1.5rem; }
 
@@ -4215,6 +4217,7 @@ hr { background-color: #E6ECF8; }
 
 .section.hero-quote {
   background-color: #6495ED;
+  background-image: linear-gradient(160deg, #7aa5f0 0%, #6495ED 55%, #5580d8 100%);
   padding: 1.25rem 1.5rem;
 }
 
@@ -5011,8 +5014,19 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
 /* ---- Hero CTA ---- */
 .hero-cta { padding-top: 1.25rem; }
 
+/* ---- Shared section titles ---- */
+.section-title {
+  text-align: center;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+}
+
+.section-subtitle { text-align: center; }
+
 /* ---- Hero clients marquee ---- */
-.section.clients-strip { padding: 2rem 0; }
+.section.clients-strip { padding: 3rem 0; }
 .hero-clients { padding: 0; }
 
 .hero-clients-label {
@@ -5022,6 +5036,22 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
   text-transform: uppercase;
   color: #8a8fa3;
   margin-bottom: 1.5rem;
+}
+
+.clients-intro {
+  margin-bottom: 2.5rem;
+}
+
+.clients-intro-para {
+  font-size: 1.05rem;
+  color: #5a6072;
+  line-height: 1.6;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .clients-intro-para { font-size: 0.98rem; }
 }
 
 .hero-clients .logo-marquee {
@@ -5062,6 +5092,43 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
   white-space: nowrap;
   width: auto;
   padding: 0 0.5rem;
+}
+
+/* ---- Intro statement band ---- */
+.section.intro-statement {
+  background-color: #141c3a;
+  background-image: linear-gradient(160deg, #1b2547 0%, #141c3a 55%, #10162e 100%);
+  padding: 3.5rem 1.5rem;
+}
+
+.section.intro-statement .container.is-narrow { max-width: 1400px; }
+
+.intro-statement-lead {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.intro-statement-sub {
+  margin: 1.5rem auto 0;
+  max-width: 980px;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 400;
+}
+
+@media screen and (min-width: 769px) {
+  .intro-statement-lead { font-size: 2.6rem; }
+}
+
+@media screen and (max-width: 768px) {
+  .section.intro-statement { padding: 2.5rem 1.5rem; }
+  .intro-statement-sub { font-size: 1rem; }
 }
 
 /* ---- Intro section ---- */
@@ -5152,7 +5219,7 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
 }
 
 /* ---- Services section ---- */
-.section.services { background: #fafbff; }
+.section.services { background: #f4f7fc; }
 
 .services-grid {
   display: grid;
@@ -5161,7 +5228,7 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
   text-align: left;
 }
 
-.section.services { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+.section.services { padding-top: 4rem; padding-bottom: 4rem; }
 
 @media screen and (min-width: 769px) {
   .services-grid { grid-template-columns: repeat(2, 1fr); }
@@ -5218,13 +5285,26 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
 }
 
 .blog-editorial-header {
+  position: relative;
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 2rem;
 }
 
 .blog-editorial-header .title { margin-bottom: 0; }
+
+.blog-editorial-header .button {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media screen and (max-width: 768px) {
+  .blog-editorial-header .button { position: static; transform: none; margin-top: 0.75rem; }
+  .blog-editorial-header { flex-direction: column; }
+}
 
 .blog-editorial-list { border-top: 2px solid #E6ECF8; }
 
