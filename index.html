@@ -65,6 +65,7 @@
   <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
     <div class="container is-narrow-nav">
       <div class="navbar-brand">
+        <a class="navbar-item navbar-logo" href="#" aria-label="Home">MB</a>
         <a class="navbar-item navbar-social" href="https://github.com/MattBrown88" target="_blank" rel="noopener" aria-label="GitHub">
           <i class="fa-brands fa-github"></i></a>
         <a class="navbar-item navbar-social" href="https://www.linkedin.com/in/matthew-brown-44b91017/" target="_blank" rel="noopener" aria-label="LinkedIn">
@@ -91,7 +92,14 @@
             <img class="hero-headshot" src="img/linkedinprofile2.png" alt="Matt Brown">
             <h1 class="hero-greeting title is-spaced is-size-1-desktop is-size-2-tablet is-size-3-mobile">
               I'm <span style="color:#6495ED">Matt Brown</span> <span class="wave">👋</span>
-              <span class="hero-subline">I help businesses build <span style="color:#6495ED">resilient</span> &amp; <span style="color:#6495ED">scalable</span> apps with <img class="supabase-inline-logo" src="img/supabase-logo.svg" alt=""> Supabase</span>
+              <span class="hero-subline">I help businesses build <span style="color:#6495ED">resilient</span> &amp; <span style="color:#6495ED">scalable</span> analytical applications</span>
+              <span class="hero-tech-stack">
+                <span class="tech-item"><img src="img/logos/supabase.svg" alt="Supabase"><span class="tech-label">Supabase</span></span>
+                <span class="tech-divider">·</span>
+                <span class="tech-item"><img src="img/logos/dbt.svg" alt="dbt"><span class="tech-label">dbt</span></span>
+                <span class="tech-divider">·</span>
+                <span class="tech-item"><img src="img/logos/python.svg" alt="Python"><span class="tech-label">Python</span></span>
+              </span>
             </h1>
           </div>
         </div>
@@ -142,19 +150,19 @@
       <div class="container is-narrow">
         <div class="services-grid services-grid--three">
           <div class="service-card">
-            <div class="service-icon"><i class="fa-solid fa-bolt"></i></div>
+            <div class="service-icon"><img src="img/logos/supabase.svg" alt="Supabase" style="width:26px;height:26px;"></div>
             <p class="service-title">Supabase Expert</p>
             <p class="service-desc">Postgres, RLS, auth, and edge functions. I design and build on Supabase the way it's meant to be used.</p>
           </div>
           <div class="service-card">
-            <div class="service-icon"><i class="fa-solid fa-diagram-project"></i></div>
-            <p class="service-title">Experienced Solutions Architect</p>
-            <p class="service-desc">10+ years building production systems for enterprises and startups in Python, Postgres, and the cloud. I turn business problems into the right architecture.</p>
+            <div class="service-icon"><img src="img/logos/dbt.svg" alt="dbt" style="width:26px;height:26px;"></div>
+            <p class="service-title">Data Engineer</p>
+            <p class="service-desc">End-to-end pipelines on dbt, BigQuery, Airbyte, and Postgres. Clean models, repeatable transformations, and analytics-ready warehouses.</p>
           </div>
           <div class="service-card">
-            <div class="service-icon"><i class="fa-solid fa-life-ring"></i></div>
-            <p class="service-title">AI App Rescue</p>
-            <p class="service-desc">Security hardening, refactoring, and production readiness for apps that need to grow up fast.</p>
+            <div class="service-icon"><i class="fa-solid fa-diagram-project"></i></div>
+            <p class="service-title">Solutions Architect</p>
+            <p class="service-desc">10+ years building production systems for enterprises and startups in Python, Postgres, and the cloud. I turn business problems into the right architecture.</p>
           </div>
         </div>
       </div>
@@ -208,17 +216,16 @@
             </div>
           </a>
         </div>
-        <div class="column is-one-third-desktop is-half-tablet blog-grid-item" data-tags="Data Science|PPC">
-          <a class="blog-card" href="/blog/paid-media-strategy.html">
+        <div class="column is-one-third-desktop is-half-tablet blog-grid-item" data-tags="AI">
+          <a class="blog-card" href="/blog/how-i-build-product-with-ai-beyond-vibe-coding.html">
             <div class="blog-card-body">
               <span class="blog-card-date">Jun 2026</span>
-              <h2 class="blog-card-title">The PPC Performance Framework</h2>
-              <p class="blog-card-excerpt">Strategy framework showing how first-party data, targeting, bidding, attribution, experimentation, landing pages, and external market forces connect.</p>
+              <h2 class="blog-card-title">How I Build Products with AI</h2>
+              <p class="blog-card-excerpt">Step by step AI-assisted MVP development process</p>
             </div>
             <div class="blog-card-band">
               <span class="blog-card-tags">
-                <span class="blog-tag">Data Science</span>
-                <span class="blog-tag">PPC</span>
+                <span class="blog-tag">AI</span>
               </span>
               <span class="blog-card-more">Read More <i class="fa-solid fa-arrow-right"></i></span>
             </div>
@@ -307,6 +314,11 @@
                     alt="Population Health analytics tool screenshot"></div>
                 <div class="project-body">
                   <h2>Population Health Tool</h2>
+                  <div class="project-logo-pills">
+                    <span class="logo-pill"><img src="img/logos/bigquery.svg" alt=""><span>BigQuery</span></span>
+                    <span class="logo-pill"><img src="img/logos/shiny.svg" alt=""><span>R Shiny</span></span>
+                    <span class="logo-pill"><img src="img/logos/python.svg" alt=""><span>Python</span></span>
+                  </div>
                 </div>
               </a>
             </div>
@@ -317,6 +329,11 @@
                     alt="Reinsurance analytics tool screenshot"></div>
                 <div class="project-body">
                   <h2>Reinsurance Analytics Tool</h2>
+                  <div class="project-logo-pills">
+                    <span class="logo-pill"><img src="img/logos/sql-server.svg" alt=""><span>SQL Server</span></span>
+                    <span class="logo-pill"><img src="img/logos/python.svg" alt=""><span>Python</span></span>
+                    <span class="logo-pill"><img src="img/logos/react.svg" alt=""><span>React</span></span>
+                  </div>
                 </div>
               </a>
             </div>
@@ -327,6 +344,11 @@
                     alt="GCP to Azure cloud migration diagram"></div>
                 <div class="project-body">
                   <h2>GCP to Azure Cloud Migration</h2>
+                  <div class="project-logo-pills">
+                    <span class="logo-pill"><img src="img/logos/google-cloud.svg" alt=""><span>GCP</span></span>
+                    <span class="logo-pill"><img src="img/logos/azure.svg" alt=""><span>Azure</span></span>
+                    <span class="logo-pill"><img src="img/logos/postgresql.svg" alt=""><span>Postgres</span></span>
+                  </div>
                 </div>
               </a>
             </div>
@@ -344,6 +366,10 @@
                     alt="Clinical intervention triggering tool screenshot"></div>
                 <div class="project-body">
                   <h2>Clinical Intervention Triggering</h2>
+                  <div class="project-logo-pills">
+                    <span class="logo-pill"><img src="img/logos/bigquery.svg" alt=""><span>BigQuery</span></span>
+                    <span class="logo-pill"><img src="img/logos/shiny.svg" alt=""><span>R Shiny</span></span>
+                  </div>
                 </div>
               </a>
             </div>
@@ -364,6 +390,12 @@
                     alt="E-commerce data pipeline: Shopify storefronts flowing into a BigQuery warehouse and analytics" loading="lazy" /></div>
                 <div class="project-body">
                   <h2>E-commerce Data Pipeline</h2>
+                  <div class="project-logo-pills">
+                    <span class="logo-pill"><img src="img/logos/airbyte.svg" alt=""><span>Airbyte</span></span>
+                    <span class="logo-pill"><img src="img/logos/bigquery.svg" alt=""><span>BigQuery</span></span>
+                    <span class="logo-pill"><img src="img/logos/dbt.svg" alt=""><span>dbt</span></span>
+                    <span class="logo-pill"><img src="img/logos/shopify.svg" alt=""><span>Shopify</span></span>
+                  </div>
                 </div>
               </a>
             </div>
@@ -374,6 +406,10 @@
                     alt="Notifi back in stock alerts app screenshot"></div>
                 <div class="project-body">
                   <h2>Notifi: Back in Stock Alerts</h2>
+                  <div class="project-logo-pills">
+                    <span class="logo-pill"><img src="img/logos/shopify.svg" alt=""><span>Shopify</span></span>
+                    <span class="logo-pill"><img src="img/logos/postgresql.svg" alt=""><span>Postgres</span></span>
+                  </div>
                 </div>
               </a>
             </div>

@@ -4522,6 +4522,10 @@ input[name="carousel"] { display: none; }
 .navbar.is-transparent .navbar-menu { background-color: #f6f8fc; }
 
 /* --- Navbar social icons (upper left) --- */
+.navbar-brand a.navbar-item.navbar-logo { color: #6495ED; font-size: 1.4rem; font-weight: 700; letter-spacing: 0.05em; padding: 0.5rem 0.75rem; margin-right: 1.5rem; background-color: transparent; }
+
+.navbar-brand a.navbar-item.navbar-logo:hover, .navbar-brand a.navbar-item.navbar-logo:focus { color: #4a7fd4; background-color: transparent; }
+
 .navbar-brand a.navbar-item.navbar-social { color: #111111; font-size: 1.35rem; padding: 0.5rem 0.65rem; }
 
 .navbar-brand a.navbar-item.navbar-social:hover, .navbar-brand a.navbar-item.navbar-social:focus { color: #555555; background-color: transparent; }
@@ -4543,7 +4547,13 @@ input[name="carousel"] { display: none; }
   .hero-greeting .hero-subline { font-size: 1.1rem; }
 }
 
-.supabase-inline-logo { display: inline-block; height: 1em; width: auto; vertical-align: -0.1em; margin-left: 0.15em; }
+.supabase-inline-logo { display: inline-block; height: 1.1em; width: auto; vertical-align: -0.15em; }
+
+.hero-tech-stack { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 0.75rem; font-size: 1rem; color: #888; }
+.hero-tech-stack .tech-item { display: inline-flex; align-items: center; gap: 0.3rem; }
+.hero-tech-stack .tech-item img { width: 18px; height: 18px; object-fit: contain; }
+.hero-tech-stack .tech-label { font-weight: 600; color: #555; font-size: 0.95rem; letter-spacing: 0.02em; }
+.hero-tech-stack .tech-divider { color: #ccc; }
 
 .hero-greeting .wave { display: inline-block; transform-origin: 70% 70%; animation: wave-hand 2.4s ease-in-out infinite; }
 
@@ -4598,6 +4608,11 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
 @media screen and (min-width: 769px) { .project-body p { font-size: 18px; } }
 
 .project-body .tag { align-self: flex-start; }
+
+.project-logo-pills { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: auto; padding-top: 0.85rem; }
+.logo-pill { display: inline-flex; align-items: center; gap: 0.3rem; background: rgba(255,255,255,0.92); border-radius: 4px; padding: 0.18rem 0.45rem; }
+.logo-pill img { width: 14px; height: 14px; object-fit: contain; }
+.logo-pill span { font-size: 0.68rem; font-weight: 600; color: #41476b; }
 
 /* Featured cards: bigger cover + heading */
 .section.startups .startup-grid .box.project-card.is-featured { border: 2px solid #6495ED; }
