@@ -9,7 +9,7 @@ summary: "Automatically generate migration files from your schema definitions"
 video: aRvhVqLSuow
 video_caption: 'Watch an example migration'
 image: 'img/blog/migrate-declarative-schema-cover.svg'
-image_alt: 'How to Migrate an Existing Supabase Project to Declarative Schema'
+image_alt: 'How to Convert a Supabase Project to Declarative Schema'
 
 ---
 
