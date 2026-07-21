@@ -1,7 +1,7 @@
 ---
 title: 'The PPC Performance Framework'
 description: 'Strategy framework showing how first-party data, targeting, bidding, attribution, experimentation, landing pages, and external market forces connect.'
-date: 'Jun 30, 2026'
+date: 'May 1, 2026'
 featured: false
 category: Paid Media
 tags: [Data Science, PPC]
