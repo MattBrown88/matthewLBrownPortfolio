@@ -1,3 +1,16 @@
+---
+title: 'How to Organize Supabase Migrations'
+description: 'Overview of different method to generate, organize and structure migration files'
+date: 'July 21, 2026'
+featured: true
+category: Supabase
+tags: [Supabase, PostgreSQL]
+summary: "Overview of different method to generate, organize and structure migration files"
+image: 'img/blog/how-to-organize-supabase-migrations.png'
+image_alt: 'How to Organize Supabase Migrations'
+
+---
+
 ## Introduction
 
 Migration files are used to track database schema changes over time. Regardless of how the database schema is defined, Supabase always deploys changes through migration files.
