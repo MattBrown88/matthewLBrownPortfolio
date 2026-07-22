@@ -486,7 +486,7 @@
   }
   .tech-row{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(5,1fr);
     align-items:start;
     gap:10px;
   }
@@ -576,7 +576,7 @@
           <h1>A custom analytics tool for reinsurance</h1>
           <p class="tagline">Purpose-built visualizations that off-the-shelf BI tools couldn't deliver</p>
           <p class="subhead">
-            <em>A bespoke analytics application that ingests any data source, works out its structure
+            <em>A bespoke analytics application that ingests claims, weather, and geospatial data, works out its structure
             on its own, and renders interactive dashboards shaped around how the team actually works.</em>
           </p>
         </div>
@@ -692,7 +692,7 @@
             <div class="dot"><i class="fa-solid fa-shuffle"></i></div>
             <div>
               <div class="bullet-title">Disparate Data Sources</div>
-              <div class="bullet-copy">Analyses spanned model outputs and varied datasets that had to be explored together.</div>
+              <div class="bullet-copy">Analyses spanned model outputs, weather data, and GIS datasets including shapefiles that had to be explored together.</div>
             </div>
           </div>
         </div>
@@ -703,7 +703,7 @@
           <h2><span class="mini-icon"><i class="fa-solid fa-gear"></i></span> The Solution</h2>
 
           <p class="panel-intro">
-            We built the tool from scratch and shaped it around their workflow. It ingests any source,
+            We built the tool from scratch and shaped it around their workflow. It ingests claims, weather, and geospatial data,
             works out the data structure on its own, and renders the specialized, interactive views they
             couldn't get elsewhere.
           </p>
@@ -711,15 +711,15 @@
           <div class="bullet">
             <div class="dot"><i class="fa-solid fa-database"></i></div>
             <div>
-              <div class="bullet-title">Ingest Any Data Source</div>
-              <div class="bullet-copy">The tool takes raw outputs from model data, or any other source, and makes them immediately available for analysis, with no per-source setup.</div>
+              <div class="bullet-title">Flexible Data Ingestion</div>
+              <div class="bullet-copy">The tool takes raw outputs from model data, weather feeds, and shapefiles, and makes them immediately available for analysis, with no per-source setup.</div>
 
               <div class="trace-inset">
                 <div class="trace">
                   <div class="trace-step">
                     <div class="trace-icon"><i class="fa-solid fa-table"></i></div>
-                    <div class="trace-title">Any Data Source</div>
-                    <div class="trace-copy">Raw outputs from model data, or any other source, ingested as-is.</div>
+                    <div class="trace-title">Claims, Weather & GIS</div>
+                    <div class="trace-copy">Claims data, weather feeds, and shapefiles ingested as-is.</div>
                   </div>
 
                   <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
@@ -763,7 +763,7 @@
             <div class="dot"><i class="fa-solid fa-earth-americas"></i></div>
             <div>
               <div class="bullet-title">Visualizations Built for Reinsurance</div>
-              <div class="bullet-copy">Catastrophe exposure maps and bespoke interactive charts, rendered in the browser with full control over layout and interaction.</div>
+              <div class="bullet-copy">Catastrophe exposure maps powered by GIS data using GeoPandas and Shapely, alongside bespoke interactive charts rendered in the browser with full control over layout and interaction.</div>
             </div>
           </div>
         </section>
@@ -806,6 +806,7 @@
           <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="../img/logos/python.svg" alt="Python" width="24" height="24"/></div><div class="tool-name">Python</div></div>
           <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="../img/logos/typescript.svg" alt="TypeScript" width="24" height="24"/></div><div class="tool-name">TypeScript</div></div>
           <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="../img/logos/react.svg" alt="React" width="24" height="24"/></div><div class="tool-name">React</div></div>
+          <div class="tool" style="border-right:none"><div class="tool-badge" style="background:#188038;margin:0 auto 8px;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:#fff;font-weight:900;font-size:11px;">Geo</div><div class="tool-name">GeoPandas</div></div>
         </div>
       </section>
 
