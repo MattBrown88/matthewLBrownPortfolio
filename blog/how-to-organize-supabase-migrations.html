@@ -84,7 +84,7 @@
       </header>
       <figure class="blog-featured-image" style="margin:0 0 2.75rem;">
         <img src="/img/blog/how-to-organize-supabase-migrations.png" alt="How to Organize Supabase Migrations"
-          style="display:block;width:100%;height:auto;border-radius:10px;">
+          style="display:block;width:100%;height:auto;border-radius:10px;border:1px solid #e6e8ef;">
       </figure>
       <article class="content blog-article">
 <h2 id="introduction">Introduction</h2>
@@ -227,8 +227,8 @@ grant ...;</code></pre>
 <p>Supabase already provides a database client and generated TypeScript types, so I would not introduce an ORM only for schema management. I would use Prisma when the application benefits from Prisma itself, not simply as an alternative way to generate migrations.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>I generally recommend going with Declarative Schemas unless you have a good reason not to. It makes managing the database schema much simpler. It also makes it easier for new team members to understand what’s going on when they hop on your project.</p>
-<p>If you want to migrate an existing project, here’s a step by step video I created to help you with that.</p>
-<p><a href="https://www.youtube.com/watch?v=aRvhVqLSuow">How to Convert a Supabase Project to Declarative Schemas</a></p>
+<p>If you want to migrate an existing project, here’s a step by step guide I created to help you with that.</p>
+<p><a href="/blog/getting-started-with-supabase-declarative-schema.html">Getting Started with Supabase Declarative Schema</a></p>
       </article>
 
       <aside class="blog-author-cta">

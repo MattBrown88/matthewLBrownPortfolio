@@ -5098,6 +5098,8 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
 .hero-clients .logo-marquee {
   overflow: hidden;
   position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
   -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
   mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
 }

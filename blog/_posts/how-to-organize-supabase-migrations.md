@@ -217,7 +217,7 @@ Supabase already provides a database client and generated TypeScript types, so I
 
 I generally recommend going with Declarative Schemas unless you have a good reason not to. It makes managing the database schema much simpler. It also makes it easier for new team members to understand what's going on when they hop on your project. 
 
-If you want to migrate an existing project, here's a step by step video I created to help you with that.
+If you want to migrate an existing project, here's a step by step guide I created to help you with that.
 
-[How to Convert a Supabase Project to Declarative Schemas](https://www.youtube.com/watch?v=aRvhVqLSuow)
+[Getting Started with Supabase Declarative Schema](/blog/getting-started-with-supabase-declarative-schema.html)
 
