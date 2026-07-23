@@ -692,7 +692,7 @@
             <div class="dot"><i class="fa-solid fa-shuffle"></i></div>
             <div>
               <div class="bullet-title">Disparate Data Sources</div>
-              <div class="bullet-copy">Analyses spanned model outputs, weather data, and GIS datasets including shapefiles that had to be explored together.</div>
+              <div class="bullet-copy">Analyses spanned model outputs, weather feeds, and GIS datasets in different formats and coordinate systems — all of which had to be ingested, reconciled, and explored together.</div>
             </div>
           </div>
         </div>
@@ -717,9 +717,25 @@
               <div class="trace-inset">
                 <div class="trace">
                   <div class="trace-step">
+                    <div class="trace-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <div class="trace-title">On-Demand Trigger</div>
+                    <div class="trace-copy">A cloud trigger kicks off the pipeline on demand, so data is processed only when it's needed.</div>
+                  </div>
+
+                  <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+                  <div class="trace-step">
                     <div class="trace-icon"><i class="fa-solid fa-table"></i></div>
-                    <div class="trace-title">Claims, Weather & GIS</div>
-                    <div class="trace-copy">Claims data, weather feeds, and shapefiles ingested as-is.</div>
+                    <div class="trace-title">Ingest Claims, Weather &amp; GIS</div>
+                    <div class="trace-copy">Claims data, weather feeds, and shapefiles pulled in as-is.</div>
+                  </div>
+
+                  <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+                  <div class="trace-step">
+                    <div class="trace-icon logo-badge"><img src="../img/logos/python.svg" alt="Python"/></div>
+                    <div class="trace-title">Python Processing</div>
+                    <div class="trace-copy">Python transforms and normalizes each source, handles geospatial data with GeoPandas, and auto-classifies every field.</div>
                   </div>
 
                   <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
@@ -727,15 +743,7 @@
                   <div class="trace-step">
                     <div class="trace-icon logo-badge"><img src="../img/logos/sql-server.svg" alt="SQL Server"/></div>
                     <div class="trace-title">SQL Server</div>
-                    <div class="trace-copy">Data stored and served from SQL Server.</div>
-                  </div>
-
-                  <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-
-                  <div class="trace-step">
-                    <div class="trace-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                    <div class="trace-title">Auto-Detection</div>
-                    <div class="trace-copy">The app automatically classifies each variable as a dimension or a metric.</div>
+                    <div class="trace-copy">Processed data persisted to SQL Server, ready to serve.</div>
                   </div>
 
                   <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
@@ -743,11 +751,19 @@
                   <div class="trace-step">
                     <div class="trace-icon logo-badge"><img src="../img/logos/react.svg" alt="React"/></div>
                     <div class="trace-title">Interactive Dashboards</div>
-                    <div class="trace-copy">A React + TypeScript front end renders the views and interactions.</div>
+                    <div class="trace-copy">A React + TypeScript front end requests data through Python and renders the views.</div>
                   </div>
                 </div>
-                <div class="trace-caption">Point it at a new source and it's explorable immediately, with no schema mapping or manual setup.</div>
+                <div class="trace-caption">Triggered on demand in the cloud — point it at a new source and it's explorable immediately, with no schema mapping or manual setup.</div>
               </div>
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-cloud"></i></div>
+            <div>
+              <div class="bullet-title">Cloud Pipeline, Triggered On-Demand</div>
+              <div class="bullet-copy">Runs entirely in the cloud, firing from a trigger only when data needs processing. React requests data from a Python service, which reads from SQL Server.</div>
             </div>
           </div>
 
