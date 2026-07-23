@@ -14,6 +14,8 @@ image_alt: 'How to Convert a Supabase Project to Declarative Schema'
 
 ---
 
+> **Update:** This post covers the older conversion workflow. I now recommend the simpler `pg-delta` approach — see [Getting Started with Supabase Declarative Schema](/blog/getting-started-with-supabase-declarative-schema.html) for the current guide.
+
 Supabase migrations can quickly get complicated. Early in a project the database structure rapidly evolves, often resulting in a complex array of migration files. It can be difficult to find the most recent table, view or enum when there are many different versions of it in the change history. 
 
 This slows down the development process because you're constantly looking for the correct file. It also reduces clarity around the database architecture, making it more difficult to understand the codebase.
