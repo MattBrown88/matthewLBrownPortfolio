@@ -311,6 +311,51 @@
     font-size:16px;
   }
 
+  /* Fan-in of separate source systems feeding transformation */
+  .trace-sources-step{ flex:1.15; }
+  .trace-sources{
+    display:grid;
+    gap:7px;
+    margin-bottom:12px;
+  }
+  .source-row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .source-chip{
+    flex:1;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#fff;
+    border:1.5px solid #C7DBFF;
+    border-radius:10px;
+    padding:7px 10px;
+    font-size:12px;
+    font-weight:800;
+    color:#0d2f6b;
+    text-align:left;
+  }
+  .source-chip i{
+    color:var(--blue);
+    font-size:13px;
+    width:15px;
+    text-align:center;
+  }
+  .source-arrow{
+    color:var(--blue);
+    opacity:.55;
+    font-size:14px;
+  }
+  .source-chip-more{
+    border-style:dashed;
+    background:transparent;
+    color:#627D98;
+    font-weight:700;
+  }
+  .source-chip-more i{ color:#627D98; }
+
   .main{
     margin-top:28px;
     display:grid;
@@ -576,8 +621,9 @@
           <h1>A Self-Service Population Health Analytical Tool</h1>
           <p class="tagline">Turning Terabytes of Healthcare Data into Actionable Insights</p>
           <p class="subhead">
-            <em>A self-service analytics platform that empowers business analysts to explore data,
-            identify cohort opportunities, evaluate interventions, and improve member outcomes.</em>
+            <em>A modern cloud data platform and self-service analytics tool that empowers business
+            analysts to explore data, identify cohort opportunities, evaluate interventions, and
+            improve member outcomes.</em>
           </p>
         </div>
 
@@ -655,17 +701,17 @@
         <h2><span class="mini-icon"><i class="fa-solid fa-triangle-exclamation"></i></span> The Challenge</h2>
 
         <p class="panel-intro">
-          The client ran on a wide range of tools for data visualization and analysis. While each tool
-          had its specific use, they collectively lacked the versatility of an all-in-one, self-service
-          analytics solution.
+          The client's data was fragmented across disconnected source systems with no unified data
+          warehouse. Every analysis started with stitching data together by hand, and a patchwork of
+          visualization tools sat on top — none offering a trusted, self-service view of the population.
         </p>
 
         <div class="challenge-bullets">
           <div class="bullet">
-            <div class="dot"><i class="fa-solid fa-clock-rotate-left"></i></div>
+            <div class="dot"><i class="fa-solid fa-database"></i></div>
             <div>
-              <div class="bullet-title">Time-Consuming Maintenance</div>
-              <div class="bullet-copy">Maintenance of disparate dashboards was highly time-consuming.</div>
+              <div class="bullet-title">No Unified Data Warehouse</div>
+              <div class="bullet-copy">Claims, clinical, benefits, and pharmacy data lived in separate systems with no single source of truth.</div>
             </div>
           </div>
 
@@ -673,7 +719,15 @@
             <div class="dot"><i class="fa-solid fa-terminal"></i></div>
             <div>
               <div class="bullet-title">Manual SQL Extracts</div>
-              <div class="bullet-copy">Analysts routinely wrote SQL to extract data for ad-hoc reports.</div>
+              <div class="bullet-copy">Analysts hand-wrote SQL against each source system for every ad-hoc report.</div>
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-clock-rotate-left"></i></div>
+            <div>
+              <div class="bullet-title">Time-Consuming Maintenance</div>
+              <div class="bullet-copy">Disparate dashboards duplicated logic and were highly time-consuming to maintain.</div>
             </div>
           </div>
 
@@ -681,15 +735,7 @@
             <div class="dot"><i class="fa-solid fa-people-group"></i></div>
             <div>
               <div class="bullet-title">No Standard Cohort Retrieval</div>
-              <div class="bullet-copy">No standard methods for retrieving cohort data.</div>
-            </div>
-          </div>
-
-          <div class="bullet">
-            <div class="dot"><i class="fa-solid fa-gauge"></i></div>
-            <div>
-              <div class="bullet-title">No Trusted Dashboard</div>
-              <div class="bullet-copy">Lack of a reliable, intuitive dashboard to access trusted data with ease.</div>
+              <div class="bullet-copy">Cohort definitions varied by team, so the same question produced different answers.</div>
             </div>
           </div>
         </div>
@@ -700,26 +746,30 @@
           <h2><span class="mini-icon"><i class="fa-solid fa-gear"></i></span> The Solution</h2>
 
           <p class="panel-intro">
-            We designed a robust, self-service analytical tool with integrated data services. This solution
-            empowers business analysts to test hypotheses, extract data, and generate insights — saving time
-            and amplifying their ability to impact positive health outcomes.
+            We modernized the data stack first, then built the analytics on top of it. Siloed source systems
+            were consolidated into a single cloud data warehouse through automated pipelines, giving business
+            analysts one trusted foundation to test hypotheses, extract data, and generate insights.
           </p>
 
           <div class="bullet">
-            <div class="dot"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <div class="dot"><i class="fa-solid fa-diagram-project"></i></div>
             <div>
-              <div class="bullet-title">Explore From Multiple Angles</div>
-              <div class="bullet-copy">Easy-to-use interface to explore data from multiple angles.</div>
+              <div class="bullet-title">A Unified Data Pipeline</div>
+              <div class="bullet-copy">10+ siloed source systems consolidated into one governed cloud warehouse feeding a self-service application.</div>
 
               <div class="trace-inset">
                 <div class="trace">
-                  <div class="trace-step">
-                    <div class="trace-icon"><i class="fa-solid fa-layer-group"></i></div>
-                    <div class="trace-title">Sources</div>
-                    <div class="trace-copy">Siloed data spread across the enterprise — claims, clinical, benefits, and pharmacy.</div>
+                  <div class="trace-step trace-sources-step">
+                    <div class="trace-sources">
+                      <div class="source-row"><span class="source-chip"><i class="fa-solid fa-file-invoice-dollar"></i>Claims</span><i class="fa-solid fa-arrow-right source-arrow"></i></div>
+                      <div class="source-row"><span class="source-chip"><i class="fa-solid fa-notes-medical"></i>Clinical</span><i class="fa-solid fa-arrow-right source-arrow"></i></div>
+                      <div class="source-row"><span class="source-chip"><i class="fa-solid fa-id-card"></i>Benefits</span><i class="fa-solid fa-arrow-right source-arrow"></i></div>
+                      <div class="source-row"><span class="source-chip"><i class="fa-solid fa-pills"></i>Pharmacy</span><i class="fa-solid fa-arrow-right source-arrow"></i></div>
+                      <div class="source-row"><span class="source-chip source-chip-more"><i class="fa-solid fa-ellipsis"></i>+ more sources</span><i class="fa-solid fa-arrow-right source-arrow"></i></div>
+                    </div>
+                    <div class="trace-title">Siloed Sources</div>
+                    <div class="trace-copy">Disconnected systems across the enterprise — no unified warehouse.</div>
                   </div>
-
-                  <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
 
                   <div class="trace-step">
                     <div class="trace-icon"><i class="fa-solid fa-gears"></i></div>
@@ -743,24 +793,24 @@
                     <div class="trace-copy">Real-time cohort exploration for business users — no SQL required.</div>
                   </div>
                 </div>
-                <div class="trace-caption">Pre-aggregated datasets and a caching layer keep dashboards fast while holding down BigQuery costs — putting trusted data directly in the hands of business users who'd never had self-service access before.</div>
+                <div class="trace-caption">A fragmented data landscape became one governed warehouse — putting trusted data directly in the hands of business users who'd never had self-service access before.</div>
               </div>
             </div>
           </div>
 
           <div class="bullet">
-            <div class="dot"><i class="fa-solid fa-file-export"></i></div>
+            <div class="dot"><i class="fa-solid fa-arrows-rotate"></i></div>
             <div>
-              <div class="bullet-title">Fast, Reliable Extracts</div>
-              <div class="bullet-copy">Extracts raw and aggregated data quickly and reliably.</div>
+              <div class="bullet-title">Automated, Not Manual</div>
+              <div class="bullet-copy">Scheduled pipelines keep the warehouse current automatically — replacing hand-written SQL extracts.</div>
             </div>
           </div>
 
           <div class="bullet">
-            <div class="dot"><i class="fa-solid fa-code-compare"></i></div>
+            <div class="dot"><i class="fa-solid fa-coins"></i></div>
             <div>
-              <div class="bullet-title">Compare &amp; Track Over Time</div>
-              <div class="bullet-copy">Compares cohorts and tracks changes over time.</div>
+              <div class="bullet-title">Built for Scale &amp; Cost</div>
+              <div class="bullet-copy">Pre-aggregated datasets and a caching layer keep queries fast while holding down warehouse compute costs.</div>
             </div>
           </div>
 
@@ -778,10 +828,10 @@
 
           <div class="results-bullets">
             <div class="bullet">
-              <div class="dot"><i class="fa-solid fa-clock-rotate-left"></i></div>
+              <div class="dot"><i class="fa-solid fa-database"></i></div>
               <div>
-                <div class="bullet-title">Reduced Analyst Effort</div>
-                <div class="bullet-copy">Business users can answer questions without relying on technical teams.</div>
+                <div class="bullet-title">A Single Source of Truth</div>
+                <div class="bullet-copy">10+ source systems consolidated into one governed warehouse — business users answer questions without relying on technical teams.</div>
               </div>
             </div>
 
