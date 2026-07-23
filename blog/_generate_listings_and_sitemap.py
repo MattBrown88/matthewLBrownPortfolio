@@ -77,8 +77,11 @@ def load_posts():
             "tags": meta.get("tags", []),
             "excerpt": meta.get("summary") or meta.get("description", ""),
             "featured": str(meta.get("featured", "")).strip().lower() in ("true", "yes", "1"),
+            "legacy": str(meta.get("legacy", "")).strip().lower() in ("true", "yes", "1"),
         })
-    posts.sort(key=lambda p: (p["date"], p["slug"]), reverse=True)
+    non_legacy = sorted([p for p in posts if not p["legacy"]], key=lambda p: (p["date"], p["slug"]), reverse=True)
+    legacy_posts = sorted([p for p in posts if p["legacy"]], key=lambda p: (p["date"], p["slug"]), reverse=True)
+    posts[:] = non_legacy + legacy_posts
     return posts, drafts
 
 
@@ -137,15 +140,15 @@ def inject(path, marker, content):
 def select_home_posts(posts):
     """Posts shown on the home page.
 
-    Any post with `featured: true` in its frontmatter is shown first (newest
-    featured first). If fewer than HOME_POST_COUNT are featured, the remaining
-    slots are filled with the most recent non-featured posts. This keeps the
-    home-page selection curated in the .md files so it survives every rebuild.
+    Legacy posts are never shown on the home page. Among the rest, featured
+    posts come first (newest first); remaining slots are filled with the most
+    recent non-featured posts.
     """
-    featured = [p for p in posts if p["featured"]]
+    eligible = [p for p in posts if not p.get("legacy")]
+    featured = [p for p in eligible if p["featured"]]
     if not featured:
-        return posts[:HOME_POST_COUNT]
-    rest = [p for p in posts if not p["featured"]]
+        return eligible[:HOME_POST_COUNT]
+    rest = [p for p in eligible if not p["featured"]]
     return (featured + rest)[:HOME_POST_COUNT]
 
 

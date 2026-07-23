@@ -16,11 +16,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.matthewlbrown.com/blog/how-to-migrate-existing-supabase-project-to-declarative-schema.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.matthewlbrown.com/blog/production-readiness-checklist.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -47,6 +42,11 @@
   </url>
   <url>
     <loc>https://www.matthewlbrown.com/blog/paid-media-strategy.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.matthewlbrown.com/blog/how-to-migrate-existing-supabase-project-to-declarative-schema.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
