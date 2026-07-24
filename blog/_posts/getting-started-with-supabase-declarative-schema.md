@@ -6,6 +6,8 @@ category: Supabase
 featured: false
 tags: [Supabase]
 summary: "Guide to using Declarative Schema with Supabase"
+video: XWjwlIq_XkI
+video_caption: 'Watch an example'
 image: 'img/blog/getting-started-with-declarative-schema-cover.png'
 image_alt: 'Getting Started with Supabase Declarative Schema'
 
