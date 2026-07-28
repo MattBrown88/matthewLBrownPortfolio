@@ -23,7 +23,7 @@ set -euo pipefail
 # Run from the repo root no matter where the script is called from.
 cd "$(dirname "$0")/.."
 
-BASE_URL="${BASE_URL:-https://www.matthewlbrown.com}"
+BASE_URL="${BASE_URL:-https://matthewlbrown.com}"
 
 build_one() {
   local src="$1"
