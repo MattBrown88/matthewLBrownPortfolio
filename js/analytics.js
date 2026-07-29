@@ -18,6 +18,4 @@ function loadAnalytics() {
 
 window.loadAnalytics = loadAnalytics;
 
-if (localStorage.getItem('cookie-consent') === 'accepted') {
-  loadAnalytics();
-}
+loadAnalytics();
