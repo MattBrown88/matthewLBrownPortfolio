@@ -21,7 +21,7 @@ But if you build a naive version that doesn't have proper guardrails, business c
 
 This paper discusses the three pillars to implementing an enterprise AI agent system:
 
-![Three Pillars of an Enterprise AI Data-Analysis Agent](img/blog/three-pillars-enterprise-ai-agent.svg)
+![Three Pillars of an Enterprise AI Data-Analysis Agent](/img/blog/three-pillars-enterprise-ai-agent.svg)
 
 AI analytics agents should be used to complement governed reporting rather than replace it entirely. 
 
