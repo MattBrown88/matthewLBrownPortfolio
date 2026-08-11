@@ -11,7 +11,7 @@ image_alt: 'AI data-analysis agent'
 
 ---
 
-*Building the chat interface is easy. Productionizing it requires hard security boundaries outside the LLM, curated business context inside the agent, and continuous measurement to prove that it works.*
+> *Building the chat interface is easy. Productionizing it requires hard security boundaries outside the LLM, curated business context inside the agent, and continuous measurement to prove that it works.*
 
 ## Executive Summary
 
