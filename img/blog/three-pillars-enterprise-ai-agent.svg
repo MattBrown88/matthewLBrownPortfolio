@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1648" height="928" viewBox="0 0 1648 928">
+  <rect width="1648" height="928" fill="#ffffff"/>
+  <defs>
+    <style>
+      .navy { fill:#0D2445; }
+      .muted { fill:#536783; }
+      .card-title { font-family: Arial, Helvetica, sans-serif; font-size:34px; font-weight:700; fill:#0D2445; }
+      .bullet { font-family: Arial, Helvetica, sans-serif; font-size:25px; fill:#0D2445; }
+      .num { font-family: Arial, Helvetica, sans-serif; font-size:46px; font-weight:700; fill:#fff; text-anchor:middle; dominant-baseline:middle; }
+      .title { font-family: Arial, Helvetica, sans-serif; font-size:64px; font-weight:700; fill:#0D2445; text-anchor:middle; }
+      .subtitle { font-family: Arial, Helvetica, sans-serif; font-size:31px; fill:#536783; text-anchor:middle; }
+      .check { fill:none; stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; }
+    </style>
+  </defs>
+
+  <text x="824" y="95" class="title">Three Pillars of an Enterprise</text>
+  <text x="824" y="168" class="title">AI Data-Analysis Agent</text>
+  <text x="824" y="228" class="subtitle">Safe. Correct. Ready for Your Organization.</text>
+
+  <!-- Card 1 -->
+  <rect x="70" y="306" width="490" height="566" rx="24" fill="#fff" stroke="#1F63D6" stroke-width="5"/>
+  <circle cx="335" cy="297" r="43" fill="#1F63D6"/>
+  <text x="335" y="299" class="num">1</text>
+  <text x="315" y="390" class="card-title" text-anchor="middle">Enforce Guardrails</text>
+  <text x="315" y="428" class="card-title" text-anchor="middle">at the Data Platform</text>
+
+  <!-- simple lock icon -->
+  <g transform="translate(246,466)" stroke="#0D2445" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M28 78V50c0-34 20-58 50-58s50 24 50 58v28"/>
+    <rect x="5" y="78" width="146" height="112" rx="16"/>
+    <circle cx="78" cy="124" r="10" fill="#0D2445" stroke="none"/>
+    <path d="M78 134l-6 28h12l-6-28" fill="#0D2445" stroke="none"/>
+  </g>
+
+  <!-- bullets 1 -->
+  <g>
+    <circle cx="126" cy="716" r="18" fill="#1F63D6"/><path d="M117 716l7 7 13-16" class="check"/>
+    <text x="161" y="725" class="bullet">Scoped identity &amp; permissions</text>
+    <circle cx="126" cy="772" r="18" fill="#1F63D6"/><path d="M117 772l7 7 13-16" class="check"/>
+    <text x="161" y="781" class="bullet">Read-only access</text>
+    <circle cx="126" cy="828" r="18" fill="#1F63D6"/><path d="M117 828l7 7 13-16" class="check"/>
+    <text x="161" y="837" class="bullet">Resource limits</text>
+  </g>
+
+  <!-- Card 2 -->
+  <rect x="600" y="306" width="490" height="566" rx="24" fill="#fff" stroke="#14978F" stroke-width="5"/>
+  <circle cx="845" cy="297" r="43" fill="#14978F"/>
+  <text x="845" y="299" class="num">2</text>
+  <text x="845" y="390" class="card-title" text-anchor="middle">Provide</text>
+  <text x="845" y="428" class="card-title" text-anchor="middle">Business Context</text>
+
+  <!-- open book icon -->
+  <g transform="translate(688,472)" stroke="#0D2445" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M10 20c42-20 82-16 120 16v148c-42-28-80-31-120-9z"/>
+    <path d="M250 20c-42-20-82-16-120 16v148c42-28 80-31 120-9z"/>
+    <line x1="130" y1="36" x2="130" y2="184"/>
+    <line x1="40" y1="65" x2="100" y2="65"/>
+    <line x1="40" y1="98" x2="100" y2="98"/>
+    <line x1="40" y1="131" x2="100" y2="131"/>
+    <line x1="160" y1="65" x2="220" y2="65"/>
+    <line x1="160" y1="98" x2="220" y2="98"/>
+    <line x1="160" y1="131" x2="220" y2="131"/>
+  </g>
+
+  <!-- bullets 2 -->
+  <g>
+    <circle cx="657" cy="716" r="18" fill="#14978F"/><path d="M648 716l7 7 13-16" class="check"/>
+    <text x="692" y="725" class="bullet">Metric definitions</text>
+    <circle cx="657" cy="772" r="18" fill="#14978F"/><path d="M648 772l7 7 13-16" class="check"/>
+    <text x="692" y="781" class="bullet">Database metadata</text>
+    <circle cx="657" cy="828" r="18" fill="#14978F"/><path d="M648 828l7 7 13-16" class="check"/>
+    <text x="692" y="837" class="bullet">Business rules</text>
+  </g>
+
+  <!-- Card 3 -->
+  <rect x="1130" y="306" width="448" height="566" rx="24" fill="#fff" stroke="#6F31CF" stroke-width="5"/>
+  <circle cx="1354" cy="297" r="43" fill="#6F31CF"/>
+  <text x="1354" y="299" class="num">3</text>
+  <text x="1354" y="390" class="card-title" text-anchor="middle">Continuously</text>
+  <text x="1354" y="428" class="card-title" text-anchor="middle">Measure Accuracy</text>
+
+  <!-- bullseye only -->
+  <g transform="translate(1243,468)" fill="none" stroke="#0D2445" stroke-width="8">
+    <circle cx="110" cy="95" r="82"/>
+    <circle cx="110" cy="95" r="48"/>
+    <circle cx="110" cy="95" r="15" fill="#6F31CF" stroke="none"/>
+  </g>
+
+  <!-- bullets 3 -->
+  <g>
+    <circle cx="1190" cy="716" r="18" fill="#6F31CF"/><path d="M1181 716l7 7 13-16" class="check"/>
+    <text x="1225" y="725" class="bullet">Trusted evaluation answers</text>
+    <circle cx="1190" cy="772" r="18" fill="#6F31CF"/><path d="M1181 772l7 7 13-16" class="check"/>
+    <text x="1225" y="781" class="bullet">Regression testing</text>
+    <circle cx="1190" cy="828" r="18" fill="#6F31CF"/><path d="M1181 828l7 7 13-16" class="check"/>
+    <text x="1225" y="837" class="bullet">Learn from production</text>
+  </g>
+</svg>
