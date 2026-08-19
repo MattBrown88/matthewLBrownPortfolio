@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" ry="96" fill="#ffffff"/>
+  <text x="50%" y="52%" dominant-baseline="central" text-anchor="middle"
+        font-family="Helvetica, Arial, sans-serif" font-weight="700"
+        font-size="248" letter-spacing="4" fill="#6495ED">MB</text>
+</svg>
