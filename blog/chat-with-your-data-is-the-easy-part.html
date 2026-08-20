@@ -7,16 +7,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="description" content='How to make an AI data-analysis agent that is safe, correct, and ready for a whole organization'>
+  <meta name="description" content='Building the chat interface is easy. Productionizing it requires hard security boundaries outside the LLM, curated business context inside the agent, and continuous measurement to prove that it works.'>
   <link rel="canonical" href="https://matthewlbrown.com/blog/chat-with-your-data-is-the-easy-part.html">
   <meta property="og:site_name" content="Matt Brown">
   <meta property="og:type" content="article">
   <meta property="og:title" content='Chat with Your Data is the Easy Part'>
-  <meta property="og:description" content='How to make an AI data-analysis agent that is safe, correct, and ready for a whole organization'>
+  <meta property="og:description" content='Building the chat interface is easy. Productionizing it requires hard security boundaries outside the LLM, curated business context inside the agent, and continuous measurement to prove that it works.'>
   <meta property="og:url" content="https://matthewlbrown.com/blog/chat-with-your-data-is-the-easy-part.html">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content='Chat with Your Data is the Easy Part'>
-  <meta name="twitter:description" content='How to make an AI data-analysis agent that is safe, correct, and ready for a whole organization'>
+  <meta name="twitter:description" content='Building the chat interface is easy. Productionizing it requires hard security boundaries outside the LLM, curated business context inside the agent, and continuous measurement to prove that it works.'>
   <meta property="og:image" content="https://matthewlbrown.com/img/blog/chatwithyourdatacover.png">
   <meta name="twitter:image" content="https://matthewlbrown.com/img/blog/chatwithyourdatacover.png">
 
@@ -86,10 +86,11 @@
         <img src="/img/blog/chatwithyourdatacover.png" alt="AI data-analysis agent"
           style="display:block;width:100%;height:auto;border-radius:10px;border:1px solid #e6e8ef;">
       </figure>
+      <p class="blog-subtitle"
+        style="margin:0 0 2.75rem;padding-left:1rem;border-left:3px solid #6495ED;font-family:'eurostile',sans-serif;font-size:1.3rem;line-height:1.5;font-style:italic;color:#141c3a;">
+        Building the chat interface is easy. Productionizing it requires hard security boundaries outside the LLM, curated business context inside the agent, and continuous measurement to prove that it works.
+      </p>
       <article class="content blog-article">
-<blockquote>
-<p><em>Building the chat interface is easy. Productionizing it requires hard security boundaries outside the LLM, curated business context inside the agent, and continuous measurement to prove that it works.</em></p>
-</blockquote>
 <h2 id="executive-summary">Executive Summary</h2>
 <p>An engineer can code up a working AI data analyst agent in an afternoon. The basic question → SQL → answer loop is commoditized at this point. Most data platforms also include conversational analytics capabilities.</p>
 <p>But if you build a naive version that doesn’t have proper guardrails, business context, or an evaluation loop, you leave the system open to unauthorized access or modification of data, plausible-sounding but incorrect answers, and excessive query costs.</p>
