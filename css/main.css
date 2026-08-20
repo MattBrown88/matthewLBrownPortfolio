@@ -5096,7 +5096,7 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
     position: absolute;
     top: 0;
     bottom: 0;
-    left: max(1rem, calc(50vw - 360px - 248px));
+    left: max(1rem, calc(50vw - 400px - 280px));
     width: 200px;
     animation: blog-toc-in 0.5s ease both;
   }
