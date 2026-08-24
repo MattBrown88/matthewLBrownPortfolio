@@ -89,16 +89,7 @@ A five-year sales chart can contain three years from the legacy ERP and two year
 
 ### Here's a simplified technical system architecture
 
-```mermaid
-flowchart LR
-    A[Legacy ERP] --> B[stg_legacy_erp__sales.sql]
-    C[New ERP] --> D[stg_new_erp__sales.sql]
-
-    B --> E[fct_sales.sql]
-    D --> E
-
-    E --> F[BI / Reporting]
-```
+![Simplified technical system architecture](/img/blog/erp-migration-architecture.png)
 
 
 
@@ -148,7 +139,7 @@ where transaction_date >= '2026-01-01'
 
 Much of the analytics foundation can already be in place by go-live. At go-live, we connect the new ERP to the data warehouse, validate, and refine data mapping if discrepancies are found.
 
-![image-20260824090222809](/Users/matthewbrown/Library/Application Support/typora-user-images/image-20260824090222809.png)
+![Analytics Migration Steps](/img/blog/erp-migration2.png)
 
 
 
