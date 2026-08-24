@@ -3,7 +3,7 @@ title: 'Your ERP Migration Needs an Analytics Migration'
 description: 'ERP migration and analytics migration are separate but coordinated projects'
 date: 'August 24, 2026'
 category: Data
-featured: false
+featured: true
 tags: [Data, Analytics, ERP]
 summary: "ERP migration and analytics migration are separate but coordinated projects"
 image: 'img/blog/erp-migration-cover.png'

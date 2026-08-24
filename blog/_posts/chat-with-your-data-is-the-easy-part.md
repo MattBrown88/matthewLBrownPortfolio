@@ -3,7 +3,7 @@ title: 'Chat with Your Data is the Easy Part'
 description: 'Building the chat interface is easy. Productionizing it requires hard security boundaries outside the LLM, curated business context inside the agent, and continuous measurement to prove that it works.'
 date: 'July 23, 2026'
 category: AI
-featured: false
+featured: true
 tags: [AI]
 summary: "How to make an AI data-analysis agent that is safe, correct, and ready for a whole organization"
 image: 'img/blog/chatwithyourdatacover.png'

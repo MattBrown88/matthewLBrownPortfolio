@@ -2,7 +2,7 @@
 title: 'How to Organize Supabase Migrations'
 description: 'Overview of different method to generate, organize and structure migration files'
 date: 'July 21, 2026'
-featured: true
+featured: false
 category: Supabase
 tags: [Supabase, PostgreSQL]
 summary: "Overview of different method to generate, organize and structure migration files"
