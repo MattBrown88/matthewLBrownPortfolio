@@ -5081,6 +5081,10 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
 .blog-article figure { margin: 1.75rem 0; }
 .blog-article figcaption { font-size: 0.85rem; color: #8a8fa3; text-align: center; margin-top: 0.5rem; }
 
+/* Notes (blockquotes) match the post subtitle: italic with a blue left rule
+   and no grey box. Overrides the global `.content blockquote` styling. */
+.blog-article blockquote { background-color: transparent; border-left: 3px solid #6495ED; padding: 0 0 0 1rem; font-family: 'eurostile', sans-serif; font-size: 1.3rem; line-height: 1.5; font-style: italic; color: #141c3a; }
+
 /* ---- Blog post table of contents (left rail, wide screens only) ---- */
 .blog-article h2 { scroll-margin-top: 1.75rem; }
 
