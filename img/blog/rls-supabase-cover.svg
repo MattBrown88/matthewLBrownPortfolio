@@ -1,17 +1,66 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Fixing the Supabase row-level security policy error">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="How to Fix new row violates row-level security policy in Supabase">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#141c3a"/>
       <stop offset="1" stop-color="#1f2a52"/>
     </linearGradient>
+    <linearGradient id="lock" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6495ED"/>
+      <stop offset="1" stop-color="#3f6fd6"/>
+    </linearGradient>
   </defs>
+
   <rect width="1200" height="630" fill="url(#bg)"/>
   <circle cx="1040" cy="120" r="240" fill="#6495ED" opacity="0.12"/>
   <circle cx="120" cy="560" r="180" fill="#2bb6a3" opacity="0.12"/>
-  <rect x="96" y="150" width="72" height="6" rx="3" fill="#6495ED"/>
-  <text x="96" y="250" font-family="Verdana, Geneva, sans-serif" font-size="34" fill="#8ea2d6" font-weight="700">SUPABASE · RLS</text>
-  <text x="96" y="335" font-family="Verdana, Geneva, sans-serif" font-size="62" fill="#ffffff" font-weight="700">new row violates</text>
-  <text x="96" y="410" font-family="Verdana, Geneva, sans-serif" font-size="62" fill="#ffffff" font-weight="700">row-level security</text>
-  <text x="96" y="485" font-family="Verdana, Geneva, sans-serif" font-size="62" fill="#6495ED" font-weight="700">policy — fixed.</text>
-  <text x="96" y="568" font-family="Verdana, Geneva, sans-serif" font-size="28" fill="#aab4d4">aiapprescue.com</text>
+
+  <!-- left: label -->
+  <rect x="96" y="270" width="72" height="6" rx="3" fill="#6495ED"/>
+  <text x="96" y="335" font-family="Verdana, Geneva, sans-serif" font-size="34" fill="#8ea2d6" font-weight="700">SUPABASE</text>
+  <text x="96" y="380" font-family="Verdana, Geneva, sans-serif" font-size="34" fill="#8ea2d6" font-weight="700">RLS</text>
+
+  <!-- table with a locked/blocked row -->
+  <g transform="translate(700,120)">
+    <!-- table frame -->
+    <rect x="20" y="30" width="320" height="360" rx="20" fill="#6495ED" opacity="0.06"/>
+    <rect x="20" y="30" width="320" height="360" rx="20" fill="none" stroke="#8ea2d6" stroke-width="3"/>
+
+    <!-- header row -->
+    <rect x="20" y="30" width="320" height="62" rx="20" fill="#6495ED" opacity="0.18"/>
+    <rect x="44" y="54" width="80" height="14" rx="7" fill="#8ea2d6"/>
+    <rect x="150" y="54" width="80" height="14" rx="7" fill="#8ea2d6"/>
+    <rect x="256" y="54" width="60" height="14" rx="7" fill="#8ea2d6"/>
+
+    <!-- allowed rows -->
+    <g>
+      <circle cx="60" cy="140" r="14" fill="#2bb6a3"/>
+      <path d="M53 140l5 5 10-12" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="90" y="133" width="150" height="14" rx="7" fill="#ffffff" opacity="0.5"/>
+
+      <circle cx="60" cy="196" r="14" fill="#2bb6a3"/>
+      <path d="M53 196l5 5 10-12" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="90" y="189" width="120" height="14" rx="7" fill="#ffffff" opacity="0.5"/>
+    </g>
+
+    <!-- blocked row -->
+    <rect x="34" y="238" width="292" height="52" rx="12" fill="#ff5a6a" opacity="0.14"/>
+    <circle cx="60" cy="264" r="14" fill="#ff5a6a"/>
+    <path d="M54 258l12 12M66 258l-12 12" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+    <rect x="90" y="257" width="140" height="14" rx="7" fill="#ff5a6a" opacity="0.6"/>
+
+    <!-- allowed row -->
+    <g>
+      <circle cx="60" cy="336" r="14" fill="#2bb6a3"/>
+      <path d="M53 336l5 5 10-12" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="90" y="329" width="100" height="14" rx="7" fill="#ffffff" opacity="0.5"/>
+    </g>
+
+    <!-- lock badge overlapping -->
+    <g transform="translate(240,250)">
+      <rect x="0" y="46" width="132" height="98" rx="18" fill="url(#lock)" stroke="#141c3a" stroke-width="4"/>
+      <path d="M26 46V30c0-22 14-38 40-38s40 16 40 38v16" fill="none" stroke="#6495ED" stroke-width="14" stroke-linecap="round"/>
+      <circle cx="66" cy="88" r="12" fill="#ffffff"/>
+      <rect x="60" y="94" width="12" height="30" rx="6" fill="#ffffff"/>
+    </g>
+  </g>
 </svg>

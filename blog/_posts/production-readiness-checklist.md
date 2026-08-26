@@ -6,7 +6,7 @@ featured: true
 category: Supabase
 tags: [Supabase, React, Vercel]
 summary: 'A practical checklist used to review apps for security, RLS, secrets, deployments, and reliability issues.'
-image: 'img/blog/production-readiness-checklist-cover.png'
+image: 'img/blog/production-readiness-checklist-cover.svg'
 image_alt: 'How to Audit a Vibe-Coded App Before Production'
 
 ---
