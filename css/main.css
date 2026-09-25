@@ -5635,3 +5635,41 @@ a.project-card.box:hover { transform: translateY(-4px); box-shadow: 0 0.6em 1.5e
   .blog-author-cta-actions { justify-content: center; }
 }
 
+
+/* ---- Resume page ----
+   Navy hero band with the resume PDF rendered onto canvases (PDF.js)
+   inside a single white "sheet" pulled up over the blue/white edge. */
+.resume-hero .hero-body { min-height: 0; padding: 3.5rem 1.5rem 7.5rem; }
+
+.resume-hero .resume-contact {
+  margin: 0.35rem 0 1.6rem;
+  font-size: 1.02rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.resume-hero .resume-contact a { color: #ffffff; text-decoration: underline; text-underline-offset: 3px; }
+
+.resume-page-section { padding: 0 1.5rem 5rem; }
+
+.resume-sheet {
+  max-width: 800px;
+  margin: -5.25rem auto 0;
+  background: #ffffff;
+  border: 1px solid #dfe5f4;
+  border-radius: 12px;
+  box-shadow: 0 14px 40px rgba(20, 28, 58, 0.12);
+  padding: 1.25rem;
+  overflow: hidden;
+}
+
+.resume-pages canvas { display: block; width: 100%; height: auto; }
+
+.resume-pages canvas + canvas { border-top: 1px solid #eef1f8; margin-top: 1.25rem; padding-top: 1.25rem; }
+
+.resume-fallback { text-align: center; padding: 3rem 1rem; color: #41476b; }
+
+.resume-fallback p { margin-bottom: 1.5rem; }
+
+@media screen and (max-width: 768px) {
+  .resume-sheet { padding: 0.6rem; margin-top: -4.5rem; }
+}
