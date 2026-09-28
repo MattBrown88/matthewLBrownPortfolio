@@ -1,0 +1,840 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="apple-touch-icon" sizes="180x180" href="../favicon_io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon_io/favicon-16x16.png">
+<title>Field Operations Analytics Platform Case Study</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+<style>
+  :root{
+    --navy:#071A44;
+    --blue:#0052CC;
+    --blue2:#1A73E8;
+    --sky:#EAF4FF;
+    --green:#188038;
+    --green-bg:#E6F4EA;
+    --red:#D93025;
+    --red-bg:#FFF0F0;
+    --orange:#F59E0B;
+    --purple:#635BFF;
+    --ink:#102A43;
+    --muted:#627D98;
+    --line:#D6E4F0;
+    --page:#F8FBFF;
+    --card:#FFFFFF;
+  }
+
+  * { box-sizing: border-box; }
+
+  body{
+    margin:0;
+    background:#e8eef7;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    color:var(--ink);
+  }
+
+  .page{
+    width:1200px;
+    min-height:1600px;
+    margin:32px auto;
+    background:
+      radial-gradient(circle at 87% 6%, rgba(112,214,255,.26), transparent 18%),
+      radial-gradient(circle at 9% 96%, rgba(0,82,204,.12), transparent 22%),
+      var(--page);
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 20px 60px rgba(7,26,68,.18);
+  }
+
+  .page:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(0,82,204,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,82,204,.035) 1px, transparent 1px);
+    background-size:32px 32px;
+    pointer-events:none;
+  }
+
+  .content{ position:relative; padding:34px 34px 0; }
+
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    background:var(--blue);
+    color:#fff;
+    padding:10px 18px;
+    border-radius:11px;
+    font-size:18px;
+    letter-spacing:.06em;
+    font-weight:800;
+    margin-bottom:34px;
+  }
+
+  .hero{
+    display:grid;
+    grid-template-columns: 1.55fr .95fr;
+    gap:34px;
+    align-items:start;
+  }
+
+  h1{
+    margin:0;
+    font-size:54px;
+    line-height:1.04;
+    color:var(--navy);
+    font-weight:900;
+  }
+
+  .tagline{
+    margin-top:20px;
+    color:var(--blue);
+    font-size:24px;
+    font-weight:800;
+    line-height:1.3;
+  }
+
+  .subhead{
+    margin-top:18px;
+    max-width:650px;
+    color:#253858;
+    font-size:20px;
+    line-height:1.42;
+  }
+
+  .hero-image{
+    position:relative;
+    border-radius:22px;
+    overflow:hidden;
+    min-height:240px;
+    border:1.5px solid #BFD7FF;
+    background:linear-gradient(135deg,#EAF4FF,#F8FBFF);
+    box-shadow:0 12px 32px rgba(0,82,204,.08);
+  }
+
+  .hero-image img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+
+  .hero-image-placeholder{
+    position:absolute;
+    inset:0;
+    display:grid;
+    place-items:center;
+    color:#9DBCE6;
+    font-size:48px;
+  }
+  /* Hide the placeholder once a real image is provided */
+  .hero-image img[src]:not([src=""]) + .hero-image-placeholder{ display:none; }
+
+  /* ---------- Dashboard mockup ---------- */
+  .device{
+    border-radius:10px;
+    overflow:hidden;
+    border:1px solid #d2ddec;
+    box-shadow:0 18px 40px rgba(0,26,71,.18);
+    background:#fff;
+  }
+  .device-top{
+    display:flex; gap:7px; align-items:center;
+    padding:9px 12px; background:#10203f;
+  }
+  .device-top i{ width:11px;height:11px;border-radius:50%;background:#33425f; }
+  .device-top i:nth-child(1){ background:#ff5f57; }
+  .device-top i:nth-child(2){ background:#febc2e; }
+  .device-top i:nth-child(3){ background:#28c840; }
+  .app{ display:grid; grid-template-columns:104px 1fr; background:#f4f7fb; }
+  .side{ background:#0d2f6b; color:#cdd9f0; padding:14px 12px; font-size:9px; }
+  .side .brand{ color:#fff; font-weight:800; font-size:10px; margin-bottom:14px; }
+  .side ul{ list-style:none; margin:0; padding:0; display:grid; gap:11px; }
+  .side li.active{ color:#fff; font-weight:700; }
+  .scr{ padding:12px; }
+  .scr-head{ display:flex; align-items:center; gap:7px; font-size:11px; font-weight:800; color:#10203f; margin-bottom:10px; }
+  .scr-head i{ color:#7d8ba6; }
+  .tiles{ display:grid; grid-template-columns:repeat(4,1fr); gap:7px; margin-bottom:9px; }
+  .tile{ background:#fff; border:1px solid #e6ecf5; border-radius:6px; padding:7px 8px; }
+  .tile small{ display:block; color:#8290a8; font-size:7.5px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; }
+  .tile b{ display:block; color:#0d2f6b; font-size:14px; }
+  .panels{ display:grid; grid-template-columns:1.5fr 1fr; gap:7px; margin-bottom:9px; }
+  .card{ background:#fff; border:1px solid #e6ecf5; border-radius:6px; padding:8px; }
+  .card .ct{ font-size:8px; font-weight:800; color:#5b6b85; text-transform:uppercase; letter-spacing:.04em; margin-bottom:5px; }
+  .lower{ display:grid; grid-template-columns:1.5fr 1fr; gap:7px; }
+  .bars{ display:grid; gap:5px; }
+  .bar{ display:grid; grid-template-columns:64px 1fr 22px; gap:5px; align-items:center; font-size:7.5px; color:#5b6b85; }
+  .bar .track{ height:7px; background:#e8eef7; border-radius:4px; overflow:hidden; }
+  .bar .fill{ height:100%; background:#2f6bd8; border-radius:4px; }
+  .gap{ display:flex; align-items:center; justify-content:space-between; }
+  .gap b{ color:#0d2f6b; font-size:16px; }
+
+  .kpis{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    overflow:hidden;
+  }
+
+  .kpi{
+    padding:6px 28px;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:18px;
+    align-items:center;
+    border-right:1px solid var(--line);
+  }
+
+  .kpi:first-child{ padding-left:0; }
+  .kpi:last-child{ border-right:none; padding-right:0; }
+
+  .kpi .mark{
+    width:54px;
+    height:54px;
+    border-radius:18px;
+    display:grid;
+    place-items:center;
+    color:#fff;
+    font-weight:900;
+    font-size:21px;
+    background:linear-gradient(135deg,var(--blue),#4EA3FF);
+    box-shadow:0 10px 22px rgba(0,82,204,.22);
+  }
+
+  .kpi:nth-child(1) .mark{ background:linear-gradient(135deg,#0052CC,#4EA3FF); }
+  .kpi:nth-child(2) .mark{ background:linear-gradient(135deg,#34A853,#8BD17C); }
+  .kpi:nth-child(3) .mark{ background:linear-gradient(135deg,#F59E0B,#FDBA74); }
+  .kpi:nth-child(4) .mark{ background:linear-gradient(135deg,#673AB7,#A78BFA); }
+
+  .kpi-value{
+    color:var(--navy);
+    font-size:32px;
+    font-weight:900;
+    line-height:1;
+    white-space:nowrap;
+  }
+
+  .kpi-title{
+    color:var(--blue);
+    font-size:16px;
+    line-height:1.12;
+    font-weight:900;
+    letter-spacing:.01em;
+    text-transform:uppercase;
+  }
+  .kpi:nth-child(3) .kpi-title{ color:var(--orange); }
+  .kpi:nth-child(4) .kpi-title{ color:#673AB7; }
+
+  .kpi-copy{
+    margin-top:7px;
+    color:#334E68;
+    font-size:15.5px;
+    line-height:1.25;
+  }
+
+  /* Pipeline architecture (inset within the Solution) */
+  .trace-inset{
+    margin-top:16px;
+    background:var(--sky);
+    border:1px solid #D6E4F0;
+    border-radius:16px;
+    padding:22px 22px 18px;
+  }
+  .trace-inset .trace-icon{
+    width:52px;
+    height:52px;
+    border-radius:15px;
+    font-size:20px;
+    margin-bottom:10px;
+    background:#fff;
+  }
+  .trace-inset .trace-title{ font-size:13.5px; }
+  .trace-inset .trace-copy{ font-size:13px; margin-top:6px; }
+  .trace-inset .trace-arrow{ margin-top:16px; }
+  .trace-inset .trace-caption{ margin-top:18px; font-size:14px; }
+  .trace{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:6px;
+  }
+  .trace-step{
+    flex:1;
+    text-align:center;
+    padding:0 8px;
+  }
+  .trace-icon{
+    width:66px;
+    height:66px;
+    border-radius:20px;
+    margin:0 auto 14px;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(135deg,#EAF4FF,#F8FBFF);
+    border:1.5px solid #C7DBFF;
+    color:var(--blue);
+    font-size:25px;
+  }
+  .trace-icon img{ width:30px; height:30px; object-fit:contain; }
+  .trace-title{
+    font-size:16px;
+    font-weight:900;
+    color:var(--navy);
+    text-transform:uppercase;
+    letter-spacing:.02em;
+    line-height:1.15;
+  }
+  .trace-copy{
+    margin-top:9px;
+    font-size:14.5px;
+    line-height:1.34;
+    color:#334E68;
+  }
+  .trace-arrow{
+    flex:0 0 auto;
+    align-self:flex-start;
+    margin-top:22px;
+    color:var(--blue);
+    font-size:20px;
+    opacity:.55;
+  }
+  .trace-caption{
+    margin-top:24px;
+    padding-top:18px;
+    border-top:1px dashed var(--line);
+    text-align:center;
+    color:#52617a;
+    font-style:italic;
+    font-size:16px;
+  }
+
+  .main{
+    margin-top:28px;
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:24px;
+  }
+
+  .panel{
+    border-radius:22px;
+    background:rgba(255,255,255,.94);
+    border:1.5px solid var(--line);
+    box-shadow:0 14px 36px rgba(7,26,68,.07);
+    padding:28px;
+  }
+
+  .panel h2{
+    margin:0 0 18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:24px;
+    line-height:1;
+    letter-spacing:-.02em;
+    font-weight:900;
+  }
+
+  .panel-intro{
+    color:#334E68;
+    font-size:16px;
+    line-height:1.42;
+    margin:0 0 22px;
+  }
+
+  .challenge{
+    border-color:#FFC9C9;
+    background:linear-gradient(180deg,#fff,#FFFDFD);
+  }
+  .challenge h2{ color:var(--red); }
+
+  .challenge-story{ margin-top:28px; }
+
+  .challenge-bullets{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    column-gap:40px;
+  }
+  .challenge-bullets .bullet:nth-child(2){ border-top:none; padding-top:0; }
+
+  .results-bullets{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    column-gap:40px;
+  }
+  .results-bullets .bullet:nth-child(2){ border-top:none; padding-top:0; }
+  .solution{
+    border-color:#BFD7FF;
+    background:linear-gradient(180deg,#fff,#FBFDFF);
+  }
+  .solution h2{ color:var(--blue); }
+
+  .results{
+    border-color:#BBE6C8;
+    background:linear-gradient(180deg,#fff,#FBFFFC);
+  }
+  .results h2{ color:var(--green); }
+  .results .mini-icon{ color:var(--green); background:var(--green-bg); }
+
+  .mini-icon{
+    width:36px;
+    height:36px;
+    border-radius:12px;
+    display:grid;
+    place-items:center;
+    font-weight:900;
+    font-size:18px;
+  }
+  .challenge .mini-icon{ color:var(--red); background:var(--red-bg); }
+  .solution .mini-icon{ color:var(--blue); background:var(--sky); }
+
+  .bullet{
+    display:grid;
+    grid-template-columns:38px 1fr;
+    gap:14px;
+    padding:17px 0;
+    border-top:1px solid rgba(214,228,240,.9);
+  }
+  .bullet:first-of-type{ border-top:none; padding-top:0; }
+
+  .bullet .dot{
+    width:38px;
+    height:38px;
+    border-radius:12px;
+    display:grid;
+    place-items:center;
+    font-weight:900;
+    font-size:16px;
+    margin-top:1px;
+  }
+  .challenge .dot{ background:var(--red-bg); color:var(--red); }
+  .solution .dot{ background:var(--sky); color:var(--blue); }
+  .results .dot{ background:var(--green-bg); color:var(--green); }
+
+  .bullet-title{
+    font-weight:900;
+    font-size:17px;
+    color:#102A43;
+    text-transform:uppercase;
+    letter-spacing:.01em;
+    line-height:1.2;
+  }
+  .bullet-copy{
+    font-size:15.5px;
+    line-height:1.34;
+    color:#334E68;
+    margin-top:5px;
+  }
+
+  .bullet-logos{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:9px;
+  }
+  .bullet-logos img{
+    width:22px;
+    height:22px;
+    object-fit:contain;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:7px;
+    padding:2px;
+  }
+
+  .quote{
+    max-width:680px;
+    margin:26px auto 0;
+    text-align:center;
+  }
+  .quote p{
+    margin:0;
+    font-size:15.5px;
+    line-height:1.5;
+    color:#52617a;
+    font-style:italic;
+  }
+  .quote .quote-mark{ display:none; }
+  .quote cite{
+    display:block;
+    margin-top:8px;
+    font-style:normal;
+    font-weight:700;
+    color:#9DAEC4;
+    font-size:12px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+
+  /* Technologies used */
+  .tech{
+    margin-top:24px;
+    background:#fff;
+    border:1.5px solid var(--line);
+    border-radius:20px;
+    padding:22px 26px 18px;
+    box-shadow:0 12px 28px rgba(7,26,68,.055);
+  }
+  .tech h2{
+    text-align:center;
+    color:var(--blue);
+    font-size:22px;
+    margin:0 0 20px;
+    font-weight:900;
+  }
+  .tech-row{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    align-items:start;
+    gap:10px;
+  }
+  .tool{
+    text-align:center;
+    border-right:1px solid var(--line);
+    min-height:62px;
+  }
+  .tool:last-child{ border-right:none; }
+  .tool-badge{
+    width:34px;
+    height:34px;
+    margin:0 auto 8px;
+    border-radius:10px;
+    display:grid;
+    place-items:center;
+    color:#fff;
+    font-weight:900;
+    font-size:12px;
+  }
+  .tool-name{
+    font-size:13px;
+    font-weight:800;
+    color:#102A43;
+    line-height:1.1;
+  }
+
+  .footer{
+    margin:32px -34px 0;
+    height:120px;
+    background:var(--navy);
+    color:#fff;
+    display:grid;
+    grid-template-columns:92px 1fr;
+    align-items:center;
+    padding:0 50px;
+    position:relative;
+    overflow:hidden;
+  }
+  .footer:after{
+    content:"";
+    position:absolute;
+    right:34px;
+    bottom:22px;
+    width:190px;
+    height:76px;
+    background-image:radial-gradient(circle, rgba(112,214,255,.5) 4px, transparent 4px);
+    background-size:18px 18px;
+    opacity:.55;
+  }
+  .footer-mark{
+    width:58px;
+    height:58px;
+    border-radius:20px;
+    background:linear-gradient(135deg,#0052CC,#70D6FF);
+    display:grid;
+    place-items:center;
+    font-weight:900;
+    font-size:28px;
+    z-index:1;
+  }
+  .footer-text{
+    font-size:25px;
+    line-height:1.25;
+    max-width:760px;
+    z-index:1;
+  }
+
+  /* Brand-logo helpers */
+  .brand-img{ display:block; object-fit:contain; }
+  .tool-badge.logo-badge{ background:#fff !important; border:1px solid var(--line); }
+  .trace-icon.logo-badge{ background:#fff !important; }
+
+  @media print{
+    body{ background:#fff; }
+    .page{ margin:0; box-shadow:none; width:1080px; min-height:1600px; }
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+    <div class="content">
+      <div class="badge">CASE STUDY</div>
+
+      <section class="hero">
+        <div>
+          <h1>Field operations analytics from GPS telemetry</h1>
+          <p class="tagline">Automatic classification of field work, productivity, and cost from raw telemetry</p>
+          <p class="subhead">
+            <em>An end-to-end analytics platform that turns raw GPS pings into a measured record of field work —
+            what got done, what was skipped, and what the next job should cost.</em>
+          </p>
+        </div>
+
+        <aside>
+          <!-- Dashboard mockup -->
+          <div class="device">
+            <div class="device-top"><i></i><i></i><i></i></div>
+            <div class="app">
+              <div class="side">
+                <div class="brand">Field&nbsp;Ops&nbsp;Analytics</div>
+                <ul>
+                  <li class="active">&#9632;&nbsp; Progress Map</li>
+                  <li>Playback</li>
+                  <li>Productivity</li>
+                  <li>Forecasts</li>
+                  <li>Review Queue</li>
+                  <li>Settings</li>
+                </ul>
+              </div>
+              <div class="scr">
+                <div class="scr-head"><i class="fa-solid fa-arrow-left"></i> Route Progress</div>
+                <div class="tiles">
+                  <div class="tile"><small>Telemetry</small><b>Nightly</b></div>
+                  <div class="tile"><small>Segments</small><b>Auto</b></div>
+                  <div class="tile"><small>Skipped</small><b>Flagged</b></div>
+                  <div class="tile"><small>Forecast</small><b>Live</b></div>
+                </div>
+                <div class="panels">
+                  <div class="card">
+                    <div class="ct">Route Map</div>
+                    <svg viewBox="0 0 220 70" width="100%" height="62">
+                      <rect x="0" y="0" width="220" height="70" fill="#eef4fc"/>
+                      <path d="M12,40 C30,20 55,18 78,28 C96,36 110,24 132,26 C156,28 178,18 208,30 L208,64 L12,64 Z"
+                            fill="#dbe7f7" stroke="#c4d6ee" stroke-width="1"/>
+                      <path d="M14,52 C40,44 62,50 88,42" fill="none" stroke="#188038" stroke-width="3" stroke-linecap="round"/>
+                      <path d="M88,42 C102,38 112,40 122,38" fill="none" stroke="#F59E0B" stroke-width="3" stroke-linecap="round"/>
+                      <path d="M122,38 C144,34 168,40 204,32" fill="none" stroke="#c4d6ee" stroke-width="3" stroke-linecap="round" stroke-dasharray="5 4"/>
+                      <circle cx="122" cy="38" r="6" fill="rgba(47,107,216,.35)"/>
+                      <circle cx="122" cy="38" r="3" fill="#2f6bd8"/>
+                    </svg>
+                  </div>
+                  <div class="card">
+                    <div class="ct">Work vs Transit</div>
+                    <svg viewBox="0 0 70 70" width="100%" height="62">
+                      <circle cx="35" cy="35" r="24" fill="none" stroke="#e6ecf5" stroke-width="11"/>
+                      <circle cx="35" cy="35" r="24" fill="none" stroke="#188038" stroke-width="11"
+                        stroke-dasharray="92 151" transform="rotate(-90 35 35)"/>
+                      <circle cx="35" cy="35" r="24" fill="none" stroke="#2f6bd8" stroke-width="11"
+                        stroke-dasharray="38 151" stroke-dashoffset="-92" transform="rotate(-90 35 35)"/>
+                      <circle cx="35" cy="35" r="24" fill="none" stroke="#F59E0B" stroke-width="11"
+                        stroke-dasharray="21 151" stroke-dashoffset="-130" transform="rotate(-90 35 35)"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="lower">
+                  <div class="card">
+                    <div class="ct">Production by Crew</div>
+                    <div class="bars">
+                      <div class="bar"><span>Crew A</span><div class="track"><div class="fill" style="width:84%"></div></div><span></span></div>
+                      <div class="bar"><span>Crew B</span><div class="track"><div class="fill" style="width:68%"></div></div><span></span></div>
+                      <div class="bar"><span>Crew C</span><div class="track"><div class="fill" style="width:55%"></div></div><span></span></div>
+                      <div class="bar"><span>Crew D</span><div class="track"><div class="fill" style="width:41%"></div></div><span></span></div>
+                    </div>
+                  </div>
+                  <div class="card gap">
+                    <div>
+                      <div class="ct">Cost to Finish</div>
+                      <div style="font-size:7.5px;color:#8290a8;">From Measured Rates</div>
+                    </div>
+                    <b>Forecast</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="panel challenge challenge-story">
+        <h2><span class="mini-icon"><i class="fa-solid fa-triangle-exclamation"></i></span> The Challenge</h2>
+
+        <p class="panel-intro">
+          The client runs field crews across multiple states, performing work along long geographic routes.
+          The only objective record of that work was raw GPS telemetry — a position ping from each unit every
+          few seconds — plus end-of-day paperwork filled out by hand.
+        </p>
+
+        <div class="challenge-bullets">
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-location-dot"></i></div>
+            <div>
+              <div class="bullet-title">No Objective Record of Work</div>
+              <div class="bullet-copy">Nobody could answer basic questions — how much work got done, which stretches are finished, which were skipped — without manually reconstructing the day.</div>
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-file-pen"></i></div>
+            <div>
+              <div class="bullet-title">Manual Reporting &amp; Validation</div>
+              <div class="bullet-copy">Progress reporting depended on operator logs, and invoicing validation meant checking hand-filled paperwork against memory.</div>
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-scale-unbalanced"></i></div>
+            <div>
+              <div class="bullet-title">Bids Built on Gut Feel</div>
+              <div class="bullet-copy">Without measured production rates, estimates for how long the next job would take — and what it should cost — rested on experience and intuition.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="main">
+        <section class="panel solution">
+          <h2><span class="mini-icon"><i class="fa-solid fa-gear"></i></span> The Solution</h2>
+
+          <p class="panel-intro">
+            An end-to-end analytics platform that turns raw telemetry into answers automatically —
+            from ingestion, through a geospatial classification model, to an interactive review application.
+          </p>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-database"></i></div>
+            <div>
+              <div class="bullet-title">Geospatial Data Pipeline</div>
+              <div class="bullet-copy">An automated service pulls GPS telemetry from the tracking provider's API into a PostgreSQL warehouse hosted in Azure, and a dbt project transforms the raw pings into cleaned, analytics-ready tables — immutable raw data, validated positions enriched with terrain and route geometry, and business metrics on top.</div>
+
+              <div class="trace-inset">
+                <div class="trace">
+                  <div class="trace-step">
+                    <div class="trace-icon"><i class="fa-solid fa-satellite-dish"></i></div>
+                    <div class="trace-title">Ingest Telemetry</div>
+                    <div class="trace-copy">GPS pings pulled automatically from the tracking provider's API.</div>
+                  </div>
+
+                  <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+                  <div class="trace-step">
+                    <div class="trace-icon logo-badge"><img src="../img/logos/postgresql.svg" alt="PostgreSQL"/></div>
+                    <div class="trace-title">PostgreSQL on Azure</div>
+                    <div class="trace-copy">Raw pings land unmodified in a cloud-hosted warehouse.</div>
+                  </div>
+
+                  <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+                  <div class="trace-step">
+                    <div class="trace-icon logo-badge"><img src="../img/logos/dbt.svg" alt="dbt"/></div>
+                    <div class="trace-title">dbt Transformations</div>
+                    <div class="trace-copy">Layered models clean, validate, and enrich each position with terrain and route geometry.</div>
+                  </div>
+
+                  <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+                  <div class="trace-step">
+                    <div class="trace-icon logo-badge"><img src="../img/logos/python.svg" alt="Python"/></div>
+                    <div class="trace-title">Classification Model</div>
+                    <div class="trace-copy">Python scores every fix as work or transit and credits it to precise route segments.</div>
+                  </div>
+
+                  <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+                  <div class="trace-step">
+                    <div class="trace-icon logo-badge"><img src="../img/logos/react.svg" alt="React"/></div>
+                    <div class="trace-title">Review App</div>
+                    <div class="trace-copy">A React front end maps progress, plays back each day, and forecasts cost.</div>
+                  </div>
+                </div>
+                <div class="trace-caption">Runs automatically every night — raw pings land in the warehouse and classified, mapped results are waiting in the app by morning.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <div>
+              <div class="bullet-title">Field-Behavior Classification Model</div>
+              <div class="bullet-copy">A Python model combines each unit's movement patterns — speed, heading, position relative to the route, height above terrain — with GIS data to decide, fix by fix, whether the crew was working or in transit. Work is credited to precise segments of the route, producing not just "hours worked" but a map of exactly what was completed, skipped, or needs review.</div>
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-chart-line"></i></div>
+            <div>
+              <div class="bullet-title">Cost Model Trained on Completed Work</div>
+              <div class="bullet-copy">A companion model learns production rates from the segments crews have already finished and predicts the effort remaining on unworked ones — turning measured history into forward-looking cost forecasts.</div>
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-map-location-dot"></i></div>
+            <div>
+              <div class="bullet-title">Interactive Review Application</div>
+              <div class="bullet-copy">Everything surfaces in a React app: interactive maps with a full playback of each day's activity, per-segment progress, productivity statistics, and cost forecasts. Reviewers inspect any stretch the model was unsure about, correct its classification, and save the result — keeping a human in the loop where it matters.</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel results">
+          <h2><span class="mini-icon"><i class="fa-solid fa-chart-line"></i></span> Results</h2>
+
+          <div class="results-bullets">
+            <div class="bullet">
+              <div class="dot"><i class="fa-solid fa-moon"></i></div>
+              <div>
+                <div class="bullet-title">Overnight, Automatic Reporting</div>
+                <div class="bullet-copy">Reporting that previously required manually piecing together logs and paperwork now happens automatically overnight — managers open the app in the morning and see yesterday's production on the map.</div>
+              </div>
+            </div>
+
+            <div class="bullet">
+              <div class="dot"><i class="fa-solid fa-gauge-high"></i></div>
+              <div>
+                <div class="bullet-title">Objective Productivity Measurement</div>
+                <div class="bullet-copy">Productivity is measured consistently across crews and days from the telemetry itself, rather than self-reported.</div>
+              </div>
+            </div>
+
+            <div class="bullet">
+              <div class="dot"><i class="fa-solid fa-flag"></i></div>
+              <div>
+                <div class="bullet-title">Skipped Work Caught Early</div>
+                <div class="bullet-copy">Skipped or incomplete sections are flagged the moment the surrounding work is done, instead of being discovered later in the field.</div>
+              </div>
+            </div>
+
+            <div class="bullet">
+              <div class="dot"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+              <div>
+                <div class="bullet-title">Data-Driven Cost Forecasts</div>
+                <div class="bullet-copy">With production rates measured per segment, the client forecasts the time and cost of upcoming work from data instead of intuition.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="tech">
+        <h2>TECHNOLOGIES USED</h2>
+        <div class="tech-row">
+          <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="../img/logos/python.svg" alt="Python" width="24" height="24"/></div><div class="tool-name">Python</div></div>
+          <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="../img/logos/dbt.svg" alt="dbt" width="24" height="24"/></div><div class="tool-name">dbt</div></div>
+          <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="../img/logos/postgresql.svg" alt="PostgreSQL" width="24" height="24"/></div><div class="tool-name">PostgreSQL</div></div>
+          <div class="tool"><div class="tool-badge" style="background:#009688;">API</div><div class="tool-name">FastAPI</div></div>
+          <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="../img/logos/react.svg" alt="React" width="24" height="24"/></div><div class="tool-name">React</div></div>
+          <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="../img/logos/azure.svg" alt="Azure" width="24" height="24"/></div><div class="tool-name">Azure</div></div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-mark"><i class="fa-solid fa-location-crosshairs"></i></div>
+        <div class="footer-text">
+          An end-to-end analytics platform built to turn raw GPS telemetry into a measured record of field work — progress, productivity, and cost.
+        </div>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>
