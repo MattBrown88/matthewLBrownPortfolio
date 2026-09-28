@@ -486,7 +486,7 @@
   }
   .tech-row{
     display:grid;
-    grid-template-columns:repeat(7,1fr);
+    grid-template-columns:repeat(9,1fr);
     align-items:start;
     gap:10px;
   }
@@ -576,8 +576,8 @@
           <h1>Building an e-commerce data pipeline</h1>
           <p class="subhead">
             <em>An end-to-end analytics platform that consolidates data from Shopify, Google Analytics 4,
-            and Google Ads into a single, governed data warehouse and enables trusted reporting across
-            all storefronts.</em>
+            Meta Ads, and Google Ads into a unified Snowflake analytics layer and enables trusted reporting
+            across all storefronts.</em>
           </p>
         </div>
 
@@ -655,8 +655,8 @@
         <h2><span class="mini-icon"><i class="fa-solid fa-triangle-exclamation"></i></span> The Challenge</h2>
 
         <p class="panel-intro">
-          The client ran several Shopify storefronts with data scattered across Shopify, GA4, and
-          Google Ads. With no central environment for cross-store analytics, each platform reported
+          The client ran several Shopify storefronts with data scattered across Shopify, GA4, Meta Ads,
+          and Google Ads. With no central environment for cross-store analytics, each platform reported
           its own numbers, and reporting depended on manual exports, spreadsheets, and cleanup.
         </p>
 
@@ -665,10 +665,11 @@
             <div class="dot"><i class="fa-solid fa-puzzle-piece"></i></div>
             <div>
               <div class="bullet-title">Fragmented Data</div>
-              <div class="bullet-copy">Data spread across Shopify, GA4, and Google Ads with no shared home.</div>
+              <div class="bullet-copy">Data spread across Shopify, GA4, Meta Ads, and Google Ads with no shared home.</div>
               <div class="bullet-logos">
                 <img src="../img/logos/shopify.svg" alt="Shopify"/>
                 <img src="../img/logos/ga4.svg" alt="Google Analytics 4"/>
+                <img src="../img/logos/meta.svg" alt="Meta Ads"/>
                 <img src="../img/logos/google-ads.svg" alt="Google Ads"/>
               </div>
             </div>
@@ -716,22 +717,22 @@
             <div class="dot"><i class="fa-solid fa-arrows-turn-right"></i></div>
             <div>
               <div class="bullet-title">Automated Data Ingestion</div>
-              <div class="bullet-copy">Airbyte automatically ingests data from Shopify, GA4, and Google Ads into the warehouse, replacing manual exports with scheduled, repeatable pipelines.</div>
+              <div class="bullet-copy">Airbyte automatically ingests data from Shopify, GA4, Meta Ads, and Google Ads into the warehouse, replacing manual exports with scheduled, repeatable pipelines.</div>
 
               <div class="trace-inset">
                 <div class="trace">
                   <div class="trace-step">
                     <div class="trace-icon logo-badge"><img src="../img/logos/airbyte.svg" alt="Airbyte"/></div>
                     <div class="trace-title">Airbyte</div>
-                    <div class="trace-copy">Automated ingestion from Shopify, GA4, and Google Ads.</div>
+                    <div class="trace-copy">Automated ingestion from Shopify, GA4, Meta Ads, and Google Ads.</div>
                   </div>
 
                   <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
 
                   <div class="trace-step">
-                    <div class="trace-icon logo-badge"><img src="../img/logos/bigquery.svg" alt="BigQuery"/></div>
-                    <div class="trace-title">BigQuery</div>
-                    <div class="trace-copy">A central, governed warehouse for all storefront data.</div>
+                    <div class="trace-icon logo-badge"><img src="../img/logos/snowflake.svg" alt="Snowflake"/></div>
+                    <div class="trace-title">Snowflake</div>
+                    <div class="trace-copy">A central, governed warehouse for all storefront data, provisioned with Terraform.</div>
                   </div>
 
                   <div class="trace-arrow"><i class="fa-solid fa-arrow-right"></i></div>
@@ -759,7 +760,15 @@
             <div class="dot"><i class="fa-solid fa-database"></i></div>
             <div>
               <div class="bullet-title">Centralized Data Warehouse</div>
-              <div class="bullet-copy">Consolidated every source into BigQuery as a single, governed home for all storefront data.</div>
+              <div class="bullet-copy">Consolidated every source into Snowflake as a single, governed home for all storefront data.</div>
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div class="dot"><i class="fa-solid fa-shield-halved"></i></div>
+            <div>
+              <div class="bullet-title">Infrastructure as Code</div>
+              <div class="bullet-copy">Provisioned Snowflake infrastructure and RBAC with Terraform &mdash; warehouses, roles, grants, and databases.</div>
             </div>
           </div>
 
@@ -775,7 +784,7 @@
             <div class="dot"><i class="fa-solid fa-chart-line"></i></div>
             <div>
               <div class="bullet-title">Self-Service Reporting</div>
-              <div class="bullet-copy">Exposed governed business metrics through a Lightdash semantic layer, with interactive dashboards and visualizations for every storefront.</div>
+              <div class="bullet-copy">Developed Lightdash dashboards for portfolio-level and individual store performance, exposing governed business metrics through a semantic layer.</div>
             </div>
           </div>
         </section>
@@ -794,7 +803,7 @@
             <div class="dot"><i class="fa-solid fa-layer-group"></i></div>
             <div>
               <div class="bullet-title">Unified Data Platform</div>
-              <div class="bullet-copy">Consolidated Shopify, GA4, and Google Ads into one analytics environment.</div>
+              <div class="bullet-copy">Consolidated Shopify, GA4, Meta Ads, and Google Ads into one analytics environment.</div>
             </div>
           </div>
 
@@ -818,7 +827,7 @@
             <div class="dot"><i class="fa-solid fa-store"></i></div>
             <div>
               <div class="bullet-title">Multi-Store Architecture</div>
-              <div class="bullet-copy">One platform supporting all storefronts.</div>
+              <div class="bullet-copy">One platform with portfolio and individual store dashboards.</div>
             </div>
           </div>
 
@@ -826,7 +835,7 @@
             <div class="dot"><i class="fa-solid fa-layer-group"></i></div>
             <div>
               <div class="bullet-title">Modern Data Stack</div>
-              <div class="bullet-copy">Built on BigQuery, dbt, Lightdash, and cloud-native infrastructure.</div>
+              <div class="bullet-copy">Built on Snowflake, dbt, Lightdash, and Terraform-managed infrastructure.</div>
             </div>
           </div>
           </div>
@@ -838,9 +847,11 @@
         <div class="tech-row">
           <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="../img/logos/shopify.svg" alt="Shopify" width="24" height="24"/></div><div class="tool-name">Shopify</div></div>
           <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="../img/logos/ga4.svg" alt="Google Analytics 4" width="24" height="24"/></div><div class="tool-name">GA4</div></div>
+          <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="../img/logos/meta.svg" alt="Meta Ads" width="24" height="24"/></div><div class="tool-name">Meta Ads</div></div>
           <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="../img/logos/google-ads.svg" alt="Google Ads" width="24" height="24"/></div><div class="tool-name">Google Ads</div></div>
           <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="../img/logos/airbyte.svg" alt="Airbyte" width="24" height="24"/></div><div class="tool-name">Airbyte</div></div>
-          <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="../img/logos/bigquery.svg" alt="BigQuery" width="24" height="24"/></div><div class="tool-name">BigQuery</div></div>
+          <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="../img/logos/snowflake.svg" alt="Snowflake" width="24" height="24"/></div><div class="tool-name">Snowflake</div></div>
+          <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="../img/logos/terraform.svg" alt="Terraform" width="24" height="24"/></div><div class="tool-name">Terraform</div></div>
           <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="../img/logos/dbt.svg" alt="dbt" width="24" height="24"/></div><div class="tool-name">dbt</div></div>
           <div class="tool"><div class="tool-badge logo-badge"><img class="brand-img" src="../img/logos/lightdash.svg" alt="Lightdash" width="26" height="26"/></div><div class="tool-name">Lightdash</div></div>
         </div>

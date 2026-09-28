@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" role="img" aria-label="E-commerce data pipeline: Shopify storefronts flow into a BigQuery warehouse, are transformed with dbt, and surface as revenue, marketing, and customer analytics.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" role="img" aria-label="E-commerce data pipeline: Shopify storefronts flow into a Snowflake warehouse, are transformed with dbt, and surface as revenue, marketing, and customer analytics.">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#6495ED"/>
@@ -70,7 +70,7 @@
     <text class="lbl" x="51" y="100" font-size="14" font-weight="600" text-anchor="middle">Ingest + dbt</text>
   </g>
 
-  <!-- ===== Stage 3: BigQuery warehouse ===== -->
+  <!-- ===== Stage 3: Snowflake warehouse ===== -->
   <g transform="translate(428,108)">
     <rect class="node" x="0" y="0" width="102" height="120" rx="16"/>
     <!-- database cylinder -->
@@ -79,7 +79,7 @@
       <path class="ico" d="M0 8 C0 14 36 14 36 8"/>
       <path class="ico" d="M0 26 C0 32 36 32 36 26"/>
     </g>
-    <text class="lbl" x="51" y="100" font-size="14" font-weight="600" text-anchor="middle">BigQuery</text>
+    <text class="lbl" x="51" y="100" font-size="14" font-weight="600" text-anchor="middle">Snowflake</text>
   </g>
 
   <!-- ===== Stage 4: Analytics dashboard ===== -->
